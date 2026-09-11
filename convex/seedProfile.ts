@@ -4,7 +4,7 @@ import { internalMutation } from "./_generated/server";
 import { AI_DISPLAY_NAME } from "./lib/constants";
 import { finalizeGame } from "./lib/games";
 
-const EVENT = "Castle demo profile wins";
+const EVENT = "Sixty4 demo profile wins";
 const TARGET = 50;
 
 /**

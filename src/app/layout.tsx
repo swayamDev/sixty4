@@ -25,26 +25,26 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Castle", template: "%s · Castle" },
+  title: { default: "Sixty4", template: "%s · Sixty4" },
   description: "Online 3D chess with real-time matchmaking, an AI opponent and custom rooms.",
 };
 
 /**
  * The Clerk card headings name the CLERK APPLICATION, which is not this product's name.
- * Overriding them here is the only way to say "Castle" on the auth screens without a
+ * Overriding them here is the only way to say "Sixty4" on the auth screens without a
  * dashboard change — and the copy voice of UI_REDESIGN §2 applies to them like anything
  * else: sentence case, plain verbs, no exclamation marks.
  */
 const CLERK_COPY = {
   signIn: {
     start: {
-      title: "Sign in to Castle",
+      title: "Sign in to Sixty4",
       subtitle: "Welcome back. Pick up where you left off.",
     },
   },
   signUp: {
     start: {
-      title: "Join Castle",
+      title: "Join Sixty4",
       subtitle: "Free, and it runs in your browser.",
     },
   },

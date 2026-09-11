@@ -121,7 +121,7 @@ function PlanSection() {
     <Section
       id="settings-plan"
       title="Plan"
-      description="Castle is free. Pro adds the tutor — the coach that explains a position and marks the board."
+      description="Sixty4 is free. Pro adds the tutor — the coach that explains a position and marks the board."
     >
       {hasTutor === undefined ? (
         <div className="flex items-center justify-between gap-4" aria-busy>

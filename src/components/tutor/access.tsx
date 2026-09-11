@@ -17,7 +17,7 @@ import { TUTOR_FEATURE } from "@/lib/constants";
  * One key, defined once, because two packages read it: the tutor panel writes it and
  * `src/components/pro` reads it.
  */
-export const TUTOR_RETURN_KEY = "castle:tutor:return";
+export const TUTOR_RETURN_KEY = "sixty4:tutor:return";
 
 /** Every accessor is guarded: Safari's private mode throws on `sessionStorage`. */
 export function rememberTutorReturn(gameId: string): void {

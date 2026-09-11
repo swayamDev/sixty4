@@ -15,8 +15,8 @@ import { ProPoints } from "@/components/pro/pro-points";
 import { ProPricing } from "@/components/pro/pro-pricing";
 
 export const metadata: Metadata = {
-  // Not the "%s · Castle" template: this page's name IS the product's name.
-  title: { absolute: "Castle Pro" },
+  // Not the "%s · Sixty4" template: this page's name IS the product's name.
+  title: { absolute: "Sixty4 Pro" },
   description:
     "The tutor: ask about any position in any game, and get the idea explained and drawn on the board.",
 };

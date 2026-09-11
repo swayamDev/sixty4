@@ -64,7 +64,7 @@ export function LandingFooter() {
               <span aria-hidden className="text-primary">
                 ♞
               </span>
-              Castle
+              Sixty4
             </p>
             <p className="mt-4 max-w-[42ch] text-[13px] text-muted-foreground">
               An online chess club with rooms you can sit in. Free, and it runs in your browser.

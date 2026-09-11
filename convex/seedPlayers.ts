@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 import { internalMutation } from "./_generated/server";
 
-const PREFIX = "castle-demo-player-v1-";
+const PREFIX = "sixty4-demo-player-v1-";
 const ADJECTIVES = ["amber", "cosmic", "velvet", "silver", "quiet", "crimson", "lunar", "cobalt", "golden", "frost"];
 const PIECES = ["rook", "knight", "bishop", "queen", "pawn"];
 
@@ -48,7 +48,7 @@ export const seed = internalMutation({
       const wins = Math.round((totalGames - draws) * (0.3 + ((rating - 800) / 1323) * 0.48));
       await ctx.db.insert("players", {
         clerkId,
-        tokenIdentifier: `https://castle-demo.invalid|${clerkId}`,
+        tokenIdentifier: `https://sixty4-demo.invalid|${clerkId}`,
         username,
         usernameLower: username,
         avatarUrl,

@@ -1,8 +1,8 @@
-# Castle
+# Sixty4
 
-Castle is a real-time 3D chess club: play a rated opponent online, challenge one of five AI
+Sixty4 is a real-time 3D chess club: play a rated opponent online, challenge one of five AI
 personalities, or share one device with a friend, all from a physically lit board you can walk
-around. Switch to a flat 2D board any time, sit in one of five rooms, and if you're on Castle Pro,
+around. Switch to a flat 2D board any time, sit in one of five rooms, and if you're on Sixty4 Pro,
 ask an AI tutor to explain the position and watch it draw its explanation directly on your board.
 
 **Author:** Swayam Swarup Panda
@@ -109,7 +109,7 @@ npx convex env set CLERK_JWT_ISSUER_DOMAIN https://<your-clerk-frontend-api-doma
 ```
 
 In your Clerk dashboard, create a JWT template named `convex` with audience `convex` and a
-`nickname` claim (Castle reads the display name from it), and require a username at sign-up.
+`nickname` claim (Sixty4 reads the display name from it), and require a username at sign-up.
 
 ### 4. Run the app
 
@@ -157,7 +157,7 @@ docs/                 Architecture reference and known platform issues
 
 ## Deployment
 
-Castle deploys to Vercel, with Convex and Clerk as separate managed services.
+Sixty4 deploys to Vercel, with Convex and Clerk as separate managed services.
 
 1. Deploy Convex functions: `npx convex deploy`.
 2. Set `CLERK_JWT_ISSUER_DOMAIN` on the **production** Convex deployment, pointing at your Clerk
@@ -168,6 +168,8 @@ Castle deploys to Vercel, with Convex and Clerk as separate managed services.
 4. Deploy the Next.js app to Vercel. `next.config.ts` wraps the app in `withEve`, which mounts the
    AI opponent's agent runtime as a Vercel Build Output service alongside the Next.js app, so no
    separate deployment step is needed for it.
+5. Point your custom domain (this deployment uses `chess.swayam.space`) at the Vercel project,
+   and add the same domain to your Clerk production instance's allowed origins.
 
 Deploy Convex before Vercel whenever `convex/` has changed; the app will otherwise call functions
 that don't exist yet on the new deployment.

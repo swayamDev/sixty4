@@ -11,7 +11,7 @@
 // mounted copy of the control agrees.
 import { useSyncExternalStore } from "react";
 
-const KEY = "castle:hero-replay-paused";
+const KEY = "sixty4:hero-replay-paused";
 
 const listeners = new Set<() => void>();
 let cached: boolean | null = null;

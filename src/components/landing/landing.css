@@ -64,7 +64,7 @@
 /* The rating window breathes outward once, then rests widened. `Reveal` sets
    data-revealed on the wrapper, so the animation is tied to the scroll reveal
    rather than to mount. */
-@keyframes castle-window-widen {
+@keyframes sixty4-window-widen {
   from {
     transform: scaleX(0.42);
   }
@@ -81,11 +81,11 @@
 }
 
 [data-revealed="true"] .window-bracket {
-  animation: castle-window-widen 900ms var(--ease-out-soft) both;
+  animation: sixty4-window-widen 900ms var(--ease-out-soft) both;
 }
 
 /* ------------------------------------------------ §2.2 artefact 2: the bubbles */
-@keyframes castle-bubble-in {
+@keyframes sixty4-bubble-in {
   from {
     opacity: 0;
     transform: translateY(6px) scale(0.98);
@@ -97,7 +97,7 @@
 }
 
 [data-revealed="true"] .bubble-in {
-  animation: castle-bubble-in var(--dur-reveal) var(--ease-out-soft) both;
+  animation: sixty4-bubble-in var(--dur-reveal) var(--ease-out-soft) both;
   animation-delay: var(--bubble-delay, 0ms);
 }
 

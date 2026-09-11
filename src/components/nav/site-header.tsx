@@ -70,7 +70,7 @@ export function SiteHeader() {
         <Link
           prefetch={false}
           href="/"
-          aria-label="Castle — home"
+          aria-label="Sixty4 — home"
           className={cn(
             // 36px of tappable area on touch (DESIGN.md, Layout) without
             // changing the header's density on a mouse-driven pointer.
@@ -86,7 +86,7 @@ export function SiteHeader() {
               otherwise clip "Leaderboard" mid-word at 375-390. The link keeps its
               accessible name either way. */}
           <span className="hidden text-sm font-semibold tracking-tight sm:inline sm:text-[0.9375rem]">
-            Castle
+            Sixty4
           </span>
         </Link>
 

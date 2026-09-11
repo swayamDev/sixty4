@@ -388,7 +388,7 @@ the scene work (exact camera fit, sharp backdrops, table, curated rooms). None b
    removed on 2026-09-11 at the owner's request; the 3D canvas now meets the nameplates and the
    sidebar hairline with a clean edge, in both themes. The landing hero keeps its own blend.
 
-## 8. Castle Pro and the tutor (2026-09-11)
+## 8. Sixty4 Pro and the tutor (2026-09-11)
 
 Shipped per `docs/PRO_TUTOR.md`; verified end to end (Clerk checkout with the test card, a real
 model turn, the browser-side Stockfish tool round trip, annotations on both boards). Residues:
