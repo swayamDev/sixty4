@@ -10,11 +10,11 @@ the ones that come from a dependency or a hosting platform. Where the two overla
 | # | Issue | Severity | Workaround in the repo | Removable when |
 |---|---|---|---|---|
 | 1 | `withEve` breaks Next 16.3 segment prefetch on Vercel | High (UX + request volume) | `prefetch={false}` on **every** `next/link` | eve ships a fix; re-test per §1.6 |
-| 2 | Clerk still runs its **development** instance in production | High (security + limits) | none — migration steps in §2 | a custom domain + prod OAuth apps exist |
+| 2 | Clerk still runs its **development** instance in production | High (security + limits) | none - migration steps in §2 | a custom domain + prod OAuth apps exist |
 | 3 | AI commentary is not token-streamed | Medium (perceived latency) | NDJSON status heartbeats; commentary lands whole | a `commit_move` tool replaces `outputSchema` |
 | 4 | Piece models are CC BY 3.0, not CC0 | Low (licence obligation) | in-app credit + `ATTRIBUTION.md` | a CC0 set is found (do not re-research) |
-| 5 | Stockfish 18 default is a 5.6 MB first download | Low (accepted) | lazy, immutable-cached, progress bar, SF11 fallback | never — NFR-3 was waived |
-| 6 | `three` is pinned to 0.185.x — 0.186.0 is out of reach | Low (accepted) | pin `three@^0.185.1`; ecosystem not ready | `postprocessing` widens its peer range **and** `@types/three@0.186.x` ships |
+| 5 | Stockfish 18 default is a 5.6 MB first download | Low (accepted) | lazy, immutable-cached, progress bar, SF11 fallback | never - NFR-3 was waived |
+| 6 | `three` is pinned to 0.185.x - 0.186.0 is out of reach | Low (accepted) | pin `three@^0.185.1`; ecosystem not ready | `postprocessing` widens its peer range **and** `@types/three@0.186.x` ships |
 
 ---
 
@@ -34,13 +34,13 @@ router uses for its **segment-tree prefetch**, and two distinct failures follow:
    a normal route (`/`, `/leaderboard`) answers **404** instead of the segment tree. The router
    treats that as a transient miss.
 2. **Optional catch-all routes answer with a corrupted tree.** `/sign-in` and `/sign-up` are
-   `[[...sign-in]]` / `[[...sign-up]]` (required by Clerk — see §2 and ARCHITECTURE §G). Their tree
+   `[[...sign-in]]` / `[[...sign-up]]` (required by Clerk - see §2 and ARCHITECTURE §G). Their tree
    comes back with the catch-all **param replaced by the internal
    `…/.segments/_tree.segment.rsc` path**. The client compares that tree against the one it asked
-   for, rejects the mismatch, and immediately re-prefetches — forever.
+   for, rejects the mismatch, and immediately re-prefetches - forever.
 
-Failure 2 is the expensive one. Every visible `<Link href="/sign-in">` / `"/sign-up"` — the header
-carries both on every public page — re-prefetches at roughly **4 requests/second, per link**.
+Failure 2 is the expensive one. Every visible `<Link href="/sign-in">` / `"/sign-up"` - the header
+carries both on every public page - re-prefetches at roughly **4 requests/second, per link**.
 Measured on one page view of `/`: **280+ requests in 12 seconds** before the router gave up.
 
 ### 1.2 Reproduction
@@ -50,14 +50,14 @@ Against a Vercel deployment of this app built **with** `withEve`:
 ```bash
 DEPLOY=https://<your-deployment>.vercel.app
 
-# (a) Static route — expected: 200 text/x-component. Actual: 404.
+# (a) Static route - expected: 200 text/x-component. Actual: 404.
 curl -sS -o /dev/null -D - \
   -H 'RSC: 1' \
   -H 'Next-Router-Prefetch: 1' \
   -H 'Next-Router-Segment-Prefetch: /_tree' \
   "$DEPLOY/leaderboard"
 
-# (b) Optional catch-all route — expected: a tree whose segment carries the route's own
+# (b) Optional catch-all route - expected: a tree whose segment carries the route's own
 #     param. Actual: 200, but the param slot holds the internal `.segments/_tree.segment.rsc`
 #     path, so the router rejects the tree and re-requests it.
 curl -sS \
@@ -73,13 +73,13 @@ same two requests against `http://localhost:3000` under `pnpm dev` behave correc
 this never shows up locally.
 
 To watch failure 2 in a browser: deploy with the `prefetch={false}` props removed, open the
-landing page, and filter the Network panel on `_tree` — the request count climbs continuously
+landing page, and filter the Network panel on `_tree` - the request count climbs continuously
 while the two auth links are on screen.
 
 ### 1.3 The control (this is what proves it is eve, not Next or Clerk)
 
-Deploy the identical commit with the wrapper removed — `export default nextConfig` instead of
-`export default withEve(nextConfig)` — to a preview:
+Deploy the identical commit with the wrapper removed - `export default nextConfig` instead of
+`export default withEve(nextConfig)` - to a preview:
 
 ```bash
 # in next.config.ts, temporarily:  export default nextConfig;
@@ -90,7 +90,7 @@ On that preview both curl calls behave: (a) returns **200** with
 `content-type: text/x-component`, and (b) returns a tree with the real catch-all param. Re-adding
 `withEve` and redeploying brings both failures straight back. The Next.js version, the Clerk
 version, the routes and the app code are identical across the two deployments; the eve service in
-the Build Output is the only difference. (The control deployment is only useful for this test —
+the Build Output is the only difference. (The control deployment is only useful for this test -
 without `withEve` there is no `/eve/v1/*` mount, so the AI opponent falls back to the direct AI
 SDK path; see the README's `EVE_SERVER_SECRET` note.)
 
@@ -100,11 +100,11 @@ SDK path; see the README's `EVE_SERVER_SECRET` note.)
 makes the tree request useless for static routes too, so prefetch buys nothing anywhere while this
 is broken. The prose reason lives at the top of `src/components/nav/auth-nav.tsx`.
 
-**Do not remove those props** as a "cleanup" — the regression is invisible in `next dev` and only
+**Do not remove those props** as a "cleanup" - the regression is invisible in `next dev` and only
 appears once deployed. The routes most affected (`/sign-in`, `/sign-up`, `/game/[id]`) are dynamic
 and were never usefully prefetchable anyway, so the cost of the workaround is close to zero.
 
-### 1.5 Upstream report — file this against eve, verbatim
+### 1.5 Upstream report - file this against eve, verbatim
 
 > **Title:** `withEve` on Vercel breaks Next.js 16.3 segment-tree prefetch (`Next-Router-Segment-Prefetch`)
 >
@@ -169,7 +169,7 @@ and were never usefully prefetchable anyway, so the cost of the workaround is cl
 The app authenticates against the Clerk **development** instance
 (`https://flowing-wildcat-1401.clerk.accounts.dev`, `pk_test_…` / `sk_test_…`). No production
 instance exists, because a production instance needs a custom domain to CNAME
-`clerk.<domain>` at, and real OAuth credentials for Google and GitHub — the dev instance uses
+`clerk.<domain>` at, and real OAuth credentials for Google and GitHub - the dev instance uses
 Clerk's shared demo OAuth apps, which are not licensed for production traffic.
 
 Consequences while this stands:
@@ -187,12 +187,12 @@ Details, including the minted-token verification of the `convex` JWT template, a
 
 ### 2.2 Migration steps (in this order)
 
-1. **Create the production instance** — `clerk deploy`, or the dashboard, then add the
+1. **Create the production instance** - `clerk deploy`, or the dashboard, then add the
    `clerk.<domain>` CNAME at the DNS provider and wait for Clerk to verify it.
 2. **Re-apply the instance config with `--instance prod`**, plus **real** OAuth credentials:
    `connection_oauth_google.client_id` must match
    `^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com$`, and GitHub needs its own OAuth app whose
-   callback is the new `clerk.<domain>` domain. Keep `username.required` and progressive sign-up —
+   callback is the new `clerk.<domain>` domain. Keep `username.required` and progressive sign-up -
    the whole app keys display names off `identity.nickname` (ARCHITECTURE §I-13).
 3. **Re-create the `convex` JWT template on the production instance.** Templates are per-instance
    and are *not* copied by `clerk deploy`. Same name (`convex`), same audience (`convex`), same
@@ -204,11 +204,11 @@ Details, including the minted-token verification of the `convex` JWT template, a
    ```
 5. **Swap the Vercel production env vars** to `pk_live_…` / `sk_live_…`
    (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`). Leave the four
-   `NEXT_PUBLIC_CLERK_*_URL` variables exactly as they are — without
+   `NEXT_PUBLIC_CLERK_*_URL` variables exactly as they are - without
    `NEXT_PUBLIC_CLERK_SIGN_IN_URL` the protected-route redirect goes to Clerk's hosted Account
    Portal instead of `/sign-in`.
 6. **Redeploy and verify:** sign up with a real address, confirm a `players` row appears
-   (`ensurePlayer`, ARCHITECTURE §E.1), and confirm the username shows in the header — a token
+   (`ensurePlayer`, ARCHITECTURE §E.1), and confirm the username shows in the header - a token
    whose `nickname` claim is missing produces a nameless player rather than an error.
 
 **Users do not migrate.** Development and production instances have separate user stores, so every
@@ -226,29 +226,29 @@ platform-side explanation.
 **Why.** FR-36 requires the agent to answer with a validated `{move, commentary}` object, because
 the move has to be machine-checkable before it is applied to the board. Under eve, a per-turn
 `outputSchema` routes the answer through a hidden `final_output` tool, and **that tool's deltas are
-filtered out of the event stream** — verified live against eve 0.52.2. Nothing text-shaped arrives
+filtered out of the event stream** - verified live against eve 0.52.2. Nothing text-shaped arrives
 before `result.completed`, so there is no token stream to forward, however the client subscribes.
 
 **What we do instead.** `/api/ai/move` streams NDJSON `status` heartbeats so the panel shows live
 "thinking" state and a persona name, then renders the commentary in one piece when the result
-lands (typically 2–4 s). The visible effect is a filled progress state rather than a typewriter.
+lands (typically 2-4 s). The visible effect is a filled progress state rather than a typewriter.
 
 **The documented alternative**, if true token streaming is ever wanted: drop `outputSchema` and
 give the agent a real `commit_move` tool, whose `action.input.appended` deltas **do** stream. The
-cost is an extra model step (~+4 s), which breaks FR-38's 3 s latency target — so it is only worth
+cost is an extra model step (~+4 s), which breaks FR-38's 3 s latency target - so it is only worth
 doing if that target is relaxed at the same time.
 
 ---
 
-## 4. Piece models are CC BY 3.0 — attribution is mandatory
+## 4. Piece models are CC BY 3.0 - attribution is mandatory
 
 **Status:** permanent obligation, satisfied. ARCHITECTURE §I-7 has the full decision record.
 
 `public/models/chess-pieces.glb` is baked from six models by **Jarlan Perez** via
 [Poly Pizza](https://poly.pizza), licensed
 [**CC BY 3.0**](https://creativecommons.org/licenses/by/3.0/). The PRD assumed a CC0 set; none
-exists that is reachable without a login (**do not re-research Sketchfab** — its download endpoint
-401s without OAuth, and its CC0 chess hits are 180k–500k-face photogrammetry scans).
+exists that is reachable without a login (**do not re-research Sketchfab** - its download endpoint
+401s without OAuth, and its CC0 chess hits are 180k-500k-face photogrammetry scans).
 
 The licence obligation is **attribution, visibly, in the shipped app**:
 
@@ -259,7 +259,7 @@ The licence obligation is **attribution, visibly, in the shipped app**:
 
 If the Credits panel is ever removed or the string is edited to drop the author or the licence
 name, the app is out of compliance. `assets.md` §B2's procedural `LatheGeometry` fallback exists
-if the licence becomes unacceptable, but it is unrendered and unverified — prefer the GLB.
+if the licence becomes unacceptable, but it is unrendered and unverified - prefer the GLB.
 
 Two more licences ship with the app and are not optional either: **Stockfish is GPL v3** (engine
 files are served from `public/stockfish/` with `LICENSE-GPL-3.0.txt` alongside and the file
@@ -273,8 +273,8 @@ banners intact), and the HDRIs are CC0 from Poly Haven (credited anyway).
 
 NFR-3 asked for a WASM bundle "under 2 MB gzipped". The default engine is
 `stockfish@18.0.8`'s `lite-single` build: **5.64 MB gzipped** (7,295,411-byte `.wasm` +
-~21 KB JS). Nothing in that package is under 2 MB — the smallest published artifact *is*
-lite-single — so meeting NFR-3 would mean shipping a different engine. The user chose SF18's NNUE
+~21 KB JS). Nothing in that package is under 2 MB - the smallest published artifact *is*
+lite-single - so meeting NFR-3 would mean shipping a different engine. The user chose SF18's NNUE
 strength over the byte budget.
 
 What keeps the cost tolerable:
@@ -289,7 +289,7 @@ What keeps the cost tolerable:
   `stockfish@11.0.0` (classical eval, **669 KB gzipped**, no SIMD and no SharedArrayBuffer
   required). `EngineBuild` is `"sf18" | "sf11"` and is *not* a user-facing setting.
 
-Neither build needs `SharedArrayBuffer`, so **no COOP/COEP headers are required** — which matters,
+Neither build needs `SharedArrayBuffer`, so **no COOP/COEP headers are required** - which matters,
 because those headers would break Clerk's and Convex's cross-origin traffic.
 
 The route back under 2 MB, if it is ever wanted: build an `ULTRA_LITE_NET=yes` flavour (upstream
@@ -298,26 +298,26 @@ SF11 the default and lose NNUE strength. See `docs/research/stockfish.md` §2.1 
 
 ---
 
-## 6. `three` is pinned to 0.185.x — the r3f post-FX stack cannot take 0.186 yet
+## 6. `three` is pinned to 0.185.x - the r3f post-FX stack cannot take 0.186 yet
 
 **Status:** accepted, re-test on the next `postprocessing` release. Evaluated 2026-09-09 against
 **three 0.186.0** (published 2026-09-08, one day earlier).
 
 ### 6.1 Why 0.186 was rejected
 
-The bump was attempted for real — `pnpm add three@0.186.0`, then the full gate — and **both
+The bump was attempted for real - `pnpm add three@0.186.0`, then the full gate - and **both
 `pnpm exec tsc --noEmit` and `pnpm build` passed**, and `/dev/board3d` rendered with no `THREE`
 or WebGL console errors. It was still reverted, because those greens do not mean what they look
 like:
 
 1. **`@types/three@0.186.x does not exist.`** The newest published types are **0.185.4**
    (2026-08-04). Running the 0.186 runtime against 0.185 type definitions means `tsc` is checking
-   this app's three usage against *the wrong version's* API surface — anything renamed or removed
+   this app's three usage against *the wrong version's* API surface - anything renamed or removed
    in r186 typechecks clean and fails in the browser. The tsc pass above is therefore not evidence
    of compatibility; it is evidence that the types did not change, because they were never
    published.
 2. **`postprocessing@6.39.4` explicitly excludes it.** Its peer range is
-   `three: ">= 0.168.0 < 0.186.0"` — an upper bound the maintainer wrote deliberately, not a stale
+   `three: ">= 0.168.0 < 0.186.0"` - an upper bound the maintainer wrote deliberately, not a stale
    caret. With three 0.186 installed, `pnpm peers check` reports:
    ```
    ✕ unmet peer three
@@ -329,7 +329,7 @@ like:
    `src/components/board3d/post-fx.tsx`) runs through it.
 3. **A green `next build` cannot exercise any of that.** Turbopack bundles the effect chain but
    never instantiates a `WebGLRenderer`, compiles a shader, or runs a render pass. The failure mode
-   a `< 0.186.0` peer bound guards against is a shader/renderer-internals mismatch at runtime —
+   a `< 0.186.0` peer bound guards against is a shader/renderer-internals mismatch at runtime -
    precisely the class of breakage a build is blind to.
 4. **The runtime check did not clear it either.** `/dev/board3d` renders under 0.186, but the
    preview harness held the quality tier at `low`, and low-tier scenes **unmount** `<PostFX>`
@@ -340,21 +340,21 @@ like:
    window. Installing it at all required pinning the exact version, which also wrote a
    `three@0.186.0` entry into `minimumReleaseAgeExclude` in `pnpm-workspace.yaml` (removed again on
    revert). Note this trap: **`pnpm add <pkg>@latest` saying "Already up to date" does not mean you
-   are on latest** — check `npm view <pkg> version` before believing it.
+   are on latest** - check `npm view <pkg> version` before believing it.
 
 Reverted with `pnpm add three@0.185.1`; `@types/three` stays at **^0.185.4**, which is both its
 latest release and the matching one. `pnpm peers check` is clean again.
 
 ### 6.2 How to re-test
 
-1. `npm view postprocessing peerDependencies` — proceed only once the `three` range admits
+1. `npm view postprocessing peerDependencies` - proceed only once the `three` range admits
    ≥ 0.186, i.e. the upper bound moved or was dropped.
-2. `npm view @types/three version` — proceed only once a 0.186.x types release exists.
+2. `npm view @types/three version` - proceed only once a 0.186.x types release exists.
 3. Then `pnpm add three@latest @types/three@latest` (pin exact versions if the release-age gate
    makes `@latest` a no-op) and run the full gate.
 4. **Verify in a browser at a post-FX tier, not just at `low`:** open `/dev/board3d`, raise the
    quality control until `<PostFX>` is mounted, and confirm the console is free of `THREE.*` and
-   WebGL shader errors. `tsc` and `next build` passing is not sufficient — see §6.1.3.
+   WebGL shader errors. `tsc` and `next build` passing is not sufficient - see §6.1.3.
 
 Only `three` and `@types/three` are pinned by this; nothing else in the r3f stack was held back.
 
@@ -396,7 +396,7 @@ model turn, the browser-side Stockfish tool round trip, annotations on both boar
 1. **Conversation is not persisted** (§9, by design) and is also lost when the panel moves between
    surfaces: resizing across 1024 or 1280, or entering and leaving fullscreen. Within one surface
    it survives collapsing.
-2. **Overlay semantics at 1024–1279.** The tutor overlay is `aria-modal="true"` with a working
+2. **Overlay semantics at 1024-1279.** The tutor overlay is `aria-modal="true"` with a working
    focus trap, but the board behind it is deliberately NOT `inert`, because §3 puts the panel over
    the board's left half so the drawing stays visible and playable. A stricter resolution needs a
    spec decision.
