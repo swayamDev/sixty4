@@ -167,7 +167,7 @@ and were never usefully prefetchable anyway, so the cost of the workaround is cl
 ### 2.1 What is wrong
 
 The app authenticates against the Clerk **development** instance
-(`https://flowing-wildcat-1401.clerk.accounts.dev`, `pk_test_…` / `sk_test_…`). No production
+(`https://<your-instance>.clerk.accounts.dev`, `pk_test_…` / `sk_test_…`). No production
 instance exists, because a production instance needs a custom domain to CNAME
 `clerk.<domain>` at, and real OAuth credentials for Google and GitHub - the dev instance uses
 Clerk's shared demo OAuth apps, which are not licensed for production traffic.
@@ -410,11 +410,11 @@ model turn, the browser-side Stockfish tool round trip, annotations on both boar
    opponent's agent uses the same credential.
 5. **Free plan copy lives in Clerk config**, not source: `clerk config patch` set the `free_user`
    description on 2026-09-11. The Pro plan's price is never written in the repo.
-6. **The e2e test user `castle-e2e` is now a Pro subscriber** (dev gateway, test card), so
-   `e2e/pro.spec.ts` skips the checkout branch and annotates the run; cancel the subscription
+6. **The e2e test user is now a Pro subscriber** (dev gateway, test card), so an e2e checkout
+   flow would skip the checkout branch and annotate the run; cancel the subscription
    from the Clerk dashboard to re-exercise checkout.
 7. **Convex production is deployed by hand.** Vercel builds the Next app only; new Convex
-   functions (the tutor's `games.useTutorTurn`) reach `hallowed-impala-527` with
+   functions (the tutor's `games.useTutorTurn`) reach `<your-prod-deployment>` with
    `npx convex deploy --yes`. Forgetting it made production answer 503 `tutor-unavailable`
    from the quota step on 2026-09-11 while the dev deployment worked. Deploy Convex before
    Vercel whenever `convex/` changed.

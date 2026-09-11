@@ -10,9 +10,6 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
 # next.js
 /.next/
 /out/
@@ -46,18 +43,3 @@ next-env.d.ts
 # eve local state / build output
 .eve/
 .output/
-
-# playwright (end-to-end)
-/playwright-report/
-/test-results/
-/playwright/.cache/
-
-# impeccable per-machine config
-.impeccable/config.local.json
-
-# codex cli local state
-.codex/
-
-# impeccable live-server runtime state (config.json is project config and stays tracked)
-.impeccable/live/*
-!.impeccable/live/config.json

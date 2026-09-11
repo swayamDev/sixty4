@@ -512,11 +512,11 @@ NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/play
 NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/play
 
 # Convex deployment env (set with `npx convex env set`, NOT here):
-#   CLERK_JWT_ISSUER_DOMAIN=https://flowing-wildcat-1401.clerk.accounts.dev
+#   CLERK_JWT_ISSUER_DOMAIN=https://<your-instance>.clerk.accounts.dev
 ```
 
 **Environment facts already verified** (`clerk-setup.md`): Clerk app `3D Chess`, dev instance,
-issuer `https://flowing-wildcat-1401.clerk.accounts.dev`, JWT template named **`convex`** exists
+issuer `https://<your-instance>.clerk.accounts.dev`, JWT template named **`convex`** exists
 (id `jtmp_3J5WhMRDDwh8FuS83KACkOHJV3H`) with `aud: "convex"` and a `nickname` claim carrying the
 username. **Username is required at sign-up** (min 3, max 20) and OAuth sign-ups get a progressive
 "continue" step that collects it - this is why `/sign-up` must be a catch-all route. Therefore
@@ -617,7 +617,7 @@ export default {
   providers: [
     {
       // Set on the Convex deployment (NOT in .env.local):
-      //   npx convex env set CLERK_JWT_ISSUER_DOMAIN https://flowing-wildcat-1401.clerk.accounts.dev
+      //   npx convex env set CLERK_JWT_ISSUER_DOMAIN https://<your-instance>.clerk.accounts.dev
       domain: process.env.CLERK_JWT_ISSUER_DOMAIN!,
       applicationID: "convex", // must equal the JWT `aud` claim; the `convex` template sets it
     },
@@ -626,7 +626,7 @@ export default {
 ```
 
 P1 must also run, once:
-`npx convex env set CLERK_JWT_ISSUER_DOMAIN https://flowing-wildcat-1401.clerk.accounts.dev`
+`npx convex env set CLERK_JWT_ISSUER_DOMAIN https://<your-instance>.clerk.accounts.dev`
 (value verified in `clerk-setup.md` §0; it is not a secret).
 
 ### `convex/schema.ts` - [P1], verbatim
@@ -2933,7 +2933,7 @@ moves, best first, with `scoreCp`/`mateIn` from your point of view.
 | grandmaster | Always pick rank 1 (the best move). | "Kasparova", imperious grandmaster; cutting one-liners |
 
 (PRD §3.8 verbatim; the `choose` cells must stay byte-identical to
-`DIFFICULTIES[*].selectionPolicy` - `src/lib/__tests__/difficulty.test.ts` asserts it.)
+`DIFFICULTIES[*].selectionPolicy` in `src/lib/difficulty.ts`.)
 
 Keep the persona consistent for the whole game. Never break character.
 ```
@@ -3023,7 +3023,7 @@ do not use it.
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` | `.env.local`, Vercel | Clerk (already set locally) |
 | `NEXT_PUBLIC_CLERK_SIGN_IN_URL` / `_SIGN_UP_URL` / `_SIGN_IN_FALLBACK_REDIRECT_URL` / `_SIGN_UP_FALLBACK_REDIRECT_URL` | `.env.local`, Vercel | `/sign-in`, `/sign-up`, `/play`, `/play` - **P2 must add these; they are not in `.env.local` yet** |
 | `CONVEX_DEPLOYMENT`, `NEXT_PUBLIC_CONVEX_URL`, `NEXT_PUBLIC_CONVEX_SITE_URL` | `.env.local` (written by `convex dev`) | Convex |
-| `CLERK_JWT_ISSUER_DOMAIN` | **Convex deployment env only** (`npx convex env set …`) | `auth.config.ts`; value `https://flowing-wildcat-1401.clerk.accounts.dev` |
+| `CLERK_JWT_ISSUER_DOMAIN` | **Convex deployment env only** (`npx convex env set …`) | `auth.config.ts`; value `https://<your-instance>.clerk.accounts.dev` |
 | `EVE_SERVER_SECRET` | `.env.local`, Vercel | shared secret between `/api/ai/*` and `agent/channels/eve.ts` |
 | `EVE_HOST` | optional | overrides the same-origin default (`VERCEL_URL` → `https://…`, else `http://localhost:3000`) |
 | `VERCEL_OIDC_TOKEN` | `.env.local` (already present, expires) | AI Gateway credential locally |

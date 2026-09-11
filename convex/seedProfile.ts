@@ -4,19 +4,27 @@ import { internalMutation } from "./_generated/server";
 import { AI_DISPLAY_NAME } from "./lib/constants";
 import { finalizeGame } from "./lib/games";
 
-const EVENT = "Castle demo profile wins - 2026-09-11";
+const EVENT = "Castle demo profile wins";
 const TARGET = 50;
 
-/** Admin-only, development-only fixture. Repeat calls insert only missing wins. */
+/**
+ * Admin-only, development-only fixture. Repeat calls insert only missing wins.
+ * Disabled unless ALLOW_DEV_SEED=true is set on the deployment, and takes any
+ * existing player id rather than a hardcoded account, so it works against
+ * whichever Convex deployment and player you point it at.
+ */
 export const seedWins = internalMutation({
   args: { playerId: v.id("players") },
   returns: v.object({ added: v.number(), wins: v.number(), losses: v.number(), draws: v.number(), rating: v.number() }),
   handler: async (ctx, { playerId }) => {
-    if (process.env.CONVEX_CLOUD_URL !== "https://tangible-dogfish-529.convex.cloud") {
-      throw new Error("This fixture is restricted to the Castle development deployment.");
+    if (process.env.ALLOW_DEV_SEED !== "true") {
+      throw new Error(
+        "This fixture is disabled. Set ALLOW_DEV_SEED=true on your Convex dev deployment " +
+          "(npx convex env set ALLOW_DEV_SEED true) to run it intentionally."
+      );
     }
     const player = await ctx.db.get("players", playerId);
-    if (!player || player.usernameLower !== "sonnysangha") throw new Error("Unexpected demo profile.");
+    if (!player) throw new Error("Unknown player id.");
     const previous = await ctx.db.query("games")
       .withIndex("by_whiteId_and_createdAt", q => q.eq("whiteId", playerId)).take(2001);
     if (previous.length > 2000) throw new Error("Profile is too large for this bounded fixture.");

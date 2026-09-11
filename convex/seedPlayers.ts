@@ -10,8 +10,11 @@ export const seed = internalMutation({
   args: {},
   returns: v.object({ added: v.number(), existing: v.number(), avatarsUpdated: v.number(), totalFixtures: v.number() }),
   handler: async (ctx) => {
-    if (process.env.CONVEX_CLOUD_URL !== "https://tangible-dogfish-529.convex.cloud") {
-      throw new Error("This fixture is restricted to the Castle development deployment.");
+    if (process.env.ALLOW_DEV_SEED !== "true") {
+      throw new Error(
+        "This fixture is disabled. Set ALLOW_DEV_SEED=true on your Convex dev deployment " +
+          "(npx convex env set ALLOW_DEV_SEED true) to run it intentionally."
+      );
     }
     let added = 0;
     let existing = 0;
