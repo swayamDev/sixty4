@@ -1,13 +1,13 @@
 "use client";
 // src/components/play/find-match-panel.tsx  [U5]
-// "Online match" — the first seat of UI_UPGRADE_2 §3.2, and the waiting state
+// "Online match" - the first seat of UI_UPGRADE_2 §3.2, and the waiting state
 // that replaces it IN PLACE while the player is in the queue: elapsed time in
 // mono, the widening-window rail drawn live, "Cancel" and "Play the AI while you
 // wait".
 //
 // Every piece of queue behaviour below (the pagehide cleanup, the optimistic
 // `queuedRef` claim, the skipped query before Convex has validated the session)
-// is unchanged from the previous round — only the presentation is new.
+// is unchanged from the previous round - only the presentation is new.
 import { useEffect, useRef, useState } from "react";
 import { SwordsIcon } from "lucide-react";
 import { useMutation, useQuery } from "convex/react";
@@ -26,7 +26,7 @@ const TICK_MS = 500;
 /**
  * The widest window the rail draws as "fully open". `queueRangeAt` keeps widening
  * past this, so the rail saturates rather than lying about a maximum that does
- * not exist — the numbers beside it stay authoritative.
+ * not exist - the numbers beside it stay authoritative.
  */
 const BAR_MAX_RANGE = 1000;
 
@@ -45,12 +45,12 @@ function RatingWindowRail({ range, myRating }: { range: number; myRating: number
         <span className="lobby-data text-foreground">
           {low === null || high === null
             ? `±${range}`
-            : `${formatRating(low)}–${formatRating(high)}`}
+            : `${formatRating(low)}-${formatRating(high)}`}
         </span>
       </div>
 
       {/* §3.2.1: "the same visual as the landing artefact, now live". It is the same
-          component — the 800–2400 rail with its mono ticks — with the bracket
+          component - the 800-2400 rail with its mono ticks - with the bracket
           centred on the player's own rating and widening with the real range, so a
           visitor who read the landing recognises it. */}
       <div
@@ -183,7 +183,7 @@ export interface MatchSeatViewProps {
   onFind(): void;
 }
 
-/** Pure idle seat — the harness renders it beside the waiting state. */
+/** Pure idle seat - the harness renders it beside the waiting state. */
 export function MatchSeatView({
   className,
   seat,
@@ -237,7 +237,7 @@ export function MatchSeatView({
 
 /**
  * The whole online seat: the idle panel, and the queue panel *in place of it*
- * while searching (§3.2). Owning both here is what lets the swap happen at all —
+ * while searching (§3.2). Owning both here is what lets the swap happen at all -
  * the queue state lives in `queue.myStatus`, not in the page.
  */
 export function FindMatchPanel({
@@ -252,7 +252,7 @@ export function FindMatchPanel({
   className,
   seat,
 }: {
-  /** False until Convex has validated the session — the query is skipped then. */
+  /** False until Convex has validated the session - the query is skipped then. */
   enabled: boolean;
   myRating: number | null;
   onPlayAi: () => void;
@@ -273,7 +273,7 @@ export function FindMatchPanel({
   const joinedAt = status?.joinedAt ?? null;
 
   // No wall clock during render (react-hooks/purity) and no synchronous setState
-  // inside the effect body (react-hooks/set-state-in-effect) — the interval owns both.
+  // inside the effect body (react-hooks/set-state-in-effect) - the interval owns both.
   useEffect(() => {
     if (joinedAt === null) return;
     const id = setInterval(() => setNowMs(Date.now()), TICK_MS);
@@ -329,7 +329,7 @@ export function FindMatchPanel({
         await join({});
       }
     } catch (error) {
-      // Nothing changed server-side — fall back to the last value the
+      // Nothing changed server-side - fall back to the last value the
       // subscription gave us so the cleanup does not act on a phantom row.
       queuedRef.current = inQueue;
       toast.error(describeConvexError(error, "Matchmaking is unavailable right now."));

@@ -48,7 +48,7 @@ function Stat({
   );
 }
 
-/** Pure — the /dev/pages harness renders this with a fixed profile. */
+/** Pure - the /dev/pages harness renders this with a fixed profile. */
 export function ProfileHeaderView({ profile }: { profile: ProfileSummary }) {
   return (
     <header className="grid gap-5 rounded-xl border border-border bg-card p-5 shadow-soft sm:p-6">

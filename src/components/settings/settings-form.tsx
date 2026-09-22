@@ -1,7 +1,7 @@
 "use client";
 // src/components/settings/settings-form.tsx  [U4]
 // The settings sections of UI_REDESIGN §6: Room, Board, Camera & motion,
-// Graphics, Engine, Account — plus Credits, which is a licence obligation (§I-7)
+// Graphics, Engine, Account - plus Credits, which is a licence obligation (§I-7)
 // and therefore has to stay reachable in the UI.
 //
 // `SettingsForm({ save })` keeps its exact pre-redesign contract because the game
@@ -67,7 +67,7 @@ function SettingsSkeleton() {
   );
 }
 
-/** Detected, never chosen — `engineBuild` is set by the worker that booted it. */
+/** Detected, never chosen - `engineBuild` is set by the worker that booted it. */
 function EngineSection() {
   const engineBuild = useUiStore((s) => s.engineBuild);
   return (
@@ -94,7 +94,7 @@ function EngineSection() {
             <span className="text-muted-foreground">
               {engineBuild === "sf18"
                 ? "The NNUE build, chosen because this browser has WASM SIMD."
-                : "The classical build — this browser has no WASM SIMD."}
+                : "The classical build, chosen because this browser has no WASM SIMD."}
             </span>
           </>
         )}
@@ -109,7 +109,7 @@ function EngineSection() {
  * they already paid something they already have.
  *
  * Managing and cancelling both live in Clerk's own user profile (its Billing section),
- * opened as a modal with the app's palette — there is no second billing UI to keep in
+ * opened as a modal with the app's palette - there is no second billing UI to keep in
  * step, and no place here where a card number could be typed.
  */
 function PlanSection() {
@@ -121,7 +121,7 @@ function PlanSection() {
     <Section
       id="settings-plan"
       title="Plan"
-      description="Sixty4 is free. Pro adds the tutor — the coach that explains a position and marks the board."
+      description="Sixty4 is free. Pro adds the tutor: the coach that explains a position and marks the board."
     >
       {hasTutor === undefined ? (
         <div className="flex items-center justify-between gap-4" aria-busy>
@@ -148,7 +148,7 @@ function PlanSection() {
             <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">
               {hasTutor
                 ? "Billing and cancellation both live in your account."
-                : "Everything else — rated games, the AI opponents, the rooms — stays free."}
+                : "Everything else (rated games, the AI opponents, the rooms) stays free."}
             </p>
           </div>
 
@@ -204,7 +204,7 @@ function AccountSection() {
 }
 
 export interface SettingsFormProps {
-  /** The /settings page shows the "Plan" row; the in-game Room drawer does not —
+  /** The /settings page shows the "Plan" row; the in-game Room drawer does not -
    *  nobody wants a subscription pitch beside a live board. */
   showPlan?: boolean;
   /** The ONE debounced `players.updateSettings` writer for this tree. The form does
@@ -234,7 +234,7 @@ export function SettingsForm({ save, showPlan = false }: SettingsFormProps) {
       <Section
         id="settings-room"
         title="Room"
-        description="Your board, your surroundings. Rooms are per-player — your opponent keeps theirs, and so do spectators."
+        description="Your board, your surroundings. Rooms are per-player: your opponent keeps theirs, and so do spectators."
       >
         <RoomPicker save={save} />
       </Section>

@@ -1,7 +1,7 @@
 "use client";
 // src/components/leaderboard/leaderboard-filters.tsx  [U4]
 // The three rating pools as tabs (UI_REDESIGN §6). One pool is shown at a time
-// and each has its own subscription, so a tab really does control a panel —
+// and each has its own subscription, so a tab really does control a panel -
 // which is what makes the tab semantics honest here.
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { LeaderboardFilter } from "@/lib/types";
@@ -24,7 +24,7 @@ export const FILTER_HINTS: Record<LeaderboardFilter, string> = {
   ai: POOL_TABS[2].hint,
 };
 
-/** The tab strip itself — must be rendered inside a `<Tabs>` root. */
+/** The tab strip itself - must be rendered inside a `<Tabs>` root. */
 export function LeaderboardFilters() {
   return (
     <TabsList variant="line" aria-label="Rating pool" className="h-8">

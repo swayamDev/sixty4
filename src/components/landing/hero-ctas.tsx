@@ -1,7 +1,7 @@
 "use client";
 // src/components/landing/hero-ctas.tsx  [U1]
 // §3: "▐ Play now ▌ Watch live games". Two buttons, always the same two labels and
-// the same footprint — only the destination of the first one depends on Clerk, so
+// the same footprint - only the destination of the first one depends on Clerk, so
 // nothing moves when `useAuth()` resolves.
 //
 // Semantics are the ones `HeroActions` (nav/auth-nav.tsx) has today: a signed-in

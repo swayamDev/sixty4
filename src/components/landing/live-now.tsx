@@ -1,6 +1,6 @@
 "use client";
 // src/components/landing/live-now.tsx  [UI upgrade 2 §2.4]
-// "Games in progress." — the club's own room, shown as boards rather than rows.
+// "Games in progress." - the club's own room, shown as boards rather than rows.
 // `games.listLive` is a public query so this renders for guests too; `games.get`
 // (the position) requires an identity, so a signed-out visitor sees the tiles,
 // the players and the move counts, and is told plainly that the positions and
@@ -24,7 +24,7 @@ function profileHref(username: string): string {
   return `/profile/${encodeURIComponent(username)}`;
 }
 
-/** One subscription per tile for the position — the same trade the lobby makes. */
+/** One subscription per tile for the position - the same trade the lobby makes. */
 function LiveTile({ game, canWatch }: { game: LiveGameSummary; canWatch: boolean }) {
   const view = useQuery(
     api.games.get,

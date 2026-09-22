@@ -2,7 +2,7 @@
 // src/components/tutor/tutor-locked.tsx
 // The panel a member without the tutor sees (docs/PRO_TUTOR.md §3.2): what it
 // does, in the host's voice; three questions it would answer; one brass way in.
-// No fake conversation and no blurred screenshot — nothing here pretends to be
+// No fake conversation and no blurred screenshot - nothing here pretends to be
 // the thing behind the wall.
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -24,7 +24,7 @@ export interface TutorLockedProps {
 export function TutorLocked({ gameId, notice, className }: TutorLockedProps) {
   return (
     // TOP-ALIGNED under the header plate, not centred. Centring put the whole sales
-    // case — a paragraph, three chips, the brass bar and one micro line — in a band at
+    // case - a paragraph, three chips, the brass bar and one micro line - in a band at
     // y 390-610 of an 840px column, with the header plate stranded alone above it and
     // ~330px of empty walnut between the two; a 9px squint read the column as an
     // unfinished rectangle. A short pitch that starts where the eye starts reads as
@@ -44,7 +44,7 @@ export function TutorLocked({ gameId, notice, className }: TutorLockedProps) {
         </p>
 
         {/* The three examples as a taller list carrying the annotation chips' own
-            tone dot — the same vocabulary the unlocked panel speaks, so the locked
+            tone dot - the same vocabulary the unlocked panel speaks, so the locked
             column is a picture of the thing rather than three grey pills. */}
         <ul className="flex flex-col items-start gap-2">
           {EXAMPLES.map((example, index) => (

@@ -1,6 +1,6 @@
 "use client";
 // src/components/play/local-setup.tsx  [U5]
-// "Same device" — the third seat of UI_UPGRADE_2 §3.2. One visible label, one
+// "Same device" - the third seat of UI_UPGRADE_2 §3.2. One visible label, one
 // field, one button, and nothing else: "No other fields."
 //
 // Pinned: the label text "Player 2 name", MAX_LOCAL_NAME_LENGTH, and a button

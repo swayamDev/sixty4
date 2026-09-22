@@ -1,7 +1,7 @@
 // convex/lib/returns.ts
 //
 // `returns` validators shared by more than one module. They are the runtime
-// guarantee behind the TypeScript shapes in `src/lib/types.ts` (§D.1) — keep the
+// guarantee behind the TypeScript shapes in `src/lib/types.ts` (§D.1) - keep the
 // two in step: PlayerSummary, PlayerProfile, GameView, GameSummary,
 // LiveGameSummary, LeaderboardRow.
 import { v } from "convex/values";
@@ -21,7 +21,7 @@ export const vPlayerDoc = schema.doc("players");
 export const vGameDoc = schema.doc("games");
 export const vCommentaryDoc = schema.doc("commentary");
 
-/** `players.me` — the caller's own row plus the resolved room-image URL. */
+/** `players.me` - the caller's own row plus the resolved room-image URL. */
 export const vMe = vPlayerDoc.extend({
   roomImageUrl: v.union(v.string(), v.null()),
 });

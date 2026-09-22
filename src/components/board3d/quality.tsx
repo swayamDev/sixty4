@@ -12,13 +12,13 @@ const BOUNDS = (): [number, number] => [30, 55];
 /**
  * FR-31 (tier drop) + FR-32 (resolution scaling).
  *
- * `flipflops`/`onFallback` are left at their defaults on purpose — see
+ * `flipflops`/`onFallback` are left at their defaults on purpose - see
  * use-quality-watchdog.ts: drei counts an INCLINE as a flip-flop too, so wiring
  * `onFallback` to the tier drop degrades a machine that is running perfectly.
  *
  * drei's <AdaptiveDpr> is not mounted either: it only reacts to
  * `state.performance.current`, which nothing in this app ever regresses, so it could
- * never scale the resolution. The same fps window drives the dpr instead — and it does so
+ * never scale the resolution. The same fps window drives the dpr instead - and it does so
  * by asking the OWNER of the `<Canvas dpr>` prop to change it, because fiber re-applies
  * that prop on every configure() and would undo a bare `setDpr()` on the next render.
  */
@@ -56,7 +56,7 @@ export function QualityWatchdog({
 
 /**
  * FR-31 auto-selection (§E.10 step 3). `useDetectGPU` suspends, so it lives behind its
- * own <Suspense> and is mounted OUTSIDE the Canvas — it needs no fiber context, and a
+ * own <Suspense> and is mounted OUTSIDE the Canvas - it needs no fiber context, and a
  * slow GPU-benchmark lookup must never hold up the first frame.
  *
  * `autoDetectTier` is a no-op unless the player left the quality setting on "auto".

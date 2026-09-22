@@ -1,6 +1,6 @@
 "use client";
 // src/components/ai/game-chat.tsx  [U2]
-// The Chat tab of UI_REDESIGN §5.1 — the rebuild of the old `commentary-panel`.
+// The Chat tab of UI_REDESIGN §5.1 - the rebuild of the old `commentary-panel`.
 //
 // It is a PURE view: persisted commentary arrives as plain rows (the container
 // runs `api.commentary.forGame`), and the only live source it reads is the
@@ -51,7 +51,7 @@ export interface GameChatProps {
   /** Who the plate names. Defaults to `personaName`; an online game names the
    *  other player, a local one names the table. */
   personaHeaderName?: string;
-  /** "Beginner · 800", "Online · 1311", "Same device" — the plate's mono line. */
+  /** "Beginner · 800", "Online · 1311", "Same device" - the plate's mono line. */
   personaMeta?: string;
   /** Whose move it is, from the viewer's seat. */
   turn?: "you" | "opponent" | "none";
@@ -86,7 +86,7 @@ export function GameChat({
   const hintPending = useAiStore((s) => s.hintPending);
 
   // ChatList only follows the conversation once it GROWS, so a chat that is
-  // already long on first paint would open at the oldest message — and §5.3's
+  // already long on first paint would open at the oldest message - and §5.3's
   // 40% sheet peek exists precisely so the newest bubble is the one you see.
   // One anchor, scrolled into view after the first layout pass.
   const bottomRef = useRef<HTMLLIElement | null>(null);
@@ -128,7 +128,7 @@ export function GameChat({
   // sr-only `MoveAnnouncer`, so the transcript is NOT a live region (see
   // `ChatList`): a player's own move would otherwise be read twice, once as
   // notation and once as a chat line. What a reader cannot get anywhere else is
-  // what the OPPONENT said, so that — and the hint they asked for — is all this
+  // what the OPPONENT said, so that - and the hint they asked for - is all this
   // region carries. Two spans, not one string: each changes only when its own
   // source does, so clearing the hint can never re-announce the last comment.
   let lastAi: { personaName: string; text: string } | null = null;
@@ -154,7 +154,7 @@ export function GameChat({
     (thinking ? 1 : 0) +
     (streaming.length > 0 ? 1 : 0);
 
-  // §4.4: the plate's status line is the game's live truth, in this order —
+  // §4.4: the plate's status line is the game's live truth, in this order -
   // spectating, over, thinking, whose move.
   const status: PersonaStatus = spectating
     ? "watching"
@@ -196,11 +196,11 @@ export function GameChat({
           hint.available ? (
             <div className="flex flex-col gap-1.5">
               <Button
-                // §4.8 item 6: a ghost, not the only brass on the screen — the board
+                // §4.8 item 6: a ghost, not the only brass on the screen - the board
                 // and the action bar own the accent, and a hint is an aside.
                 variant="ghost"
                 // `aria-disabled`, not `disabled`, so the button keeps its tooltip and
-                // stays in the tab order to explain itself — but it has to LOOK
+                // stays in the tab order to explain itself - but it has to LOOK
                 // unavailable too, the same 50% the action bar's blocked buttons use.
                 // Unavailable is said in colour, not in a 50% veil: the reason
                 // underneath has to stay readable, and so does the label it

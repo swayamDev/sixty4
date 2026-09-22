@@ -2,7 +2,7 @@
 // Development-only harness for /dev/board3d. It fabricates a `BoardViewProps` from a
 // local chess.js position and a local PieceTracker so the whole 3D package can be driven
 // in a browser with no Clerk session, no Convex deployment and no game controller.
-// Nothing here ships to production — the route calls notFound() outside development.
+// Nothing here ships to production - the route calls notFound() outside development.
 //
 // It also exercises the §10.4 showcase contract: the toggle swaps the board into
 // showcase mode, the second section below the board proves the off-screen frameloop
@@ -68,7 +68,7 @@ function devNumber(name: string): number | null {
  * It PATCHES the `ROOMS` table rather than threading a prop, because a room reaches the
  * scene through `resolveRoom` and nothing in the render path takes an override. That is
  * only safe because of where it runs: at module scope in a chunk that is imported by
- * `/dev/board3d` alone, on the client alone, in development alone — the route itself
+ * `/dev/board3d` alone, on the client alone, in development alone - the route itself
  * `notFound()`s in production. Before the first render, so nothing has read the table.
  */
 function applyRoomOverrides(): void {
@@ -110,13 +110,13 @@ function applyRoomOverrides(): void {
 if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") applyRoomOverrides();
 
 const SCRIPTS: Record<string, string[]> = {
-  // Ruy Lopez with a queen trade — exercises slides, captures and the tray.
+  // Ruy Lopez with a queen trade - exercises slides, captures and the tray.
   "Long game": [
     "d4", "d5", "c4", "e6", "Nc3", "Nf6", "Bg5", "Be7", "e3", "O-O", "Nf3", "h6", "Bh4", "b6",
     "cxd5", "Nxd5", "Bxe7", "Qxe7", "Nxd5", "exd5", "Rc1", "Be6", "Qa4", "c5", "Qa3", "Rc8",
     "Bb5", "a6", "dxc5", "bxc5", "O-O", "Ra7", "Be2", "Nd7", "Nd4", "Qf8", "Nxe6", "fxe6",
   ],
-  // Scholar's mate — the fastest way to see the check and checkmate indicators.
+  // Scholar's mate - the fastest way to see the check and checkmate indicators.
   "Quick mate": ["e4", "e5", "Bc4", "Nc6", "Qh5", "Nf6", "Qxf7#"],
 };
 
@@ -261,7 +261,7 @@ export function Board3DDevPreview() {
   const cinematic = useUiStore((s) => s.cinematic);
 
   /**
-   * The §10.4 prop. Tier and post FX are read from the store and PASSED IN — in
+   * The §10.4 prop. Tier and post FX are read from the store and PASSED IN - in
    * showcase mode the board never reads the store itself, so this is what keeps the
    * Quality / Post FX buttons above meaningful.
    */
@@ -476,7 +476,7 @@ export function Board3DDevPreview() {
           {flipping ? " · flipping" : ""}
         </span>
         <span className="tabular text-muted-foreground" aria-live="off">
-          {/* Ember is reserved for danger (§1.1) — a paused loop is expected, not wrong. */}
+          {/* Ember is reserved for danger (§1.1) - a paused loop is expected, not wrong. */}
           fps: <strong className={cn("font-mono", fpsStale ? "text-fg-muted" : "text-live")}>
             {fpsStale ? "0 (paused)" : (fps ?? "—")}
           </strong>
@@ -504,7 +504,7 @@ export function Board3DDevPreview() {
       )}
 
       {/* `absolute inset-0` inside a sized flex child gives the Canvas a definite
-          height — r3f measures its wrapper and a percentage chain that bottoms out in
+          height - r3f measures its wrapper and a percentage chain that bottoms out in
           `height: auto` collapses to the 300x150 canvas default. */}
       {/* In showcase mode the board gets a fixed height and a second section below it,
           so scrolling can push the canvas off screen and the fps read-out above proves

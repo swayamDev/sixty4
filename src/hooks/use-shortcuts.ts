@@ -9,8 +9,8 @@
 // One document-level listener, installed once. It is deliberately conservative:
 // a key is only claimed when the user is demonstrably NOT typing and no MODAL
 // dialog is on screen, because silently stealing "r" from a text box is far worse
-// than missing a shortcut. A non-modal popup — §5.3's game panel, which a phone
-// player leaves open while they play — keeps only Escape.
+// than missing a shortcut. A non-modal popup - §5.3's game panel, which a phone
+// player leaves open while they play - keeps only Escape.
 import { useEffect, useRef } from "react";
 
 export interface ShortcutHandlers {
@@ -20,7 +20,7 @@ export interface ShortcutHandlers {
   onToggleView?(): void;
   /** R */
   onFlip?(): void;
-  /** ← / → — delta is -1 or +1. */
+  /** ← / → - delta is -1 or +1. */
   onStep?(delta: number): void;
   /** Home */
   onFirst?(): void;
@@ -50,7 +50,7 @@ function isTypingTarget(target: EventTarget | null): boolean {
  * Base UI keeps a popup mounted for the whole of its exit transition
  * (`internals/useTransitionStatus.mjs` flips `mounted` only once the animation
  * completes), so a plain `[role="dialog"]` query goes on reporting a dialog that
- * is already fading out — and Escape, pressed twice to leave a dialog and then
+ * is already fading out - and Escape, pressed twice to leave a dialog and then
  * fullscreen, would do nothing the second time. `data-open` / `data-closed` is
  * Base UI's own open flag (`utils/popupStateMapping.mjs`), written by every popup
  * part, so ask for that.
@@ -60,21 +60,21 @@ const OPEN_POPUPS = '[role="dialog"][data-open], [role="alertdialog"][data-open]
 /**
  * A NON-modal popup's viewport. Base UI does not put `aria-modal` on a dialog
  * popup at all (checked: the only `aria-modal` in @base-ui/react is ToastRoot's
- * `false`), so modality has to be read off the wrapper that does record it —
+ * `false`), so modality has to be read off the wrapper that does record it -
  * `src/components/ui/drawer.tsx` stamps `data-modal={modal}` on
  * `DrawerPrimitive.Viewport`, the popup's own ancestor.
  */
 const NON_MODAL_VIEWPORT = '[data-slot="drawer-viewport"][data-modal="false"]';
 
 /**
- * True while a MODAL popup is on screen — one of those owns Escape, Home/End and
+ * True while a MODAL popup is on screen - one of those owns Escape, Home/End and
  * the arrows for as long as it is up.
  *
  * §5.3's game panel is the exception that made this a function rather than a
  * selector: it is a `role="dialog"` the phone player deliberately leaves open
  * while they carry on playing, so treating "a dialog exists" as "the user is busy
- * elsewhere" silently killed every shortcut on a phone — including Escape, the way
- * out of fullscreen — for as long as the sheet was up. A non-modal popup does not
+ * elsewhere" silently killed every shortcut on a phone - including Escape, the way
+ * out of fullscreen - for as long as the sheet was up. A non-modal popup does not
  * take the page away from you, so it does not take the keys either.
  */
 function isModalDialogOpen(): boolean {
@@ -91,7 +91,7 @@ export function useShortcuts(
   // The handler object is rebuilt on every render of the caller; keeping it in a
   // ref means the listener is attached exactly once instead of on every keystroke
   // that changed a closure upstream. The write happens in an effect, never during
-  // render — mutating a ref while rendering is a React Compiler error.
+  // render - mutating a ref while rendering is a React Compiler error.
   const ref = useRef(handlers);
   useEffect(() => {
     ref.current = handlers;
@@ -108,7 +108,7 @@ export function useShortcuts(
       if (isModalDialogOpen()) return;
       // Escape is the one key a NON-modal popup still owns: with §5.3's sheet up,
       // Escape means "put the panel away", and Base UI's own dismissal does that.
-      // Everything else — F, T, R, the review keys — is about the board, which is
+      // Everything else - F, T, R, the review keys - is about the board, which is
       // still right there behind the sheet.
       if (event.key === "Escape" && document.querySelector(OPEN_POPUPS) !== null) return;
 

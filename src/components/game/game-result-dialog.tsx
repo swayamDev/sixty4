@@ -161,7 +161,7 @@ export function GameResultDialog({
           </DialogTitle>
           {/* §4.8 item 4: never state the same fact twice. When the viewer has a
               seat the verdict above already says who won ("You won"), so this line
-              carries only what the verdict does not — how it ended. Spectators and
+              carries only what the verdict does not - how it ended. Spectators and
               local games, where the verdict is "Game over" or "Draw", still get the
               full sentence with the names in it. */}
           <DialogDescription>
@@ -171,7 +171,7 @@ export function GameResultDialog({
                 : detail
               : `${detail}${
                   reason && !detail.toLowerCase().includes(reason.toLowerCase())
-                    ? ` — ${reason}`
+                    ? ` (${reason})`
                     : ""
                 }`}
             {abandoned ? " Your opponent left the game." : ""}
@@ -192,7 +192,7 @@ export function GameResultDialog({
             {takeBackLine.text}
             {takeBackLine.rating === null ? null : (
               <>
-                {" — "}
+                {": "}
                 <span className="font-medium text-foreground">{takeBackLine.rating}</span>
               </>
             )}

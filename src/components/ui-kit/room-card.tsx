@@ -5,7 +5,7 @@ import { cn, focusRing } from "@/lib/ui";
 export interface RoomCardProps extends React.ComponentProps<"button"> {
   name: string;
   description: string;
-  /** Hex from ROOMS[...].board — drawn as the two square swatches. */
+  /** Hex from ROOMS[...].board - drawn as the two square swatches. */
   lightSquare: string;
   darkSquare: string;
   /**

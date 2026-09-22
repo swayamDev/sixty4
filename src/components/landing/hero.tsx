@@ -29,7 +29,7 @@ type RoomId = Exclude<RoomPresetId, "custom">;
 export function Hero() {
   const [room, setRoom] = useState<RoomId>(DEFAULT_ROOM as RoomId);
   const [preview, setPreview] = useState<RoomId | null>(null);
-  // Kept for the visit in sessionStorage — see use-replay-pause.ts.
+  // Kept for the visit in sessionStorage - see use-replay-pause.ts.
   const paused = useReplayPaused();
   const reducedMotion = useReducedMotion();
 

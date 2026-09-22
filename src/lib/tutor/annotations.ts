@@ -84,8 +84,8 @@ export function isEmptyAnnotations(a: BoardAnnotations | null | undefined): bool
  * is an `<svg viewBox="0 0 8 8">` and the 3D scene puts one square on one world unit.
  *
  * The two boards differ only in where a square's centre is:
- *   2D  `squareCentre2d` — orientation-aware (the grid is drawn from a seat).
- *   3D  `squareCentre3d` — world coordinates flattened into the highlight group's
+ *   2D  `squareCentre2d` - orientation-aware (the grid is drawn from a seat).
+ *   3D  `squareCentre3d` - world coordinates flattened into the highlight group's
  *       local plane (that group is rotated -90 deg about X, so world -Z is local +Y);
  *       the camera moves instead of the board, so orientation does not come into it.
  */
@@ -110,7 +110,7 @@ export const ARROW_START_INSET = 0.3;
  * A square tint knows which square it sits on, so its edge can be pushed away from
  * that square's own value (`toneEdgeToken`). An ARROW does not: one shaft crosses
  * light and dark squares in the same stroke. And no single colour can clear 3:1
- * against both of this board's squares — `--board-light` #d9b98a has a relative
+ * against both of this board's squares - `--board-light` #d9b98a has a relative
  * luminance of 0.560 and `--board-dark` #7a4a22 of 0.092, so a casing dark enough
  * for the light square (L <= 0.153) is automatically too dark for the dark one, and
  * a casing light enough for the dark square (L >= 0.375) is too light for the light
@@ -141,18 +141,18 @@ export const ARROW_OPACITY = 0.85;
  * Measured on both boards (docs/PRO_TUTOR.md §8): a 45 % wash of a tone over a board
  * square is a large COLOUR difference and a small VALUE one, because this palette's
  * baize, ember and brass sit at almost the same luminance as the board's own walnut.
- * The worst pair — `--live` on a dark square in the light theme — is 1.00:1 against the
+ * The worst pair - `--live` on a dark square in the light theme - is 1.00:1 against the
  * bare square (a colour difference of dE 29, but no contrast at all in grey).
  *
  * So the tint's EDGE carries the shape: the same tone pushed half-way away from the
- * square it sits on — lighter on a dark square, darker on a light one. Hue is kept, so
+ * square it sits on - lighter on a dark square, darker on a light one. Hue is kept, so
  * it still reads as that tone, and every tone on every square in both themes clears
  * 3:1 against the bare square (WCAG 1.4.11 for a meaningful graphic).
  */
 export const SQUARE_EDGE_MIX = 0.5;
 /**
  * The same edge on the 3D board's DARK squares. Walnut that is #7a4a22 as a token
- * renders around #a66534 under the room's key light — a mid value, not a dark one — so
+ * renders around #a66534 under the room's key light - a mid value, not a dark one - so
  * a half-mix toward white measured only 2.1-2.4:1 there. Pushed further it clears 3:1
  * while keeping the hue. Light squares need no such correction; they are already the
  * bright end at both stages.
@@ -167,7 +167,7 @@ export function toneEdgeToken(tone: AnnotationTone, lightSquare: boolean): strin
 }
 
 /**
- * The same mix, done in numbers, for a renderer that cannot evaluate `color-mix` —
+ * The same mix, done in numbers, for a renderer that cannot evaluate `color-mix` -
  * i.e. three. `colour` is a resolved `#rrggbb`; anything else comes back untouched.
  */
 export function toneEdgeColour(
@@ -186,7 +186,7 @@ export function toneEdgeColour(
 }
 /**
  * The two casing rings of an arrow, as CSS. `outer` is pushed toward black (it reads
- * on a light square), `inner` toward white (it reads on a dark one) — the same mix
+ * on a light square), `inner` toward white (it reads on a dark one) - the same mix
  * the tint's edge uses, applied both ways because a shaft crosses both colours.
  */
 export function toneCasingTokens(tone: AnnotationTone): { outer: string; inner: string } {
@@ -211,7 +211,7 @@ export interface ArrowGeometry {
   /** Shaft start (inset out of the piece it leaves). */
   x1: number;
   y1: number;
-  /** Shaft end — where the head's BASE sits, so the tip lands on the square centre. */
+  /** Shaft end - where the head's BASE sits, so the tip lands on the square centre. */
   x2: number;
   y2: number;
   /** The head's point: the exact centre of the target square. */
@@ -232,8 +232,8 @@ export interface ArrowOptions {
 
 /**
  * The shaft of an arrow between two square centres, shortened at BOTH ends: at the
- * start so the piece underneath stays visible, at the end so the head's tip — not its
- * base — lands on the target square's centre. Knight moves and neighbouring squares
+ * start so the piece underneath stays visible, at the end so the head's tip - not its
+ * base - lands on the target square's centre. Knight moves and neighbouring squares
  * are short, so the insets are clamped rather than allowed to invert the shaft.
  */
 export function arrowBetween(
@@ -325,7 +325,7 @@ export function badgePoint(arrow: ArrowGeometry, offset: number = LINE_BADGE_OFF
  */
 export function lineStepOpacity(index: number): number {
   // The floor was 0.38, which measured 1.01-1.59:1 against a bare square on every
-  // combination of theme and square colour — step 4 of a line was not visible at all.
+  // combination of theme and square colour - step 4 of a line was not visible at all.
   // A gentler decay to a 0.6 floor keeps "first move strongest" readable AND keeps the
   // last step of the line on the board.
   return Math.max(0.6, ARROW_OPACITY - index * 0.08);

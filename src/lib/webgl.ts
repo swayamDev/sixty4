@@ -1,6 +1,6 @@
 // src/lib/webgl.ts
 // FR-19 / NFR-2 / §E.10. three r185 is WebGL2-only and fiber's <Canvas> swallows a
-// renderer-constructor throw into an unhandled rejection — the `fallback` prop does NOT
+// renderer-constructor throw into an unhandled rejection - the `fallback` prop does NOT
 // cover it. So probe BEFORE mounting the Canvas and fall back to Board2D when this says no.
 //
 // Browser-only: every entry point returns the "unavailable" answer on the server instead of

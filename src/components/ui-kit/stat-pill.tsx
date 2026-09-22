@@ -14,7 +14,7 @@ export interface StatPillProps extends React.ComponentProps<"span"> {
   /** What the number counts, e.g. "playing now". */
   label?: React.ReactNode;
   tone?: keyof typeof TONE_CLASS;
-  /** A leading status dot — pulses on the `live` tone. */
+  /** A leading status dot - pulses on the `live` tone. */
   dot?: boolean;
 }
 

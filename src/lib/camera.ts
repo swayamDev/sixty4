@@ -10,8 +10,8 @@ export interface CameraPose {
 
 /**
  * The "Top" preset must sit INSIDE the FR-20 polar clamp. camera-controls only applies
- * `minPolarAngle`/`maxPolarAngle` in `rotateTo()` and the pointer handlers — `setLookAt()`
- * writes `_sphericalEnd` unclamped and `update()` only calls `makeSafe()` — so a
+ * `minPolarAngle`/`maxPolarAngle` in `rotateTo()` and the pointer handlers - `setLookAt()`
+ * writes `_sphericalEnd` unclamped and `update()` only calls `makeSafe()` - so a
  * near-vertical preset would be legal until the first orbit drag, which then snaps the
  * camera to `minPolarAngle` in a single frame. 14 deg keeps a 4 deg margin over the 10 deg
  * limit while still reading as a top-down view.
@@ -19,7 +19,7 @@ export interface CameraPose {
 const TOP_DISTANCE = 13;
 const TOP_POLAR = 14 * DEG;
 
-/** "cinematic" is not a pose — it is the white pose plus idle auto-orbit. */
+/** "cinematic" is not a pose - it is the white pose plus idle auto-orbit. */
 export const CAMERA_PRESETS: Record<Exclude<CameraPresetId, "cinematic">, CameraPose> = {
   white: { position: [0, 7.5, 9], target: [0, 0, 0] },
   black: { position: [0, 7.5, -9], target: [0, 0, 0] },
@@ -40,7 +40,7 @@ export const CAMERA_LIMITS = {
   /**
    * Ceiling for an AUTOMATIC fit, which is not the same limit as the player's own
    * zoom-out. FR-22's 22 units is "whole board plus room" seen through a wide canvas;
-   * a tall narrow one — the landing hero is ~0.87:1 — legitimately needs more than that
+   * a tall narrow one - the landing hero is ~0.87:1 - legitimately needs more than that
    * before the board fits, and clamping the fit there is exactly how a board ends up
    * cropped. The rig raises `controls.maxDistance` to whatever the fit actually used
    * (`dollyTo` clamps to it) and leaves it at `maxDistance` whenever the fit is happy.
@@ -73,7 +73,7 @@ export const CAMERA_LIMITS = {
  * FR-24's orbit used to be a full circle, and a full circle is a promise no photographic
  * room can keep: a panorama has a best side, and turning all the way round guarantees the
  * worst one is on screen for part of every lap. (The Classic Study's was a mustard sofa,
- * for about 20 of every 42 seconds — see docs/research/assets.md §A2c/§A2d.) So the idle
+ * for about 20 of every 42 seconds - see docs/research/assets.md §A2c/§A2d.) So the idle
  * camera now swings back and forth across an arc centred on the side of the room that is
  * worth looking at, and never reaches the side that is not.
  */
@@ -96,7 +96,7 @@ export interface OrbitSweep {
 
 /**
  * What a room gets if it does not say. ~55 deg either side, so the sweep shows ~110 deg
- * of parallax — enough that the board is plainly turning, and narrow enough that a
+ * of parallax - enough that the board is plainly turning, and narrow enough that a
  * panorama only has to be good for a third of its circumference.
  */
 export const DEFAULT_ORBIT_SWEEP: OrbitSweep = { centerAzimuth: 0, halfArc: 0.95 };
@@ -105,7 +105,7 @@ const TAU = Math.PI * 2;
 
 /**
  * Phase radians per second for a sweep of this half-arc, chosen so the camera crosses the
- * centre of the arc at exactly `CAMERA_LIMITS.cinematicSpeed` — the pace the full-circle
+ * centre of the arc at exactly `CAMERA_LIMITS.cinematicSpeed` - the pace the full-circle
  * orbit ran at. A wider arc therefore takes proportionally longer rather than moving
  * faster, and every room reads at the same speed.
  */
@@ -128,7 +128,7 @@ export function orbitAzimuthAt(sweep: OrbitSweep, phase: number): number {
 export interface OrbitStep {
   /** The phase to carry into the next frame, wrapped into [0, 2*PI). */
   phase: number;
-  /** How far to turn the camera THIS frame — feed straight to `controls.rotate`. */
+  /** How far to turn the camera THIS frame - feed straight to `controls.rotate`. */
   deltaAzimuth: number;
 }
 
@@ -138,7 +138,7 @@ export interface OrbitStep {
  * Relative and not absolute on purpose. camera-controls' `rotate()` accumulates on
  * `_sphericalEnd`, so summing these deltas tracks `halfArc * sin(phase)` exactly, and a
  * player who drags the hero board mid-sweep keeps their own view instead of being pulled
- * back to a line the rig thinks the camera should be on — which is the same thing the
+ * back to a line the rig thinks the camera should be on - which is the same thing the
  * full-circle orbit did, and the behaviour FR-24 already had.
  *
  * The motion is a sine, so its speed is a cosine: fastest at the centre, easing to a stop
@@ -169,21 +169,21 @@ export function poseForPreset(preset: CameraPresetId): CameraPose {
 /**
  * The poses above are fixed distances, and a perspective camera's HORIZONTAL field of
  * view is its vertical fov widened by the canvas aspect. They were tuned in a wide box
- * (the /dev/board3d harness is ~16:9) where that is generous; in a square one — which
- * is exactly what the §5.1 game shell hands the board — the horizontal fov collapses to
+ * (the /dev/board3d harness is ~16:9) where that is generous; in a square one - which
+ * is exactly what the §5.1 game shell hands the board - the horizontal fov collapses to
  * the vertical 40 deg and the near corners of the board fall outside the frame. The
  * cinematic orbit makes it worse still: as the azimuth swings to 45 deg the board
  * presents its DIAGONAL to the camera, which is another factor of root 2 wider.
  *
  * So: the distance a pose needs in order to keep `halfWidth` world units visible either
- * side of the target, at this aspect. Purely horizontal — the vertical extent is
+ * side of the target, at this aspect. Purely horizontal - the vertical extent is
  * foreshortened by the camera's elevation and has never been the binding constraint, and
  * fitting it too would pull the wide-screen framing back for no reason.
  *
  * `depthAdvance` is the second half of the same sum and the reason the first version of
  * this still clipped: a perspective frustum is a WEDGE, so the half-width it shows
  * shrinks with depth. The corner of the board that has to stay in frame is not on the
- * target plane — it sits `depthAdvance` world units NEARER the camera along the view
+ * target plane - it sits `depthAdvance` world units NEARER the camera along the view
  * axis, where the frame is `depthAdvance * tan(fov/2) * aspect` narrower. Pushing the
  * camera back by exactly that much restores it. Zero reproduces the old plane-only fit,
  * which is correct for anything that really does sit at the target's depth.
@@ -207,7 +207,7 @@ export function minFitDistance(
  * How far in front of the target the near corner of a flat, board-plane object of
  * half-depth `halfDepth` sits, measured along the camera's own view axis: the horizontal
  * run of the pose direction (cos of its elevation) times that half-depth. A camera
- * directly overhead gets 0 — nothing is nearer than the target — and a camera at eye
+ * directly overhead gets 0 - nothing is nearer than the target - and a camera at eye
  * level gets the whole `halfDepth`. Feed the result to `minFitDistance`.
  */
 export function nearCornerAdvance(pose: CameraPose, halfDepth: number): number {
@@ -221,7 +221,7 @@ export function nearCornerAdvance(pose: CameraPose, halfDepth: number): number {
 
 /**
  * `pose` pushed straight back along its own view direction until it is at least
- * `minFitDistance` from its target — never pulled closer, so a wide canvas keeps the
+ * `minFitDistance` from its target - never pulled closer, so a wide canvas keeps the
  * framing the presets were designed for and only a narrow one moves. Returns the pose
  * unchanged (same object) when no correction is needed.
  *
@@ -284,7 +284,7 @@ export function rotatePoseAzimuth(pose: CameraPose, azimuth: number): CameraPose
   };
 }
 
-/** The pose's own distance from its target — the framing it was tuned for. */
+/** The pose's own distance from its target - the framing it was tuned for. */
 export function poseDistance(pose: CameraPose): number {
   return Math.hypot(
     pose.position[0] - pose.target[0],
@@ -301,7 +301,7 @@ export function poseDistance(pose: CameraPose): number {
  *
  * Several boxes describe a chess board far better than one. The plinth is wide and flat;
  * the pieces are narrower and as tall as a king. A single box around both would insist
- * on room for a king standing on the plinth's outer corner — where no king can stand —
+ * on room for a king standing on the plinth's outer corner - where no king can stand -
  * and cost the hero a tenth of its board for nothing.
  */
 export interface FitBox {
@@ -322,7 +322,7 @@ export interface FitBox {
  * `d >= v·ĝ + |v·r̂| / tanH` and `d >= v·ĝ + |v·û| / tanV`; the answer is the largest.
  *
  * Both axes matter and that is the point: a board seen from 45 deg of azimuth puts its
- * NEAR corner dead centre horizontally, where no horizontal fit can see it, and low —
+ * NEAR corner dead centre horizontally, where no horizontal fit can see it, and low -
  * and being nearer the lens it is magnified, so it leaves the frame through the BOTTOM.
  * That is the corner that was being cut off the landing hero.
  *
@@ -344,7 +344,7 @@ export function fitDistanceForDirection(
   // because a square footprint seen from above is the same in every azimuth.
   const rLength = Math.hypot(gz, gx);
   const [rx, rz] = rLength > 1e-6 ? [gz / rLength, -gx / rLength] : ([1, 0] as const);
-  // u = g x r, with r = (rx, 0, rz) — the camera's own up.
+  // u = g x r, with r = (rx, 0, rz) - the camera's own up.
   const upx = gy * rz;
   const upy = gz * rx - gx * rz;
   const upz = -gy * rx;
@@ -380,12 +380,12 @@ const ORBIT_FIT_MAX_HALF_ARC = Math.PI / 4;
 /**
  * The distance a CINEMATIC pose has to hold for the whole idle sweep (FR-24): the worst
  * case of `fitDistanceForDirection` across `halfArc` either side of the pose's own
- * azimuth, at the pose's own elevation. One distance for the entire sweep is the point —
+ * azimuth, at the pose's own elevation. One distance for the entire sweep is the point -
  * a distance that breathed with the azimuth would read as a dolly nobody asked for.
  *
  * `halfArc` defaults to the quarter turn this used to sample unconditionally, which by
  * the symmetry above is the same answer as a full circle. A room may ask for less
- * (`OrbitSweep.halfArc`) and get a closer, larger board out of it — but only below 45
+ * (`OrbitSweep.halfArc`) and get a closer, larger board out of it - but only below 45
  * deg, because any arc of 110 deg straddles a 45 deg diagonal, and the diagonal is
  * always the worst case. Every room shipped in `src/lib/rooms.ts` is above that line, so
  * today this returns exactly what the full-circle version returned; the parameter is
@@ -432,7 +432,7 @@ export interface QualityConfig {
    */
   shadows: false | true | "basic" | "soft";
   /**
-   * DEAD CONFIG — nothing reads it. drei 10.7.8's `<SoftShadows>` (PCSS) cannot compile
+   * DEAD CONFIG - nothing reads it. drei 10.7.8's `<SoftShadows>` (PCSS) cannot compile
    * against three 0.185.1: its shader patch calls `unpackRGBAToDepth`, which r185 no
    * longer declares in `shadowmap_pars_fragment`, so every MeshStandard/Physical program
    * fails to link. Kept only so the field can be revived if drei ships an r185 patch;
@@ -442,7 +442,7 @@ export interface QualityConfig {
   directionalShadowMapSize: number;
   reflector: { enabled: boolean; resolution: number } ;
   contactShadows: { enabled: boolean; resolution: number; frames: number };
-  /** Post-processing. `composer: false` means UNMOUNT <EffectComposer> entirely —
+  /** Post-processing. `composer: false` means UNMOUNT <EffectComposer> entirely -
    *  passing enabled={false} would leave gl.toneMapping = NoToneMapping
    *  (postprocessing.md §2). */
   post: {
@@ -454,7 +454,7 @@ export interface QualityConfig {
     smaa: "low" | "high" | false;
     vignette: boolean;
   };
-  /** Physical (transmission) piece materials are High only — they cost a pass per frame. */
+  /** Physical (transmission) piece materials are High only - they cost a pass per frame. */
   allowTransmission: boolean;
   maxPixelRatioOnRegress: number;
 }
@@ -501,7 +501,7 @@ export const QUALITY_TIERS: Record<ResolvedQualityTier, QualityConfig> = {
   high: {
     dpr: [1, 2],
     shadows: "soft", // -> "percentage" (PCFShadowMap), same filter as Medium
-    softShadows: true, // NOT APPLIED (see the field's doc comment) — High's extra
+    softShadows: true, // NOT APPLIED (see the field's doc comment) - High's extra
     // shadow quality is the 2048 map below plus live ContactShadows, not PCSS.
     directionalShadowMapSize: 2048,
     reflector: { enabled: true, resolution: 1024 },
@@ -528,7 +528,7 @@ export interface AutoTierInput {
   isMobile: boolean;
 }
 
-/** FR-31 auto-select. Called once after mount (never during render — it reads
+/** FR-31 auto-select. Called once after mount (never during render - it reads
  *  browser globals and would break react-hooks/purity). */
 export function autoQualityTier(input: AutoTierInput): ResolvedQualityTier {
   const { hardwareConcurrency, devicePixelRatio, gpuTier, isMobile } = input;

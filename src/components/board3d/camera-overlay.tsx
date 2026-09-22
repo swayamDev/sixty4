@@ -3,7 +3,7 @@
 // The in-canvas camera controls (§5.1 "Camera ▾" in board form). Every button is
 // icon + label + tooltip, the active seat is brass (`variant="primary"`), and the
 // accessible names stay exactly "White" / "Black" / "Top" / "Orbit" /
-// "Reset the camera" — e2e/public.spec.ts and the keyboard help text quote them.
+// "Reset the camera" - e2e/public.spec.ts and the keyboard help text quote them.
 import { Circle, CircleDot, Grid2x2, Orbit, RotateCcw } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ActionBar, ActionButton } from "@/components/ui-kit";

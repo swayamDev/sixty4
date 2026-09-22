@@ -3,7 +3,7 @@
 // the tutor's engine runs in your browser)".
 //
 // Native `<details>`: it is keyboard-operable, findable by the browser's own find
-// command when closed, and needs no JavaScript — so this whole band ships in the
+// command when closed, and needs no JavaScript - so this whole band ships in the
 // first HTML response with the rest of the static shell. The turn cap is printed from
 // `MAX_TUTOR_TURNS_PER_GAME`, not typed out, so the answer cannot drift from the code.
 import { ChevronDown } from "lucide-react";
@@ -27,7 +27,7 @@ const QUESTIONS: Question[] = [
   },
   {
     q: "Which games does it sit in?",
-    a: "All of them — online, against the AI, pass and play, spectating and replays. It follows the board, so if you review an earlier move it answers about that position instead of the live one.",
+    a: "All of them: online, against the AI, pass and play, spectating and replays. It follows the board, so if you review an earlier move it answers about that position instead of the live one.",
   },
   {
     q: "What will it not do?",
@@ -35,11 +35,11 @@ const QUESTIONS: Question[] = [
   },
   {
     q: "Where does the analysis come from?",
-    a: "The tutor's engine runs in your browser, not on a server — the same Stockfish the AI opponents play with. So the lines it reasons from are worked out on your own machine.",
+    a: "The tutor's engine runs in your browser, not on a server. It is the same Stockfish the AI opponents play with, so the lines it reasons from are worked out on your own machine.",
   },
   {
     q: "How do I cancel?",
-    a: "In your account, under Billing — the avatar menu in the header, or the Plan row in settings. There is no notice period.",
+    a: "In your account, under Billing (the avatar menu in the header, or the Plan row in settings). There is no notice period.",
   },
 ];
 
@@ -68,7 +68,7 @@ export function ProFaq() {
               />
             </summary>
             {/* 60ch, the widest measure used anywhere else in the app. 68ch rendered 676px
-                at 15px — about 90 characters a line, above the readable 45-75 band and
+                at 15px - about 90 characters a line, above the readable 45-75 band and
                 the only place in the repo that reached for it. */}
             <p className="max-w-[60ch] pb-5 text-[15px] leading-relaxed text-pretty text-muted-foreground">
               {item.a}

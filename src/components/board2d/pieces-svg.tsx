@@ -1,5 +1,5 @@
 // src/components/board2d/pieces-svg.tsx  [P3]
-// The twelve piece glyphs (6 shapes x 2 colours) as inline SVG — no external
+// The twelve piece glyphs (6 shapes x 2 colours) as inline SVG - no external
 // assets, no licence obligations: every path here is original geometry drawn for
 // this project inside the classic 45x45 chess-glyph viewBox.
 import type { Colour, PieceSymbol } from "@/lib/types";
@@ -111,7 +111,7 @@ const PIECE_NAMES: Record<PieceSymbol, string> = {
   k: "king",
 };
 
-/** "white knight" — used for square labels and the aria-live announcer (NFR-7). */
+/** "white knight" - used for square labels and the aria-live announcer (NFR-7). */
 export function pieceName(type: PieceSymbol, colour: Colour): string {
   return `${colour === "w" ? "white" : "black"} ${PIECE_NAMES[type]}`;
 }

@@ -74,7 +74,7 @@ function PersonaDisc({
             "grid size-11 shrink-0 place-items-center rounded-full p-2 text-base font-medium",
             "transition-colors duration-150",
             // DESIGN.md, Chips: "selected chips switch to a seam fill with ivory text
-            // and a brass ring" — not a brass fill. The One Metal Rule wants exactly
+            // and a brass ring" - not a brass fill. The One Metal Rule wants exactly
             // one brass fill per view, and in this seat that is the primary button.
             selected
               ? "bg-secondary text-foreground ring-2 ring-primary ring-offset-2 ring-offset-background"
@@ -95,7 +95,7 @@ function PersonaDisc({
 
       {/* §3.2.2: ONE micro/mono line with the middot, exactly as the landing roster
           and the game's persona plate set it. It used to be split into two centred
-          lines for every persona to protect the one — "Grandmaster · 2300" — that
+          lines for every persona to protect the one - "Grandmaster · 2300" - that
           cannot fit a 108px column; letting that single case wrap at the middot
           costs nothing and gives the other four the line the spec asks for. */}
       <span
@@ -150,7 +150,7 @@ function ColourSegment({
 export interface AiSetupProps {
   /** Seat id for the `?mode=` deep link. */
   seat?: string;
-  /** Fires with the resolved colour — "random" is decided here, in the handler. */
+  /** Fires with the resolved colour - "random" is decided here, in the handler. */
   onStart(difficulty: Difficulty, playerColor: Colour): void;
   starting?: boolean;
   disabled?: boolean;

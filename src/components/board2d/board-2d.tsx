@@ -2,7 +2,7 @@
 // src/components/board2d/board-2d.tsx  [P3]
 // The 2D board: one of the two implementations of `BoardViewProps` (the other is
 // P4's Board3D). It owns no chess logic, calls no Convex function and reads no
-// game state from a store — everything comes in as props from useGameController.
+// game state from a store - everything comes in as props from useGameController.
 import { useCallback, useMemo, useState, type CSSProperties } from "react";
 import { FILES, RANKS, gridPosition, isLightSquare, squareIndices } from "@/lib/constants";
 import { resolveRoom } from "@/lib/rooms";
@@ -123,15 +123,15 @@ export function Board2D(props: BoardViewProps) {
     // `max-w-[min(100%,80vh)]` cap here, which pre-dated the §5.1 shell: that shell
     // now hands both boards an exactly-square, exactly-sized box, so a viewport-based
     // cap only made the 2D board smaller than the 3D one in the focus layout (where
-    // the box is close to 100dvh). The single caller — src/components/game/board-surface.tsx
-    // — always centres this inside that square box, so `w-full` is the right size.
+    // the box is close to 100dvh). The single caller - src/components/game/board-surface.tsx
+    // - always centres this inside that square box, so `w-full` is the right size.
     //
     // The frame is deliberately HARD-EDGED. DESIGN.md, Shapes: "The board's frame
     // and squares are the only hard-edged rectangles in the system." The 12px
     // `rounded-xl` that used to be here was also eating coordinates: the rank "8"
     // sits 2px/4px into the a8 square and the file "h" the same distance into h1,
     // and with `overflow-hidden` a 12px corner clips everything outside its
-    // quarter-circle — (12-4)² + (12-2)² = 164 > 12². Square corners clip nothing
+    // quarter-circle - (12-4)² + (12-2)² = 164 > 12². Square corners clip nothing
     // and are what the spec asked for; the hairline ring stays.
     <div data-board-room={roomPreset} style={roomStyle} className="relative aspect-square w-full max-w-full overflow-hidden rounded-none select-none">
       <div
@@ -182,7 +182,7 @@ export function Board2D(props: BoardViewProps) {
       </div>
 
       {/* The tutor's drawings (docs/PRO_TUTOR.md §4) sit above the squares and their
-          highlights, and below the pieces — a tint never hides the piece it is about. */}
+          highlights, and below the pieces - a tint never hides the piece it is about. */}
       {annotations && !isEmptyAnnotations(annotations) ? (
         <Annotations2D annotations={annotations} orientation={orientation} animate={animate} />
       ) : null}

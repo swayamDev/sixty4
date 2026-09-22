@@ -72,7 +72,7 @@ export function useAiTurn(gameId: GameId | null | undefined): AiTurnState {
   const storedError = useAiStore((s) => s.error);
 
   // A stable key for "the AI owes a move at this exact ply". Null whenever it is
-  // not the AI's turn — that is the guard against a re-render, a second tab or a
+  // not the AI's turn - that is the guard against a re-render, a second tab or a
   // take-back kicking off two turns for the same position (§E.4 step 2).
   const turnKey = isAiGame ? aiTurnKey(game) : null;
 
@@ -173,7 +173,7 @@ export function useAiTurn(gameId: GameId | null | undefined): AiTurnState {
   useEffect(() => {
     if (turnKey !== null) return;
     // A take-back REPLAYS ply numbers (FR-43), so the next turn key can be one
-    // this hook has already consumed — with the marker left in place the effect
+    // this hook has already consumed - with the marker left in place the effect
     // above would short-circuit and the AI would never move again. Clearing it
     // whenever the AI is not to move is what makes a rewound game restart.
     startedRef.current = null;
@@ -246,7 +246,7 @@ async function runAiTurn(input: RunAiTurnInput): Promise<void> {
       }
     }
   } catch {
-    // Engine unavailable — the game must still continue (§E.4 failure modes).
+    // Engine unavailable - the game must still continue (§E.4 failure modes).
   }
   if (signal.aborted) return;
   if (candidates.length === 0) {
@@ -291,14 +291,14 @@ async function runAiTurn(input: RunAiTurnInput): Promise<void> {
     }
   } catch {
     if (signal.aborted) return;
-    // Any route failure — 4xx/5xx, an offline browser, a dropped stream — falls
+    // Any route failure - 4xx/5xx, an offline browser, a dropped stream - falls
     // through to the local difficulty policy below (§E.4 "Failure modes"). The
     // game must never stall on the AI's turn; the "fallback" source badge is the
     // signal that the agent did not answer.
   }
   if (signal.aborted) return;
 
-  // 3. Local re-validation (the route validates too — this is the second gate).
+  // 3. Local re-validation (the route validates too - this is the second gate).
   if (move === null) {
     // The agent did not answer, so Stockfish plays the move itself. THIS is the one
     // search that uses the difficulty's Skill Level (PRD §3.8 / review AI-10):
@@ -307,7 +307,7 @@ async function runAiTurn(input: RunAiTurnInput): Promise<void> {
     // unavailable too, fall through to the JS policy over the existing candidates.
     //
     // It gets what is LEFT of the turn budget, not a second full `searchTimeoutMs`,
-    // and at Skill Level 20 it is skipped entirely — `fallbackSearchBudgetMs` explains
+    // and at Skill Level 20 it is skipped entirely - `fallbackSearchBudgetMs` explains
     // both, and `selectCandidate` already returns rank 1 there.
     const budgetMs = fallbackSearchBudgetMs(difficulty, AI_ROUTE_TIMEOUT_MS - (Date.now() - startedAt));
     const engineMove =
@@ -384,7 +384,7 @@ function errorCode(error: unknown): string {
   if (error instanceof Error) {
     // Convex surfaces `throw new Error("illegal-move")` with framing around it, so the
     // shared matcher (`@/lib/errors`, §S1) digs the code out of the transport noise.
-    // Client-side codes it does not know — `no-legal-moves`, `ai-route-timeout` — are
+    // Client-side codes it does not know - `no-legal-moves`, `ai-route-timeout` - are
     // already bare messages, so the slice passes them straight through.
     return convexErrorCode(error) ?? error.message.slice(0, 120);
   }

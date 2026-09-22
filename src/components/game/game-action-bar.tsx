@@ -7,7 +7,7 @@
 //   Game   Ask for a hint · Take back · Offer draw · Resign
 //   More   PGN ▾ · Room · Shortcuts
 //
-// The hint action has ONE name — "Ask for a hint", with the count as "2 left" —
+// The hint action has ONE name - "Ask for a hint", with the count as "2 left" -
 // and the chat composer in `game-chat.tsx` says exactly the same thing.
 //
 // Icon + label from 1280px up, icon-only with a tooltip below that (`labelFrom`).
@@ -86,7 +86,7 @@ export interface GameActionBarProps {
   onToggleFocus(): void;
   onOpenRoom(): void;
   onOpenShortcuts(): void;
-  /** "focus" drops the More group — it is the floating HUD bar of §5.2. */
+  /** "focus" drops the More group - it is the floating HUD bar of §5.2. */
   variant?: "full" | "focus";
   className?: string;
 }
@@ -98,8 +98,8 @@ const CAMERA_ITEMS: { preset: CameraPresetId; label: string }[] = [
   { preset: "cinematic", label: "Orbit" },
 ];
 
-/** Below 1280 this is a bare camera icon, so — like every other trigger in the bar
- *  (§5.1: "every trigger carries a tooltip") — it says what it does. Base UI composes
+/** Below 1280 this is a bare camera icon, so - like every other trigger in the bar
+ *  (§5.1: "every trigger carries a tooltip") - it says what it does. Base UI composes
  *  the two triggers by nesting `render` props (handbook/composition.md). */
 function CameraMenu({ orientation }: { orientation: Colour }) {
   const setCameraPreset = useUiStore((s) => s.setCameraPreset);
@@ -124,7 +124,7 @@ function CameraMenu({ orientation }: { orientation: Colour }) {
             </DropdownMenuTrigger>
           }
         />
-        <TooltipContent side="bottom">Where you sit — white, black, top down or orbit</TooltipContent>
+        <TooltipContent side="bottom">Where you sit: white, black, top down or orbit</TooltipContent>
       </Tooltip>
       <DropdownMenuContent align="start" side="top">
         <DropdownMenuLabel>Camera</DropdownMenuLabel>
@@ -142,7 +142,7 @@ function CameraMenu({ orientation }: { orientation: Colour }) {
   );
 }
 
-/** "PGN" is chess jargon, and below 1280 it is not even a word on screen — so the
+/** "PGN" is chess jargon, and below 1280 it is not even a word on screen - so the
  *  trigger carries a tooltip that expands it. Base UI composes the two triggers by
  *  nesting `render` props (handbook/composition.md, "Composing multiple components"). */
 function PgnMenu({ actions }: { actions: GameActions }) {
@@ -197,8 +197,8 @@ export function ResignAction({
   onResign(): void;
 }) {
   const blocked = disabledReason !== null;
-  // `AlertDialogAction` is a plain Button in this shadcn port — it does not close
-  // the dialog — so the open state is held here and the action closes it itself.
+  // `AlertDialogAction` is a plain Button in this shadcn port - it does not close
+  // the dialog - so the open state is held here and the action closes it itself.
   // Without this the game ends behind a modal that is still asking the question.
   const [open, setOpen] = useState(false);
   return (
@@ -213,7 +213,7 @@ export function ResignAction({
               render={
                 <Button
                   size={wide ? "lg" : "default"}
-                  // §4.3: ember GHOST in the bar — the danger is in the word and
+                  // §4.3: ember GHOST in the bar - the danger is in the word and
                   // the confirmation, not in a filled button competing with the
                   // board. The mobile "More" sheet keeps the full-width row and
                   // takes the 44px destructive floor (§4.8 item 3).
@@ -380,7 +380,7 @@ export function GameActionBar({
             />
 
             {/* Both of these used to be dropped from the focus HUD, which left a
-                fullscreen player unable to answer — or make — a draw offer, and
+                fullscreen player unable to answer - or make - a draw offer, and
                 unable to concede. They stay (§5.2's HUD bar wraps if it must). */}
             {mode === "online" ? (
               <ActionButton
@@ -415,7 +415,7 @@ export function GameActionBar({
 
       {/* ------------------------------------------------------------ Frame */}
       {compact ? (
-        // §5.2 puts Exit LAST in the focus HUD — it is the way out, so it reads
+        // §5.2 puts Exit LAST in the focus HUD - it is the way out, so it reads
         // after the things you came here to do.
         <>
           <ActionSeparator />

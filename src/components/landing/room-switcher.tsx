@@ -23,8 +23,8 @@ const HOVER_DELAY_MS = 120;
 /**
  * The two halves of the swatch, both read out of the room preset:
  * the light is the key light the room actually lights the board with, the floor
- * is whatever that room stands on (a painted floor, its flat background, or —
- * for the HDRI rooms — the dark squares the room gives the board).
+ * is whatever that room stands on (a painted floor, its flat background, or -
+ * for the HDRI rooms - the dark squares the room gives the board).
  */
 function swatchColours(id: RoomId): { light: string; floor: string } {
   const room = ROOMS[id];
@@ -35,7 +35,7 @@ function swatchColours(id: RoomId): { light: string; floor: string } {
 }
 
 export interface RoomSwitcherProps {
-  /** The committed room — the one the board sits in when nothing is hovered. */
+  /** The committed room - the one the board sits in when nothing is hovered. */
   value: RoomId;
   /** Commit a room (click, or arrow keys). */
   onChange(room: RoomId): void;

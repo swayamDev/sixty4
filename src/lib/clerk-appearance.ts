@@ -12,7 +12,7 @@
 // `colorText` / `colorTextSecondary`. Same names the sign-in card already uses.
 //
 // Hex, not `var(--accent)`: clerk-js DERIVES a shade scale from `colorPrimary` and
-// `colorNeutral`, so it parses the value — a `var()` yields no scale. The two
+// `colorNeutral`, so it parses the value - a `var()` yields no scale. The two
 // palettes are therefore written out and swapped from `resolvedTheme`. The values
 // are DESIGN.md's, verbatim.
 import type * as React from "react";
@@ -86,7 +86,7 @@ export function useClerkAppearance(): Appearance {
 }
 
 /**
- * The palette alone, for a Clerk component that draws no plan cards — the sign-in and
+ * The palette alone, for a Clerk component that draws no plan cards - the sign-in and
  * sign-up cards, whose only control is Clerk's own primary button.
  */
 export function useClerkVariables(): Variables {

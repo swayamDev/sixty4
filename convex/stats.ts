@@ -1,4 +1,4 @@
-// convex/stats.ts — the two numbers the landing hero prints under its CTAs
+// convex/stats.ts - the two numbers the landing hero prints under its CTAs
 // (UI_REDESIGN §3: "● 14 playing now · 1,204 games").
 //
 // Public, like `games.listLive` and `leaderboard.top`: a signed-out visitor is the
@@ -6,9 +6,9 @@
 //
 // Both counts are bounded reads, not aggregates. Convex has no `count()`, and the
 // spec forbids a counter table, so each number is the length of a capped page:
-//   * playingNow  — the `by_mode_and_status_and_lastMoveAt` index scoped to
+//   * playingNow  - the `by_mode_and_status_and_lastMoveAt` index scoped to
 //     (online, active), the same window `games.listLive` reads, capped at 200.
-//   * gamesPlayed — the first 1,000 games by creation time. At the cap the UI
+//   * gamesPlayed - the first 1,000 games by creation time. At the cap the UI
 //     prints "1,000+" rather than a wrong exact number (see `landing-stats.tsx`).
 import { v } from "convex/values";
 import { query } from "./_generated/server";

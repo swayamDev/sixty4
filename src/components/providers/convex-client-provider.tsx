@@ -10,7 +10,7 @@ import { useAuth } from "@clerk/nextjs";
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 /**
- * Must be rendered INSIDE `<ClerkProvider>` — the provider reads the Clerk
+ * Must be rendered INSIDE `<ClerkProvider>` - the provider reads the Clerk
  * context to mint a Convex token. It branches internally: when
  * `sessionClaims.aud === "convex"` it calls `getToken()`, otherwise
  * `getToken({ template: "convex" })`. This app uses the JWT template.

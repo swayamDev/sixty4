@@ -18,8 +18,8 @@ export interface PodiumProps extends React.ComponentProps<"ol"> {
   renderName?(entry: PodiumEntry): React.ReactNode;
   /**
    * `"podium"` (default) is the three-column shape: 2 · 1 · 3, first place
-   * raised. `"stack"` is the same three entries in one column — a narrow aside,
-   * for instance — where that visual order would simply reverse the reading
+   * raised. `"stack"` is the same three entries in one column - a narrow aside,
+   * for instance - where that visual order would simply reverse the reading
    * order, so it is dropped.
    */
   layout?: "podium" | "stack";
@@ -61,7 +61,7 @@ export function Podium({
               stacked ? null : ORDER_CLASS[entry.rank],
               // DESIGN.md, Elevation: cards at rest carry no shadow, and the
               // soft float is reserved for layers that genuinely float. A
-              // podium entry is page structure — the brass hairline and the
+              // podium entry is page structure - the brass hairline and the
               // extra padding are what raise first place.
               first
                 ? cn("border-primary/50", stacked ? "py-4 sm:py-5" : "py-6")
@@ -77,7 +77,7 @@ export function Podium({
             </Avatar>
             {/* The Scoresheet Rule: a rating is something a player writes down, so it
                 is Geist Mono with tabular figures, never the display face. The name
-                carries the title weight instead — the podium is about who, and the
+                carries the title weight instead - the podium is about who, and the
                 rating is the evidence. */}
             <span
               className={cn(

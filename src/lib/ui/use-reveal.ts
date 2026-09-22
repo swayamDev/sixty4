@@ -28,7 +28,7 @@ export function useReveal<T extends Element = HTMLElement>(
   const { threshold = 0.15, rootMargin = "0px 0px -8% 0px", disabled = false } = options;
   const ref = useRef<T | null>(null);
   const [observed, setObserved] = useState(false);
-  // `disabled` is a prop, so it can be resolved in render — no state to reset.
+  // `disabled` is a prop, so it can be resolved in render - no state to reset.
   const revealed = disabled || observed;
 
   useEffect(() => {

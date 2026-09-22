@@ -1,6 +1,6 @@
 // src/components/pro/tutor-panel-still.tsx  [PRO_TUTOR §3.1, §3.3, §3.6]
 // A still of the tutor panel's empty state: the header plate, the opening bubble and
-// the four suggestion chips — the panel's real anatomy, with the real strings.
+// the four suggestion chips - the panel's real anatomy, with the real strings.
 //
 // Nothing here is interactive and nothing pretends to be: the chips are `<span>`s and
 // there is no composer, because a text field on a marketing page that swallows what

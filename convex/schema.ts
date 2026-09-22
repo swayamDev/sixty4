@@ -22,7 +22,7 @@ export default defineSchema({
   // ---------------------------------------------------------------- players
   players: defineTable({
     clerkId: v.string(), // identity.subject, e.g. "user_2ab…"  (FR-3)
-    tokenIdentifier: v.string(), // "<issuer>|<subject>" — the canonical auth key (Convex guidelines)
+    tokenIdentifier: v.string(), // "<issuer>|<subject>" - the canonical auth key (Convex guidelines)
     username: v.string(), // identity.nickname (Clerk username, always set)
     usernameLower: v.string(), // lowercase, for case-insensitive /profile/[username] lookups
     avatarUrl: v.string(), // identity.pictureUrl
@@ -71,7 +71,7 @@ export default defineSchema({
     aiColor: v.optional(vColour), // ai mode only
 
     fen: v.string(), // FR-12
-    moves: v.array(v.string()), // SAN list — the source of truth for replay/undo (FR-44)
+    moves: v.array(v.string()), // SAN list - the source of truth for replay/undo (FR-44)
     pgn: v.string(), // FR-47
     turn: vColour,
     lastMove: v.optional(vLastMove), // denormalised for board highlighting
@@ -98,7 +98,7 @@ export default defineSchema({
     endedAt: v.optional(v.number()),
   })
     // `mode` leads so ai/local rows can never occupy the window listLive and the
-    // abandon sweep read — an idle vs-AI game must not hide a live online one.
+    // abandon sweep read - an idle vs-AI game must not hide a live online one.
     .index("by_mode_and_status_and_lastMoveAt", ["mode", "status", "lastMoveAt"])
     .index("by_whiteId_and_createdAt", ["whiteId", "createdAt"])
     .index("by_blackId_and_createdAt", ["blackId", "createdAt"])

@@ -2,7 +2,7 @@
 // src/components/tutor/access.tsx
 // Who may use the tutor. The real app answers from Clerk's session claims
 // (`has({ feature: "tutor" })`, docs/PRO_TUTOR.md §2); the dev harness answers from
-// a scenario. Server-side gating lives in the tutor route, never here — this only
+// a scenario. Server-side gating lives in the tutor route, never here - this only
 // decides which panel state to draw.
 import { useAuth } from "@clerk/nextjs";
 import { createContext, useContext } from "react";
@@ -24,7 +24,7 @@ export function rememberTutorReturn(gameId: string): void {
   try {
     sessionStorage.setItem(TUTOR_RETURN_KEY, gameId);
   } catch {
-    /* no session storage — the welcome state simply offers no return link. */
+    /* no session storage - the welcome state simply offers no return link. */
   }
 }
 

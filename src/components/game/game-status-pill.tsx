@@ -5,7 +5,7 @@
 // result text when over. Difficulty badge for AI games.'
 //
 // Plus one state the spec did not name: before the first move, a player who has
-// never met a 3D board is told what to do — "Your move — pick a piece".
+// never met a 3D board is told what to do - "Your move · pick a piece".
 import { RadioIcon, RotateCcwIcon, TriangleAlertIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatPill } from "@/components/ui-kit";
@@ -16,11 +16,11 @@ export interface GameStatusPillProps {
   reviewPly: number | null;
   /** Whole moves played so far. */
   moveNumber: number;
-  /** "You", "Marco", "Player 2" — from `controller.turnLabel`. */
+  /** "You", "Marco", "Player 2" - from `controller.turnLabel`. */
   turnLabel: string;
   active: boolean;
   inCheck: boolean;
-  /** True when this viewer may move right now — `controller.canMove`. */
+  /** True when this viewer may move right now - `controller.canMove`. */
   canMove?: boolean;
   /** Half-moves played so far; 0 means nobody has touched the board yet. */
   totalPlies?: number;
@@ -48,7 +48,7 @@ export function GameStatusPill({
 }: GameStatusPillProps) {
   if (reviewPly !== null) {
     // Ply 0 is the position before White's first move, not "move 0".
-    // From ply 1 the pill reads as a scoresheet entry — "12…Nf6" — so arrowing
+    // From ply 1 the pill reads as a scoresheet entry - "12…Nf6" - so arrowing
     // one half-move at a time visibly changes it.
     const number = Math.ceil(reviewPly / 2);
     const notation =
@@ -60,9 +60,9 @@ export function GameStatusPill({
     const where = reviewPly === 0 ? "the start" : notation;
     return (
       // Every other state of this pill is a `role="status"` live region, and review
-      // is a state change worth hearing. The role cannot go on the button itself —
+      // is a state change worth hearing. The role cannot go on the button itself -
       // that would replace its `button` role and the way out would stop announcing
-      // itself as pressable — so the live region wraps it.
+      // itself as pressable - so the live region wraps it.
       <span role="status" className={cn("inline-flex shrink-0", className)}>
         <Button
           variant="ghost"
@@ -128,8 +128,8 @@ export function GameStatusPill({
         className={cn("shrink-0", className)}
         // One string, not value + label: StatPill's two spans are separated by a
         // flex gap and NOT by a text node, so a split here would announce (and
-        // copy) as "Your move— pick a piece".
-        value="Your move — pick a piece"
+        // copy) as "Your move· pick a piece".
+        value="Your move · pick a piece"
       />
     );
   }

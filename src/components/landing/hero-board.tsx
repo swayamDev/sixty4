@@ -43,7 +43,7 @@ export function HeroBoard({ game, room, tier, className }: HeroBoardProps) {
 
   // §E.10.1: probe BEFORE anything mounts a <Canvas>. Board3D carries its own probe,
   // but running it here means the 2D fallback is chosen without ever loading the 3D
-  // chunk — and without the FR-19 toast, which belongs on the game screen rather than
+  // chunk - and without the FR-19 toast, which belongs on the game screen rather than
   // on a marketing page. `setWebglAvailable` is a zustand action, so calling it from
   // an effect is allowed (§D.12 rule 6).
   useEffect(() => {

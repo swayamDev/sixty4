@@ -1,11 +1,11 @@
-// agent/channels/eve.ts — §F.4
+// agent/channels/eve.ts - §F.4
 //
 // Route auth for the mounted /eve/v1/* endpoints. The browser NEVER talks to eve
 // directly (option A in eve-agent.md §3.4): `src/app/api/ai/*` is the only client,
 // which keeps Clerk auth and Convex authority in one place and means a player can
 // never prompt the agent.
 //
-// `placeholderAuth()` / `none()` are deliberately absent — the scaffold's default
+// `placeholderAuth()` / `none()` are deliberately absent - the scaffold's default
 // policy 401s our server in production, and `none()` would let anyone drive the
 // agent. `httpBasic` credentials are `{ username, password }`, NFC-normalised and
 // compared with constant-time hash equality (dist/src/public/channels/auth.d.ts).
@@ -20,7 +20,7 @@ import { randomUUID } from "node:crypto";
 const serverSecret = process.env.EVE_SERVER_SECRET;
 if (serverSecret === undefined || serverSecret.length === 0) {
   console.warn(
-    "[chess-agent] EVE_SERVER_SECRET is not set — HTTP Basic auth will reject every " +
+    "[chess-agent] EVE_SERVER_SECRET is not set - HTTP Basic auth will reject every " +
       "caller. Set it in .env.local and in the Vercel project env.",
   );
 }

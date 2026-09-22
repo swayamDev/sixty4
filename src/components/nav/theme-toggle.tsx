@@ -12,7 +12,7 @@ const NOOP_SUBSCRIBE = () => () => {};
  * Light/dark switch for the header (§4).
  *
  * `resolvedTheme` is undefined on the server, so the button cannot be rendered
- * until the client has hydrated — `useSyncExternalStore` gives that answer
+ * until the client has hydrated - `useSyncExternalStore` gives that answer
  * without a setState-in-effect. The placeholder is exactly the button's size, so
  * nothing shifts when it appears.
  */

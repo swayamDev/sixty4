@@ -155,9 +155,9 @@ const BASE: Omit<MockScenario, "id" | "label" | "summary"> = {
 };
 
 const AI_COMMENTARY: MockCommentaryRow[] = [
-  { ply: 4, text: "Knights before bishops — that is what my club captain says, anyway.", source: "eve", persona: "pip" },
+  { ply: 4, text: "Knights before bishops. That is what my club captain says, anyway.", source: "eve", persona: "pip" },
   { ply: 8, text: "You have the centre. I am going to poke at it and see what falls over.", source: "eve", persona: "pip" },
-  { ply: 12, text: "Check — not a scary one, but I had to try it before you castled.", source: "eve", persona: "pip" },
+  { ply: 12, text: "Check. Not a scary one, but I had to try it before you castled.", source: "eve", persona: "pip" },
 ];
 
 /**
@@ -171,7 +171,7 @@ export const TUTOR_SCENARIO_FEN = "r1bqk2r/pppp1ppp/2n2n2/8/1bBPP3/2N2N2/PP3PPP/
 /**
  * §8's scripted conversation: two questions from the player (the composer's own
  * suggestion chips, §3) and two answers whose parts carry all three drawing tools plus
- * a `requestAnalysis` round trip. Every input is true of the position above — e4 and f7
+ * a `requestAnalysis` round trip. Every input is true of the position above - e4 and f7
  * really are the squares this Greco line turns on, and 13...Nxe4 14.Bxf7+ Kxf7 15.Qb3+
  * is legal from it, which the fixture test replays move by move.
  */
@@ -315,7 +315,7 @@ const TUTOR_ENGINE_BUSY: TutorUIMessage[] = [
       {
         type: "text",
         text:
-          "I could not get a search in — the engine is thinking about Pip's move. From " +
+          "I could not get a search in. The engine is thinking about Pip's move. From " +
           "the shape alone: the bishop on b4 is doing the work, because it pins the " +
           "knight on c3 and takes the defender off e4.",
       },
@@ -433,12 +433,12 @@ export const MOCK_SCENARIOS: Record<MockScenarioId, MockScenario> = {
   /* §3's panel anatomy says "all states must render in the dev harness", and the six
    * below are the ones a member meets most: the first thing they see, the row that
    * covers every wait, and the four ways an answer can fail. They are data, not
-   * fixtures — each is the same game with the panel put in one more state. */
+   * fixtures - each is the same game with the panel put in one more state. */
   "tutor-empty": {
     ...BASE,
     id: "tutor-empty",
     label: "Tutor · empty",
-    summary: "§3.6: unlocked with nothing asked yet — the one opening bubble.",
+    summary: "§3.6: unlocked with nothing asked yet, the one opening bubble.",
     commentary: AI_COMMENTARY,
     tutor: { access: "pro", messages: [] },
   },
@@ -462,7 +462,7 @@ export const MOCK_SCENARIOS: Record<MockScenarioId, MockScenario> = {
     ...BASE,
     id: "tutor-quota",
     label: "Tutor · quota",
-    summary: `§3.5: all ${MAX_TUTOR_TURNS_PER_GAME} turns spent — the composer says so.`,
+    summary: `§3.5: all ${MAX_TUTOR_TURNS_PER_GAME} turns spent, the composer says so.`,
     commentary: AI_COMMENTARY,
     tutor: { access: "pro", messages: TUTOR_MESSAGES, error: "quota" },
   },
@@ -478,7 +478,7 @@ export const MOCK_SCENARIOS: Record<MockScenarioId, MockScenario> = {
     ...BASE,
     id: "tutor-unavailable",
     label: "Tutor · unavailable",
-    summary: "§3.5: a 503 from the route — no retry, because a retry fails the same.",
+    summary: "§3.5: a 503 from the route, no retry, because a retry fails the same.",
     commentary: AI_COMMENTARY,
     tutor: { access: "pro", messages: TUTOR_MESSAGES, error: "unavailable" },
   },
@@ -499,7 +499,7 @@ export interface MockPosition {
 }
 
 /**
- * Replays a scenario's SAN list. Throws on an illegal move — which is exactly
+ * Replays a scenario's SAN list. Throws on an illegal move - which is exactly
  * what `game-controller.test.ts` relies on to keep the fixtures honest.
  */
 export function mockPosition(moves: string[]): MockPosition {

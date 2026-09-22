@@ -2,12 +2,12 @@
 // src/components/settings/settings-preview.tsx  [U4]
 // The sticky live preview beside the settings sections (UI_REDESIGN §6): the
 // real Board3D in showcase mode (§10.4), non-interactive, reflecting the current
-// room, colours and quality tier the instant a control changes — every control
+// room, colours and quality tier the instant a control changes - every control
 // writes to the ui-store synchronously, and this reads the same store.
 //
 // Note the tension with §I-8: /settings deliberately shipped no canvas so a
 // visitor who came for one toggle did not pay ~8 MB for it. The spec now asks
-// for a live preview here, so the canvas mounts — but only once the store has
+// for a live preview here, so the canvas mounts - but only once the store has
 // hydrated and only when WebGL2 is actually usable; without it the preview falls
 // back to a flat board painted in the room's own square colours.
 import { useMemo } from "react";
@@ -108,7 +108,7 @@ export function SettingsPreview({ className }: { className?: string }) {
           <p className="text-sm font-medium text-foreground">{room.label}</p>
           <p className="text-[12px] text-muted-foreground">
             {webglAvailable === false
-              ? "Flat preview — this browser has no WebGL2."
+              ? "Flat preview. This browser has no WebGL2."
               : "Live preview. Nobody else sees your room."}
           </p>
         </div>

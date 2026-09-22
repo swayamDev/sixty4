@@ -4,7 +4,7 @@
 // game shell VIEW with a mocked controller."
 //
 // Nobody can sign in during visual QA, so this file is the whole backend: it
-// builds a `GameController`-shaped object per §8 scenario, with STATEFUL stubs —
+// builds a `GameController`-shaped object per §8 scenario, with STATEFUL stubs -
 // selecting and moving really do advance a chess.js position, so the harness
 // board is playable and every layout state (review, draw offer, hand-over,
 // result dialog, focus) can be reached by hand.
@@ -88,7 +88,7 @@ function seatOf(role: ViewerRole): Colour | "both" | null {
   return null;
 }
 
-/** 2026-09-10, 19:04 UTC — a stable "started at" for every harness scenario. */
+/** 2026-09-10, 19:04 UTC - a stable "started at" for every harness scenario. */
 const MOCK_STARTED_AT = 1_788_030_240_000;
 
 export function useMockGameController(scenario: MockScenario): GameController {

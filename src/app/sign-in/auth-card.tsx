@@ -1,12 +1,12 @@
 "use client";
 // src/app/sign-in/auth-card.tsx  [U4]
 // The Clerk <SignIn/> and <SignUp/> cards, themed onto the Study tokens
-// (UI_REDESIGN §1.1). Shared by both auth routes — it lives beside the sign-in
+// (UI_REDESIGN §1.1). Shared by both auth routes - it lives beside the sign-in
 // page because both routes belong to this package and Next only treats reserved
 // filenames (page/layout/route/…) inside app/ as routes.
 //
 // The palette itself is `src/lib/clerk-appearance.ts`, the one place the Study
-// tokens are written in Clerk's appearance vocabulary — the same values the
+// tokens are written in Clerk's appearance vocabulary - the same values the
 // pricing table and the user-profile modal use, so the auth card cannot drift
 // away from the billing surfaces (this file used to carry its own copy).
 import { SignIn, SignUp } from "@clerk/nextjs";

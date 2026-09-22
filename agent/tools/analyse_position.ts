@@ -1,4 +1,4 @@
-// agent/tools/analyse_position.ts — §F.5
+// agent/tools/analyse_position.ts - §F.5
 //
 // Tool name = filename slug -> "analyse_position".
 //
@@ -53,7 +53,7 @@ const MATED_NOW = -1_000_001;
  *
  * Zero is checked FIRST because it is not a mate the side to move delivers: Stockfish
  * emits `score mate 0` for a position that is already checkmate, and `parse-uci.ts`
- * passes the raw value through, so a `> 0` test would have scored it 1,000,000 — above
+ * passes the raw value through, so a `> 0` test would have scored it 1,000,000 - above
  * mate in 1 and above every cp score, the exact inverse of the truth.
  */
 function rankValue(candidate: { scoreCp: number | null; mateIn: number | null }): number | null {
@@ -68,7 +68,7 @@ export default defineTool({
   description:
     "Analyse a chess position. Returns every legal move in the FEN as SAN and, when you pass " +
     "back the candidate list you were given, the legal ones ranked best-first with their " +
-    "evaluations (scoreCp / mateIn / depth / pv). No engine runs here — `depth` and `multiPv` " +
+    "evaluations (scoreCp / mateIn / depth / pv). No engine runs here - `depth` and `multiPv` " +
     "are advisory: the search already happened in the player's browser. Call this at most once " +
     "per turn, and only when you were given neither candidates nor legalMoves.",
   inputSchema: z.object({

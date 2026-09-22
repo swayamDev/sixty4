@@ -1,14 +1,14 @@
 "use client";
 // src/components/profile/recent-games-table.tsx  [U4]
 // UI_REDESIGN §6: recent games as rows with a 48px MiniBoard of the final
-// position, the opponent, a result pill and a replay link. FR-53 — every row
+// position, the opponent, a result pill and a replay link. FR-53 - every row
 // links to /game/[id], which opens finished games in review.
 //
 // The position comes from a per-row `games.get` subscription: `gamesForProfile`
 // returns the summary only (no FEN, no move list) and its return validator is
 // shared with `games.myRecentGames`, so widening it is not this package's call.
 // A finished game is an immutable document, so those subscriptions never fire
-// again after the first value — and the list is capped at RECENT_LIMIT.
+// again after the first value - and the list is capped at RECENT_LIMIT.
 import Link from "next/link";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -60,7 +60,7 @@ export interface RecentGameRowProps {
   lastMove?: { from: SquareId; to: SquareId } | null;
 }
 
-/** Pure — the /dev/pages harness renders this with fixed positions. */
+/** Pure - the /dev/pages harness renders this with fixed positions. */
 export function RecentGameRow({ game, fen, lastMove = null }: RecentGameRowProps) {
   const outcome = outcomeFor(game.status, game.winner, game.myColour);
 
@@ -68,7 +68,7 @@ export function RecentGameRow({ game, fen, lastMove = null }: RecentGameRowProps
     // `min-w-0` on the row and `overflow-hidden` on the text column: without both,
     // the row's non-wrapping meta line becomes the grid track's minimum width and
     // pushes the whole page sideways at 375 (measured: 536px of content in a 343px
-    // column). `truncate` alone does not do it — it only clips once a width exists.
+    // column). `truncate` alone does not do it - it only clips once a width exists.
     <li className="flex min-w-0 items-center gap-3 rounded-xl border border-border bg-card px-3 py-2.5">
       <MiniBoard
         fen={fen ?? DEFAULT_FEN}
@@ -144,7 +144,7 @@ function RecentGameRowLive({ game, enabled }: { game: RecentGame; enabled: boole
   );
 }
 
-/** Pure list — used directly by the /dev/pages harness. */
+/** Pure list - used directly by the /dev/pages harness. */
 export function RecentGamesView({
   games,
   positions,

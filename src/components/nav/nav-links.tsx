@@ -16,7 +16,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/settings", label: "Settings" },
 ];
 
-/** Shown to guests — only routes the proxy does not gate (§G). */
+/** Shown to guests - only routes the proxy does not gate (§G). */
 export const PUBLIC_NAV_LINKS: NavLink[] = [{ href: "/leaderboard", label: "Leaderboard" }];
 
 function isActive(pathname: string, href: string): boolean {

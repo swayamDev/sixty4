@@ -15,14 +15,14 @@ import { useStockfish } from "@/lib/engine/use-stockfish";
 import { useAiStore } from "@/lib/stores/ai-store";
 import type { Candidate, GameId } from "@/lib/types";
 
-/** A hint search is shallower than a real AI turn — it must feel instant. */
+/** A hint search is shallower than a real AI turn - it must feel instant. */
 const HINT_DEPTH = 12;
 const HINT_MULTI_PV = 3;
 const HINT_SEARCH_TIMEOUT_MS = 1_500;
 
 export interface UseHintOptions {
   gameId: GameId;
-  /** Position to advise on — the LIVE fen, never a reviewed one. */
+  /** Position to advise on - the LIVE fen, never a reviewed one. */
   fen: string;
   /** Mount the engine only where hints are actually offered. */
   enabled: boolean;
@@ -74,7 +74,7 @@ export function useHint({ gameId, fen, enabled }: UseHintOptions): HintApi {
 
 export function hintErrorMessage(error: unknown): string {
   const raw = error instanceof Error ? error.message : "";
-  if (raw.includes("hint-limit")) return `No hints left — ${MAX_HINTS_PER_GAME} per game.`;
+  if (raw.includes("hint-limit")) return `No hints left. Limit is ${MAX_HINTS_PER_GAME} per game.`;
   if (raw.includes("hints-unavailable")) return "Hints are only available on Beginner and Casual.";
   if (raw.includes("game-not-active")) return "This game has finished.";
   if (raw.includes("not-your-turn")) return "Wait for your turn to ask for a hint.";

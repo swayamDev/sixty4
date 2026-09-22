@@ -29,7 +29,7 @@ export interface SceneProps {
   cameraPreset: CameraPresetId;
   cinematic: boolean;
   reducedMotion: boolean;
-  /** True when no post-processing Outline is available — use inflated-shell outlines. */
+  /** True when no post-processing Outline is available - use inflated-shell outlines. */
   meshOutline: boolean;
   controlsRef: React.RefObject<CameraControlsImpl | null>;
   registerSelected(mesh: Mesh | null): void;
@@ -37,7 +37,7 @@ export interface SceneProps {
   roomImageUrl?: string;
   /** False in showcase mode: never read or write the FR-25 camera snapshot (§10.4). */
   persistSession?: boolean;
-  /** True while the frameloop is paused off screen — freeze the idle orbit (§10.4). */
+  /** True while the frameloop is paused off screen - freeze the idle orbit (§10.4). */
   paused?: boolean;
 }
 
@@ -70,7 +70,7 @@ export function Scene({
 
   return (
     <>
-      {/* FR-21m: the room owns the only assets that suspend on a settings change — the
+      {/* FR-21m: the room owns the only assets that suspend on a settings change - the
           HDRI and the uploaded backdrop. Its own boundary means swapping presets
           mid-game blanks the backdrop for the length of the download, never the board,
           the pieces or the camera rig. */}
@@ -78,21 +78,21 @@ export function Scene({
         <Room room={room} imageUrl={roomImageUrl} />
       </Suspense>
 
-      {/* SHADOWS — what each tier ACTUALLY gets (there is no PCSS anywhere):
+      {/* SHADOWS - what each tier ACTUALLY gets (there is no PCSS anywhere):
             Low    <Canvas shadows="basic"> = BasicShadowMap, hard-edged, 512 map, plus a
                    ContactShadows pass baked once (`frames: 1`).
             Medium PCFShadowMap (percentage-closer filtering), 1024 map, live ContactShadows.
-            High   the same PCFShadowMap, 2048 map, live ContactShadows — the softness comes
+            High   the same PCFShadowMap, 2048 map, live ContactShadows - the softness comes
                    from the filter kernel and the bigger map, not from a different technique.
           Two things force that, both verified against the installed packages:
-          (a) three 0.185.1 DEPRECATED PCFSoftShadowMap — `WebGLShadowMap` warns and falls
-              back to PCFShadowMap — so board-3d.tsx asks for `shadows="percentage"`
+          (a) three 0.185.1 DEPRECATED PCFSoftShadowMap - `WebGLShadowMap` warns and falls
+              back to PCFShadowMap - so board-3d.tsx asks for `shadows="percentage"`
               directly instead of the tier table's `true` / "soft".
           (b) drei 10.7.8's <SoftShadows> is unusable here: its PCSS patch of
               `ShaderChunk.shadowmap_pars_fragment` calls `unpackRGBAToDepth`, which r185
               no longer declares in that chunk (0 occurrences; it lives in `packing`,
               which meshphysical's fragment shader does not include), so EVERY
-              MeshStandard/Physical program fails to link — "no matching overloaded
+              MeshStandard/Physical program fails to link - "no matching overloaded
               function found" then a flood of "useProgram: program not valid".
               Reproduced live at the High tier. `quality.softShadows` is therefore dead
               config: nothing reads it, and nothing should until drei ships a PCSS patch

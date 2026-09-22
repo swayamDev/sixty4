@@ -23,7 +23,7 @@ export { Board3DSkeleton } from "./board-skeleton";
 
 /**
  * Warms the 3D chunk and its assets without rendering it (NFR-2a, FR-21m).
- * Pass the HDRI paths to preload — `HDRI_FILES` for the settings drawer, or just the
+ * Pass the HDRI paths to preload - `HDRI_FILES` for the settings drawer, or just the
  * active room's `hdri` when the game page mounts.
  */
 export async function preloadBoard3D(hdriFiles?: string[]): Promise<void> {

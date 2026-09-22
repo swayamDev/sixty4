@@ -45,20 +45,20 @@ import { toHistoryRows } from "@/lib/chess";
 import { ROOMS, ROOM_ORDER } from "@/lib/rooms";
 import type { RoomPresetId } from "@/lib/types";
 
-/** UI_REDESIGN §1.4 — the Opera Game, Paris 1858. Public domain. */
+/** UI_REDESIGN §1.4 - the Opera Game, Paris 1858. Public domain. */
 const OPERA_SAN =
   "e4 e5 Nf3 d6 d4 Bg4 dxe5 Bxf3 Qxf3 dxe5 Bc4 Nf6 Qb3 Qe7 Nc3 c6 Bg5 b5 Nxb5 cxb5 Bxb5+ Nbd7 O-O-O Rd8 Rxd7 Rxd7 Rd1 Qe6 Bxd7+ Nxd7 Qb8+ Nxb8 Rd8#".split(
     " ",
   );
 /** After 11…Nbd7 (ply 22). */
 const MIDGAME_FEN = "r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R w KQkq - 1 12";
-/** After 17. Rd8# — the final position. */
+/** After 17. Rd8# - the final position. */
 const MATE_FEN = "1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5 b k - 1 17";
 const START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 /** One short, in-character line per persona (§3, under 90 characters each). */
 const SAMPLE_LINES: Record<string, string> = {
-  pip: "Ooh, e4 already? I always forget that one. Good luck — I'll try my best.",
+  pip: "Ooh, e4 already? I always forget that one. Good luck, I'll try my best.",
   marco: "The Sicilian! My uncle played this. He lost, but he lost beautifully.",
   ada: "That knight has no squares. Trade it off before it becomes a spectator.",
   viktor: "Solid. Now I take the open file and you spend ten moves regretting it.",
@@ -91,7 +91,7 @@ const TOKENS: { name: string; className: string; text?: string }[] = [
 ];
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
-  // The slug id makes every band linkable — handy for review and for QA deep links.
+  // The slug id makes every band linkable - handy for review and for QA deep links.
   const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   return (
     <Section id={id} padding="sm" width="wide" className="scroll-mt-16">
@@ -247,7 +247,7 @@ export function UiKitGallery() {
               </ChatMessage>
               <ChatMessage variant="you">You played e5</ChatMessage>
               <ChatMessage variant="ai" personaName="Pip" moveLabel="2. Nf3" tag="Hint">
-                Develop the knight before the bishop — it only has one good square here.
+                Develop the knight before the bishop. It only has one good square here.
               </ChatMessage>
               {Array.from({ length: extraMessages }, (_, i) => (
                 <ChatMessage key={i} variant="you">

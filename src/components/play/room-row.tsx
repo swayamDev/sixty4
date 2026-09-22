@@ -1,8 +1,8 @@
 "use client";
 // src/components/play/room-row.tsx  [U5]
 // The room row under the table preview (UI_UPGRADE_2 §3.3): five 36px round
-// swatches painted from the room's own values in `src/lib/rooms.ts` — its key
-// light on top, its dark square beneath — so a swatch IS the room rather than a
+// swatches painted from the room's own values in `src/lib/rooms.ts` - its key
+// light on top, its dark square beneath - so a swatch IS the room rather than a
 // decorative dot. Picking one writes `players.updateSettings({ roomPreset })`,
 // which is what carries the choice into the game.
 //

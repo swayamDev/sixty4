@@ -4,8 +4,8 @@
 // auto-advancing content needs a play/pause). A ghost icon button beside the
 // caption, its state kept for the visit in sessionStorage.
 //
-// Under `prefers-reduced-motion` the replay does not run at all — it holds the
-// final position — so there is no control to press. A DISABLED button here was a
+// Under `prefers-reduced-motion` the replay does not run at all - it holds the
+// final position - so there is no control to press. A DISABLED button here was a
 // dead stop in the tab order carrying an explanation nobody could reach; the same
 // sentence as plain text says it to everyone.
 import { Pause, Play } from "lucide-react";

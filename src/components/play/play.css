@@ -1,7 +1,7 @@
 /* src/components/play/play.css  [U5]
    The lobby's own stylesheet (UI_UPGRADE_2 §1 "Custom CSS": screen-specific CSS
    lives with its screen, never in globals.css). Imported once, from
-   `mode-picker.tsx` — the lobby's top-level client component.
+   `mode-picker.tsx` - the lobby's top-level client component.
 
    Everything here is built from tokens that already exist in globals.css. No new
    colour is introduced; the room swatches are painted inline from `src/lib/rooms.ts`,
@@ -42,7 +42,7 @@
 /**
  * The `?mode=` deep link's brass ring, for one second (§3.2). The ring is a
  * plain box-shadow driven by the data attribute, so under reduced motion it
- * simply appears and is removed again on the same one-second timer — the final
+ * simply appears and is removed again on the same one-second timer - the final
  * state is identical either way. Motion adds only the fade out.
  */
 .lobby-seat[data-flash="true"] {
@@ -112,7 +112,7 @@
 }
 
 /* On a phone the row scrolls, so the trailing edge dissolves rather than
-   stopping flush — the only honest way to say "there is more to the right"
+   stopping flush - the only honest way to say "there is more to the right"
    without adding a control nobody needs. */
 @media (max-width: 639px) {
   .lobby-roster {

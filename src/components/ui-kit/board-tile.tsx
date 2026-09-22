@@ -2,7 +2,7 @@
 // src/components/ui-kit/board-tile.tsx  [UI upgrade 2 §2.4 / §3.4]
 // One game in progress, shown as the thing it is: a board with a player at each
 // end. Shared, because §3.4 says the lobby's "At the boards" shows "the same
-// board tiles as the landing" — one component, so the two cannot drift again.
+// board tiles as the landing" - one component, so the two cannot drift again.
 //
 // The board is never framed (DESIGN.md): the tile has no card around it, and the
 // hover state warms the board's own hairline instead of drawing a box.

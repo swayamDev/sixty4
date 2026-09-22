@@ -1,6 +1,6 @@
 // src/components/board3d/table.tsx
-// The table the board stands on. Procedural — there is no model to download and no
-// texture to fetch — and driven entirely by `room.table` in src/lib/rooms.ts, so a new
+// The table the board stands on. Procedural - there is no model to download and no
+// texture to fetch - and driven entirely by `room.table` in src/lib/rooms.ts, so a new
 // room gets its own furniture by naming a finish (FR-21n's rule, applied to a new part).
 //
 // THE ONE INVARIANT: the top face is `TABLE_TOP_Y`, which IS the plinth's underside.
@@ -24,7 +24,7 @@ import {
   TABLE_TOP_Y,
 } from "./layout";
 
-/** Underside of the top — where the apron starts. */
+/** Underside of the top - where the apron starts. */
 const APRON_TOP_Y = TABLE_TOP_Y - TABLE_THICKNESS;
 const APRON_BOTTOM_Y = APRON_TOP_Y - TABLE_APRON_HEIGHT;
 const APRON_SIZE_X = TABLE_SIZE_X - TABLE_APRON_INSET * 2;
@@ -63,7 +63,7 @@ const LEG_PROFILE: readonly [number, number][] = [
 
 /**
  * The Space room's single column: a wide foot, a waisted shaft and a plate under the
- * top. Same lathe, a different silhouette — a pedestal, not a table leg.
+ * top. Same lathe, a different silhouette - a pedestal, not a table leg.
  */
 const PEDESTAL_PROFILE: readonly [number, number][] = [
   [0.0, 0.0],
@@ -121,7 +121,7 @@ export function Board3DTable({ table, lowDetail }: Board3DTableProps) {
   const legs = table.base === "legs";
   const pedestal = table.base === "pedestal";
 
-  // Hooks run before the early return below — a lathe for a table that turns out not to
+  // Hooks run before the early return below - a lathe for a table that turns out not to
   // want one costs a few hundred bytes and keeps the hook order honest.
   const legGeometry = useLathe(LEG_PROFILE, TABLE_LEG_RADIUS, LEG_HEIGHT, segments);
   const pedestalGeometry = useLathe(
@@ -172,8 +172,8 @@ export function Board3DTable({ table, lowDetail }: Board3DTableProps) {
         </mesh>
       )}
 
-      {/* The apron. Always there — it is what gives the top its thickness from a seated
-          camera — even in the rooms that go without legs. */}
+      {/* The apron. Always there - it is what gives the top its thickness from a seated
+          camera - even in the rooms that go without legs. */}
       <mesh
         position={[0, APRON_TOP_Y - TABLE_APRON_HEIGHT / 2, 0]}
         castShadow

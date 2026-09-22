@@ -29,7 +29,7 @@ export interface FocusHudProps extends React.ComponentProps<"div"> {
    * open the panel without the exit ever moving.
    */
   persistentLead?: React.ReactNode;
-  /** Top-centre slot, also outside the fading layer — for anything that is
+  /** Top-centre slot, also outside the fading layer - for anything that is
    *  waiting on an answer (the status pill, a draw offer). */
   topCenter?: React.ReactNode;
   /**
@@ -40,7 +40,7 @@ export interface FocusHudProps extends React.ComponentProps<"div"> {
   aside?: React.ReactNode;
   /**
    * Fade out after 3s without pointer movement and return on the next move
-   * (§5.2 — true for the 3D board, false for 2D where the HUD stays put).
+   * (§5.2 - true for the 3D board, false for 2D where the HUD stays put).
    *
    * Honoured only on a fine-pointer, hover-capable device; everywhere else the
    * HUD stays put regardless, because a tap cannot hover.

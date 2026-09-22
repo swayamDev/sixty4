@@ -5,15 +5,15 @@
 // Three visual states, all driven by attributes rather than by a store, so the
 // landing page and the game screen can set them without importing anything:
 //
-//   1. default            — elevated: --bg-elevated/80, blur, hairline underneath.
-//   2. over the hero      — the landing page's `[data-hero-flag]` marker is in the
+//   1. default            - elevated: --bg-elevated/80, blur, hairline underneath.
+//   2. over the hero      - the landing page's `[data-hero-flag]` marker is in the
 //                           document and fewer than 40px have been scrolled (§3):
 //                           fully transparent, no border, no blur.
-//   3. board focus layout — <html data-layout="focus"> (§5.2): hidden entirely.
+//   3. board focus layout - <html data-layout="focus"> (§5.2): hidden entirely.
 //
 // State 2 needs both halves: the hero marker is owned by the landing page (U1) and
-// `data-scrolled` by this component, which is why the header — and not the
-// document — carries the scroll flag. `:has()` is what lets the header react to a
+// `data-scrolled` by this component, which is why the header - and not the
+// document - carries the scroll flag. `:has()` is what lets the header react to a
 // marker that comes *after* it in the document without anyone writing to <body>
 // from an effect, so there is no elevated-header flash on a cold load of `/`.
 // The legacy `body[data-hero="true"]` selectors are kept alongside it so anything
@@ -55,9 +55,9 @@ export function SiteHeader() {
       className={cn(
         "sticky top-0 z-40 h-14 border-b transition-colors duration-150",
         "border-border/70 bg-background/80 backdrop-blur-md",
-        // §5.2 focus layout — the ancestor selector out-specifies the base rules.
+        // §5.2 focus layout - the ancestor selector out-specifies the base rules.
         "[[data-layout=focus]_&]:hidden",
-        // §3 hero — transparent until the visitor has scrolled past the fold.
+        // §3 hero - transparent until the visitor has scrolled past the fold.
         "[body:has([data-hero-flag])_&[data-scrolled=false]]:border-transparent",
         "[body:has([data-hero-flag])_&[data-scrolled=false]]:bg-transparent",
         "[body:has([data-hero-flag])_&[data-scrolled=false]]:backdrop-blur-none",
@@ -70,7 +70,7 @@ export function SiteHeader() {
         <Link
           prefetch={false}
           href="/"
-          aria-label="Sixty4 — home"
+          aria-label="Sixty4 - home"
           className={cn(
             // 36px of tappable area on touch (DESIGN.md, Layout) without
             // changing the header's density on a mouse-driven pointer.

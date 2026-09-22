@@ -1,6 +1,6 @@
 // src/lib/format.ts
 // Presentation helpers shared by P2 (profile, leaderboard, play) and P3 (game header,
-// result dialog, history panel). Pure functions only — no React, no Convex, no wall clock.
+// result dialog, history panel). Pure functions only - no React, no Convex, no wall clock.
 //
 // Anything time-dependent takes `now` as an explicit argument: a helper that read
 // `Date.now()` internally would render differently on the server and on the client and
@@ -16,7 +16,7 @@ export function formatRating(rating: number): string {
   return String(Math.round(rating));
 }
 
-/** "+12" / "-8" / "±0" — the leading sign is always shown. */
+/** "+12" / "-8" / "±0" - the leading sign is always shown. */
 export function formatRatingDelta(delta: number): string {
   const d = Math.round(delta);
   if (d === 0) return "±0";
@@ -150,7 +150,7 @@ const MONTHS = [
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
 /**
- * "9 Sep 2026" — deterministic (UTC, fixed English month names) so a server render and a
+ * "9 Sep 2026" - deterministic (UTC, fixed English month names) so a server render and a
  * client render always agree. Intl/local-timezone formatting would not.
  */
 export function formatDate(timestamp: number): string {
@@ -178,14 +178,14 @@ export function formatRelative(timestamp: number, now: number): string {
   return formatDate(timestamp);
 }
 
-/** "0:07" / "1:23" / "12:04" — queue elapsed time and AI think time. */
+/** "0:07" / "1:23" / "12:04" - queue elapsed time and AI think time. */
 export function formatElapsed(ms: number): string {
   const total = Math.max(0, Math.floor(ms / 1000));
   const minutes = Math.floor(total / 60);
   return `${minutes}:${pad2(total % 60)}`;
 }
 
-/** "0.8s" / "3.2s" — AI latency readout (FR-38). */
+/** "0.8s" / "3.2s" - AI latency readout (FR-38). */
 export function formatSeconds(ms: number): string {
   return `${(Math.max(0, ms) / 1000).toFixed(1)}s`;
 }

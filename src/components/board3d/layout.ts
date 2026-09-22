@@ -16,7 +16,7 @@ export const PIECE_Y = SQUARE_TOP_Y;
 /**
  * FR-27 wants the pieces to reflect IN the board, so the reflective plane IS the
  * checkerboard (its 8x8 pattern is painted into a canvas texture) rather than a mirror
- * buried under 64 opaque tiles. It floats a hair above the plinth's top face — enough to
+ * buried under 64 opaque tiles. It floats a hair above the plinth's top face - enough to
  * beat the depth buffer at this near/far range, well under the 1 mm the click colliders
  * and the highlight overlays sit at.
  */
@@ -45,7 +45,7 @@ export const TRAY_COLUMNS = 2;
 export const TRAY_ROWS = 8;
 
 /**
- * The tray each side's trophies stand IN — a rounded block on the table top whose rim is
+ * The tray each side's trophies stand IN - a rounded block on the table top whose rim is
  * flush with the squares and whose floor is a shallow felt recess. Every number below is
  * derived from the slot grid above, so moving a slot moves the thing it stands on.
  *
@@ -59,7 +59,7 @@ export const TRAY_SIZE_Z = TRAY_ROW_GAP * (TRAY_ROWS - 1) + TRAY_MARGIN * 2;
 /** Centre of a tray on the side `trayDirection` gives (its X is mirrored per side). */
 export const TRAY_CENTRE_X = CAPTURE_TRAY_X + (TRAY_COLUMN_GAP * (TRAY_COLUMNS - 1)) / 2;
 export const TRAY_CENTRE_Z = TRAY_FIRST_ROW_Z + (TRAY_ROW_GAP * (TRAY_ROWS - 1)) / 2;
-/** How far a tray reaches from the world centre — what the table top has to cover. */
+/** How far a tray reaches from the world centre - what the table top has to cover. */
 export const TRAY_OUTER_X = TRAY_CENTRE_X + TRAY_SIZE_X / 2;
 export const TRAY_OUTER_Z = Math.abs(TRAY_CENTRE_Z) + TRAY_SIZE_Z / 2;
 
@@ -67,7 +67,7 @@ export const TRAY_OUTER_Z = Math.abs(TRAY_CENTRE_Z) + TRAY_SIZE_Z / 2;
 export const TRAY_RECESS = 0.05;
 export const TRAY_FLOOR_Y = SQUARE_TOP_Y - TRAY_RECESS;
 /**
- * The felt slab's top face, a hair proud of the body it is laid into — the same trick
+ * The felt slab's top face, a hair proud of the body it is laid into - the same trick
  * `BOARD_SURFACE_Y` plays over the plinth, and for the same reason: two coplanar faces
  * at this near/far range flicker.
  */
@@ -107,15 +107,15 @@ export function traySlot(capturer: Colour, index: number): [number, number, numb
 /**
  * The table the board stands on (`table` in src/lib/rooms.ts). Its TOP FACE is exactly
  * where the plinth's underside already was, so the table is pure addition: not one square
- * moves, `SQUARE_TOP_Y` is untouched, and the reflective playing surface — which lives a
- * quarter of a unit above this — is never intersected.
+ * moves, `SQUARE_TOP_Y` is untouched, and the reflective playing surface - which lives a
+ * quarter of a unit above this - is never intersected.
  */
 export const TABLE_TOP_Y = PLINTH_TOP_Y - PLINTH_HEIGHT;
 export const TABLE_THICKNESS = 0.35;
 /**
  * The top is a RECTANGLE, not a square, and the difference is the whole point of it: the
  * captured-piece trays stand at +/-`TRAY_OUTER_X`, far outside the plinth, and a square
- * top ending 0.35 past the plinth left them — and the men in them — hanging in mid air.
+ * top ending 0.35 past the plinth left them - and the men in them - hanging in mid air.
  *
  * Z keeps the depth it always had: a shade wider than the plinth, enough for the board to
  * sit ON something rather than flush with it. X runs out under both trays with
@@ -133,7 +133,7 @@ export const TABLE_SIZE = TABLE_SIZE_Z;
 /** The rail under the top that the legs are joined into. */
 export const TABLE_APRON_INSET = 0.6;
 export const TABLE_APRON_HEIGHT = 0.34;
-/** Where the feet land — and, in a room that paints its own floor, where that floor goes. */
+/** Where the feet land - and, in a room that paints its own floor, where that floor goes. */
 export const TABLE_FOOT_Y = -2.9;
 /** Distance from the table's centre to a leg's axis. The legs stand at the four corners
  *  of the rectangle, so the two axes no longer agree. */
@@ -153,7 +153,7 @@ export const LEGAL_DOT_RADIUS = 0.16;
 export const CAPTURE_RING_INNER = 0.36;
 export const CAPTURE_RING_OUTER = 0.47;
 
-/** Half-height of a piece — used to aim the capture flight arc at its middle. */
+/** Half-height of a piece - used to aim the capture flight arc at its middle. */
 export function pieceHalfHeight(mesh: PieceMeshName): number {
   return PIECE_HEIGHTS[mesh] / 2;
 }

@@ -1,12 +1,12 @@
 "use client";
 // src/components/game/draw-offer-dialog.tsx  [P3 → restyled U2 → UI_UPGRADE_2 §4.8 item 2]
 // FR-31: a banner rather than a modal, so the offered player can still look at
-// the position before answering — and the same banner is a persistent HUD layer
+// the position before answering - and the same banner is a persistent HUD layer
 // in the focus layout, where there is no action bar to sit above (§5.2).
 //
 // This round: accepting is guarded exactly the way resigning is. Accepting ends
 // the game and moves both ratings; it is the same size of decision, so it gets
-// the same alert dialog. Declining stays the quiet default — nothing is lost by
+// the same alert dialog. Declining stays the quiet default - nothing is lost by
 // saying no. And the banner names the person ("adrienne offers a draw."), which
 // is what a player actually reads; the colour is only the fallback.
 import { useState } from "react";
@@ -47,8 +47,8 @@ export function DrawOfferDialog({
   onRespond,
   className,
 }: DrawOfferDialogProps) {
-  // `AlertDialogAction` is a plain Button in this shadcn port — it does not close
-  // the dialog — so the open state is held here and the action closes it itself.
+  // `AlertDialogAction` is a plain Button in this shadcn port - it does not close
+  // the dialog - so the open state is held here and the action closes it itself.
   const [confirming, setConfirming] = useState(false);
 
   if (offerFrom === null || seat === null) return null;
@@ -60,7 +60,7 @@ export function DrawOfferDialog({
     <div
       // An offer waiting on this player is an interruption and has to be spoken:
       // `alert` is assertive and atomic, so the sentence and the two verbs are
-      // announced together. Your own offer is a status — nothing to answer.
+      // announced together. Your own offer is a status - nothing to answer.
       role={mine ? "status" : "alert"}
       className={cn(
         "flex flex-wrap items-center gap-2 rounded-xl border border-primary/40 bg-primary/10",
@@ -69,7 +69,7 @@ export function DrawOfferDialog({
       )}
     >
       <HandshakeIcon className="size-4 shrink-0 text-primary" aria-hidden />
-      <span>{mine ? "Draw offered — waiting for a reply." : `${who} offers a draw.`}</span>
+      <span>{mine ? "Draw offered. Waiting for a reply." : `${who} offers a draw.`}</span>
       {mine ? null : (
         // Accept first, and outlined, because it is the considered action the
         // sentence asks for; Decline is the ghost dismissal beside it. Neither gets

@@ -2,7 +2,7 @@
 // src/components/settings/settings-workbench.tsx  [U4]
 // The /settings page arrangement of UI_REDESIGN §6: sections on the left, a
 // sticky live preview on the right. The in-game "Room" drawer renders
-// `SettingsForm` on its own instead — it already has a board on screen.
+// `SettingsForm` on its own instead - it already has a board on screen.
 import { SettingsForm } from "@/components/settings/settings-form";
 import { SettingsPreview } from "@/components/settings/settings-preview";
 import { useSettingsWriter } from "@/hooks/use-settings-sync";

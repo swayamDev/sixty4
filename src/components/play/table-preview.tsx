@@ -2,7 +2,7 @@
 // src/components/play/table-preview.tsx  [U5]
 // The lobby's one theatrical element (UI_UPGRADE_2 §3.3): the player's own board,
 // in the player's own room, from the seat they are about to take. A nameplate
-// above it, the room row beneath it, and no frame anywhere — DESIGN.md: "Don't
+// above it, the room row beneath it, and no frame anywhere - DESIGN.md: "Don't
 // frame the 3D board with a border, card or box; its light is its edge."
 //
 // Three states, in the order the landing hero established:
@@ -52,7 +52,7 @@ export interface TablePreviewProps {
   rating: number | null;
   roomPreset: RoomPresetId;
   roomColors?: RoomColors | null;
-  /** The seat the player is taking — "Random" shows White (§3.3). */
+  /** The seat the player is taking - "Random" shows White (§3.3). */
   orientation: Colour;
   onSelectRoom(room: Exclude<RoomPresetId, "custom">): void;
   onPreviewRoom?(room: Exclude<RoomPresetId, "custom">): void;
@@ -62,7 +62,7 @@ export interface TablePreviewProps {
   className?: string;
 }
 
-/** Pure — the /dev/pages harness renders this with fixed values. */
+/** Pure - the /dev/pages harness renders this with fixed values. */
 export function TablePreview({
   username,
   avatarUrl,
@@ -181,7 +181,7 @@ export function TablePreview({
           <div
             // The room's light is the board's edge: the canvas dissolves into
             // the page rather than stopping at a rectangle (`.lobby-board-dissolve`
-            // in play.css). The 2D fallback below is deliberately NOT masked —
+            // in play.css). The 2D fallback below is deliberately NOT masked -
             // its outer files and ranks are information, not atmosphere.
             className="lobby-board-dissolve absolute inset-0 transition-opacity ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{

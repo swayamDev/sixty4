@@ -8,7 +8,7 @@
 //     model's turn continues by itself once the browser has answered a tool call;
 //   - `onToolCall` runs `requestAnalysis` HERE, in the player's browser, on the
 //     Stockfish worker the game already owns, and answers with `addToolOutput`
-//     WITHOUT awaiting it inside the callback (ai's own rule — awaiting there
+//     WITHOUT awaiting it inside the callback (ai's own rule - awaiting there
 //     stops the automatic re-send from ever firing).
 //
 // Nothing is fetched while `enabled` is false: a member without the tutor feature
@@ -58,7 +58,7 @@ export interface TutorChatPosition {
   gameId: string;
   /** The ply the board is showing: `reviewPly`, or the live move count. */
   ply: number;
-  /** FEN of that position — for the engine only; the route derives its own. */
+  /** FEN of that position - for the engine only; the route derives its own. */
   fen: string;
 }
 
@@ -117,7 +117,7 @@ export function useTutorChat({
   }, [gameId, ply, fen, enabled]);
 
   // The engine is a 7 MB download, so it is not fetched because a member HAS the
-  // tutor — only once they have actually asked it something. `runSearch` awaits
+  // tutor - only once they have actually asked it something. `runSearch` awaits
   // `init()` internally, so a first question that arrives before the wasm is warm
   // simply waits, and the six-second cap below answers without lines if it must.
   const [asked, setAsked] = useState((initialMessages?.length ?? 0) > 0);

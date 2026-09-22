@@ -34,7 +34,7 @@ export function CapturedTray({
   const taken = [...captured[colour]].sort(
     (a, b) => PIECE_VALUES[b] - PIECE_VALUES[a] || ORDER.indexOf(a) - ORDER.indexOf(b),
   );
-  // "" when this side is level or behind — only the player who is ahead carries
+  // "" when this side is level or behind - only the player who is ahead carries
   // the number, so the pair of trays never states the same fact twice.
   const advantage = formatMaterialAdvantage(captured, colour);
   const opponent: Colour = colour === "w" ? "b" : "w";

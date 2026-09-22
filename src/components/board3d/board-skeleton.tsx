@@ -23,7 +23,7 @@ export interface Board3DSkeletonProps {
  * FRAMELESS on purpose. DESIGN.md, Don'ts: "Don't frame the 3D board with a border,
  * card or box; its light is its edge." This skeleton covers the two consecutive waits
  * before the first frame, so a rounded hairline box here put the removed frame back on
- * screen for exactly as long as anyone was watching for it — and then snapped it away.
+ * screen for exactly as long as anyone was watching for it - and then snapped it away.
  * A soft radial wash carries the wait instead: no ring, no radius, no rectangle.
  */
 export function Board3DSkeleton({ className }: Board3DSkeletonProps) {

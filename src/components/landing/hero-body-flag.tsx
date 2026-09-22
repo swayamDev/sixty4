@@ -5,7 +5,7 @@
 //
 // This used to be a client component that wrote `body[data-hero="true"]` from an
 // effect, which meant the server HTML painted with an elevated header for a frame or
-// two before it went transparent — a visible flash on every cold load of `/`. A
+// two before it went transparent - a visible flash on every cold load of `/`. A
 // server-rendered marker plus `body:has(…)` on the header side removes the flash
 // entirely: the marker is in the first HTML response, so the header is already
 // transparent at first paint, and it disappears on its own when a client-side

@@ -21,7 +21,7 @@ export interface PieceMeshProps {
   material: Material;
   selected: boolean;
   interactive: boolean;
-  /** False while flipping or under reduced motion — the piece snaps instead (NFR-10). */
+  /** False while flipping or under reduced motion - the piece snaps instead (NFR-10). */
   animate: boolean;
   outlineColor: string;
   /** True on tiers with no post-processing: draw an inflated-shell outline instead. */

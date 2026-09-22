@@ -1,4 +1,4 @@
-// convex/commentary.ts — FR-37
+// convex/commentary.ts - FR-37
 //
 // AI commentary lives in its own table, NOT in an array on the game document
 // (§I-3): appending to a document array rewrites the whole doc and wakes every

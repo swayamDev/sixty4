@@ -3,7 +3,7 @@
 //
 // The 8x8 checker is painted into that surface's `map` from a canvas rather than built
 // from 64 tile meshes. Opaque tiles standing on top of the mirror plane hid it over the
-// whole playing area, so nothing but a thin border ever reflected — FR-27 asks for
+// whole playing area, so nothing but a thin border ever reflected - FR-27 asks for
 // "pieces reflect in the board". Two draw calls now cover the entire board.
 "use client";
 import { useEffect, useMemo } from "react";
@@ -24,12 +24,12 @@ import {
 
 /** 128 px per square, so the 0.02-unit grout line survives mipmapping at a low angle. */
 const CHECKER_CELL_PX = 128;
-const CHECKER_PX = CHECKER_CELL_PX * 8; // 1024 — power of two, one texel grid per square
+const CHECKER_PX = CHECKER_CELL_PX * 8; // 1024 - power of two, one texel grid per square
 
 /**
  * The checkerboard as a texture. `Texture.flipY` puts canvas row 0 at v = 1, and the
  * plane is rotated -90 deg about X (local +Y -> world -Z), so the top-left texel is a8.
- * `grout` is the surface colour showing between the squares — exactly what the old tile
+ * `grout` is the surface colour showing between the squares - exactly what the old tile
  * gaps revealed.
  */
 function createCheckerTexture(
@@ -90,7 +90,7 @@ export function BoardSurface3D({ room, quality }: BoardSurface3DProps) {
 
       {/* Playing surface. `MeshReflectorMaterial` mirrors around the mesh's local +Z, so
           the plane must be rotated (never the geometry). Reflections off on Low (FR-31);
-          the checker map is identical either way. The material colour stays white — the
+          the checker map is identical either way. The material colour stays white - the
           map carries the square colours. */}
       <mesh
         rotation-x={-Math.PI / 2}
@@ -103,7 +103,7 @@ export function BoardSurface3D({ room, quality }: BoardSurface3DProps) {
           <MeshReflectorMaterial
             // 0.6 mm above the plinth's top face is below what the depth buffer can
             // resolve out at the seated camera's distance, and the playing area lost the
-            // z-fight in stripes — worst on a small canvas, where the fitted camera sits
+            // z-fight in stripes - worst on a small canvas, where the fitted camera sits
             // furthest back. A polygon offset settles it at every distance.
             polygonOffset
             polygonOffsetFactor={-2}
@@ -123,7 +123,7 @@ export function BoardSurface3D({ room, quality }: BoardSurface3DProps) {
           />
         ) : (
           <meshStandardMaterial
-            // Same z-fight, same fix — see the reflective branch above.
+            // Same z-fight, same fix - see the reflective branch above.
             polygonOffset
             polygonOffsetFactor={-2}
             polygonOffsetUnits={-2}

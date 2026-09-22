@@ -3,8 +3,8 @@
 // Browser-only wrapper around BOTH shipped Stockfish builds, running in a CLASSIC
 // worker loaded by URL string from /public (constants.STOCKFISH_WORKER_URLS):
 //
-//   sf18 (default) — stockfish@18.0.8 `lite-single`, needs WASM SIMD
-//   sf11 (fallback) — stockfish@11.0.0, for browsers without WASM SIMD
+//   sf18 (default) - stockfish@18.0.8 `lite-single`, needs WASM SIMD
+//   sf11 (fallback) - stockfish@11.0.0, for browsers without WASM SIMD
 //
 // One wrapper serves both because the parts this file uses are identical: plain-string
 // output lines, `MultiPV`, `Skill Level` 0..20, `ucinewgame`, `position fen`, `go depth`,
@@ -18,7 +18,7 @@
 //
 // Per-build differences this file handles:
 //   * SF18 exposes a download-progress `MessagePort` (`postMessage({progressPort})`,
-//     stockfish.md §4) — wired to `onProgress` so the 5.6 MB first load shows real
+//     stockfish.md §4) - wired to `onProgress` so the 5.6 MB first load shows real
 //     progress. SF11 has no such channel and stays indeterminate.
 //   * SF18's glue queues `go`/`setoption` internally; SF11's does not. Searches are
 //     serialised here either way, which satisfies both.
@@ -123,7 +123,7 @@ export class StockfishEngine {
   }
 
   /**
-   * Subscribe to wasm download progress. SF18 only — SF11's glue has no progress
+   * Subscribe to wasm download progress. SF18 only - SF11's glue has no progress
    * channel, so the listener simply never fires and the UI stays indeterminate.
    */
   onProgress(listener: ProgressListener): () => void {
@@ -179,7 +179,7 @@ export class StockfishEngine {
   /**
    * `ucinewgame` + `isready`. Clears the transposition table between games so
    * evals from the previous game cannot leak into this one (stockfish.md §9
-   * rule 4). Enqueued synchronously — `init()` is awaited INSIDE the queued task
+   * rule 4). Enqueued synchronously - `init()` is awaited INSIDE the queued task
    * so a `search()` issued in the same tick can never overtake it.
    */
   newGame(): Promise<void> {
@@ -213,7 +213,7 @@ export class StockfishEngine {
     this.readyPromise = null;
     this.lineListeners.clear();
     this.lastProgress = null;
-    // Only here — with the worker actually terminated — is "idle" the truth. A
+    // Only here - with the worker actually terminated - is "idle" the truth. A
     // consumer that merely unmounts must NOT reset the status while other
     // consumers still hold the shared engine (review AI-7); `releaseEngine()`
     // returns the remaining refcount so `use-stockfish` can tell the difference.
@@ -227,8 +227,8 @@ export class StockfishEngine {
   /**
    * SF18 only: hand the glue one end of a `MessageChannel` and it streams
    * `{percent, loaded, total, …}` objects while it fetches the 7.3 MB wasm
-   * (stockfish.md §4; `percent` is a 0..1 FRACTION — verified in the shipped glue:
-   * `{percent: e/n, loaded: e, total: n, …}` — and the port self-closes at 1).
+   * (stockfish.md §4; `percent` is a 0..1 FRACTION - verified in the shipped glue:
+   * `{percent: e/n, loaded: e, total: n, …}` - and the port self-closes at 1).
    * Posted immediately after `new Worker` so it is the first message the glue sees.
    */
   private attachProgressPort(worker: Worker): void {
@@ -398,7 +398,7 @@ const changeListeners = new Set<(engine: StockfishEngine) => void>();
 /**
  * @param build pins the binary for a shared engine that has to be CREATED here
  * (the sf18 -> sf11 downgrade in `use-stockfish`). Ignored when one already
- * exists — use {@link swapSharedEngine} to replace a live engine.
+ * exists - use {@link swapSharedEngine} to replace a live engine.
  */
 export function acquireEngine(build?: EngineBuild): StockfishEngine {
   if (disposeTimer !== null) {
@@ -429,8 +429,8 @@ export function onSharedEngineChange(listener: (engine: StockfishEngine) => void
  *
  * This is the recovery path for "the default sf18 build cannot load at all" (a missing
  * or truncated 7.3 MB wasm, a device that cannot allocate it): sf11 ships alongside it
- * and runs everywhere, so a page session that would otherwise have NO engine — no AI
- * moves, no hints — downgrades once instead of failing.
+ * and runs everywhere, so a page session that would otherwise have NO engine - no AI
+ * moves, no hints - downgrades once instead of failing.
  *
  * The refcount is deliberately CARRIED OVER: every consumer keeps exactly the one hold
  * it already had, so nobody's `releaseEngine()` goes missing and the replacement is not
@@ -450,7 +450,7 @@ export function swapSharedEngine(build: EngineBuild): StockfishEngine {
  *
  * @returns the number of consumers still holding the engine. `0` means this caller
  * was the last one and the worker is on its way out, so it is the ONLY case in
- * which a consumer may reset the shared engine status to "idle" (review AI-7 — the
+ * which a consumer may reset the shared engine status to "idle" (review AI-7 - the
  * hint button and the AI turn hook can hold the engine at the same time, and the
  * one that unmounts first used to blank the other's "ready" state).
  */

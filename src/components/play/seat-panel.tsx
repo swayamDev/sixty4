@@ -73,7 +73,7 @@ export function SeatPanel({
 
 /**
  * The reason a control is unavailable, shown beside the disabled action rather
- * than only in a tooltip — a `disabled` button is not focusable, so a tooltip
+ * than only in a tooltip - a `disabled` button is not focusable, so a tooltip
  * alone reaches nobody on a keyboard (§3.2 "a tooltip that says why").
  */
 export function SeatReason({ children }: { children: React.ReactNode }) {

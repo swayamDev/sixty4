@@ -42,7 +42,7 @@ const FRAMING_MARGIN = 1.04;
  * What a SEATED camera has to keep inside the frame, as a half-extent in world units
  * (see `fitPoseToAspect`), on BOTH axes: the 8x8 playing area and the pieces standing on
  * it. Its near corners are a half-board away in x and in z at the same time, and until
- * this counted the z half as well the corner squares — a1 and h1, pieces and all — were
+ * this counted the z half as well the corner squares - a1 and h1, pieces and all - were
  * sliced in half by the edge of a square canvas, which is exactly the box the §5.1 game
  * shell hands the board.
  *
@@ -63,8 +63,8 @@ const PIECE_HALF_WIDTH = 0.25;
  * (narrower, king-high). The margin is baked in here so the fit itself stays honest
  * geometry.
  *
- * This replaces an earlier root-2 rule of thumb — "at 45 deg the board shows its
- * diagonal, so widen by root 2 and skip the depth term" — which was wrong in a way that
+ * This replaces an earlier root-2 rule of thumb - "at 45 deg the board shows its
+ * diagonal, so widen by root 2 and skip the depth term" - which was wrong in a way that
  * only showed up on the landing hero. At 45 deg of azimuth the board's near corner is
  * dead centre HORIZONTALLY, so no horizontal fit can see it at all, and being a corner's
  * worth nearer the lens it is magnified: it left the frame through the bottom of the
@@ -90,7 +90,7 @@ const TARGET_BOUNDS = new Box3(
 
 /**
  * `fromJSON` (FR-25 session restore) assigns EVERY serialised field, including
- * `enabled`, `smoothTime`, the distance range and the polar clamp — so a snapshot taken
+ * `enabled`, `smoothTime`, the distance range and the polar clamp - so a snapshot taken
  * mid-transition would restore `enabled: false` and permanently kill orbit/pan/zoom, and
  * R3F's prop diffing would not put the JSX values back (they never changed). Re-assert
  * everything the rig owns after every restore.
@@ -102,7 +102,7 @@ function applyRigLimits(controls: CameraControlsImpl, fitDistance: number): void
   controls.minDistance = CAMERA_LIMITS.minDistance;
   // `dollyTo` CLAMPS to maxDistance (verified in camera-controls 3.1.2), so a canvas
   // narrow enough to need more than FR-22's zoom-out limit would have its fit silently
-  // truncated — and the board cropped — unless the ceiling comes up with it.
+  // truncated - and the board cropped - unless the ceiling comes up with it.
   controls.maxDistance = Math.max(CAMERA_LIMITS.maxDistance, fitDistance);
   controls.minPolarAngle = CAMERA_LIMITS.minPolarAngle;
   controls.maxPolarAngle = CAMERA_LIMITS.maxPolarAngle;
@@ -195,13 +195,13 @@ export function CameraRig({
   const { width, height } = useThree((state) => state.size);
   // A canvas that has not been measured yet, or one measured mid-crossfade while its
   // wrapper is collapsed, reports a size no framing should ever be derived from. Fiber
-  // will not create a root under 1px either, so this is belt and braces — but the cost
+  // will not create a root under 1px either, so this is belt and braces - but the cost
   // of believing one bogus reading is a board that is framed wrong for the rest of the
   // page's life, which is exactly the bug this guard exists for.
   const measured = width > 1 && height > 1;
   const aspect = measured ? width / height : 1;
   const cinematicPreset = preset === "cinematic";
-  // The room's arc, as two primitives — primitives and not the object, so a parent that
+  // The room's arc, as two primitives - primitives and not the object, so a parent that
   // rebuilds `orbit` every render cannot replay the transition below.
   //
   // The CENTRE is the cinematic preset's alone: it is where the panorama's best wall is,
@@ -212,14 +212,14 @@ export function CameraRig({
     ? (orbit?.centerAzimuth ?? DEFAULT_ORBIT_SWEEP.centerAzimuth)
     : 0;
   const sweepHalfArc = orbit?.halfArc ?? DEFAULT_ORBIT_SWEEP.halfArc;
-  // FR-24's idle camera starts — and, under prefers-reduced-motion, STAYS — at the middle
+  // FR-24's idle camera starts - and, under prefers-reduced-motion, STAYS - at the middle
   // of the room's arc, not at the white seat. Everything downstream (the fit, the
   // transition, `saveState`) follows from this one rotated pose.
   const pose = cinematicPreset
     ? rotatePoseAzimuth(poseForPreset(preset), sweepCenter)
     : poseForPreset(preset);
   // Where this preset should sit for THIS canvas: its own tuned distance, or whatever
-  // the fit demands, whichever is further out — capped so a freak aspect cannot fling
+  // the fit demands, whichever is further out - capped so a freak aspect cannot fling
   // the camera out of the room.
   const fitDistance = Math.min(
     Math.max(
@@ -244,7 +244,7 @@ export function CameraRig({
   const fitRef = useRef(fitDistance);
   // The AIMED pose (see `pose` above), for the one-shot setup effect: the initial
   // cinematic preset has to open at the middle of the room's arc too, not at the white
-  // seat and then swing. Written in the RENDER phase, unlike the two above — `pose` is a
+  // seat and then swing. Written in the RENDER phase, unlike the two above - `pose` is a
   // fresh object every render, so an effect would fire every render to say the same
   // thing, and the setup effect below has to read this on the very first commit, before
   // any effect keyed on `measured` has been allowed to run.
@@ -257,7 +257,7 @@ export function CameraRig({
   }, [aspect, fitDistance, measured]);
 
   /**
-   * Where the pendulum is, in radians of PHASE — not of azimuth. `orbitStep` turns it
+   * Where the pendulum is, in radians of PHASE - not of azimuth. `orbitStep` turns it
    * into a per-frame turn; it only advances on frames the sweep actually ran, so a
    * paused frameloop, a preset transition and a player's own drag all leave the swing
    * exactly where the eye left it.
@@ -278,7 +278,7 @@ export function CameraRig({
     const seat = fitPoseToAspect(poseRef.current, SEAT_HALF, aspectRef.current, SEAT_HALF);
     void controls.setLookAt(...seat.position, ...seat.target, false);
     // FR-23: "Reset" returns to the player's seat, so the saved state is the preset
-    // pose — never the restored session pose.
+    // pose - never the restored session pose.
     controls.saveState();
 
     const saved = persistSession ? readSession() : null;
@@ -320,7 +320,7 @@ export function CameraRig({
     // does not replay this transition. `poseRef` is the AIMED pose, so a cinematic
     // preset flies to the middle of this room's arc.
     const target = poseAtDistance(poseRef.current, fitRef.current);
-    // A preset is a request for the canonical view, so it also hands the camera back —
+    // A preset is a request for the canonical view, so it also hands the camera back -
     // and the swing starts again from the centre of the arc rather than resuming
     // wherever the last room's sweep happened to be.
     userMoved.current = false;
@@ -332,7 +332,7 @@ export function CameraRig({
       locked.current = false;
       // THE CANVAS MAY HAVE BEEN RE-MEASURED WHILE THIS TRANSITION OWNED THE CAMERA.
       // The re-fit effect below could only decline while `locked` was true, and it is
-      // keyed on the fit distance, so nothing would ever have re-run it for that value —
+      // keyed on the fit distance, so nothing would ever have re-run it for that value -
       // `locked` is a ref and refs do not re-render. That is how one badly-timed measure
       // used to lock a hero into the wrong framing for good.
       if (!userMoved.current) applyFitDistance(controls, fitRef.current);
@@ -365,7 +365,7 @@ export function CameraRig({
     };
     // `sweepCenter` is a dep and not a ref on purpose: it only changes when the ROOM
     // changes, which is a genuine request to re-aim the idle camera at the new room's
-    // best wall — never a resize. It is 0 off the cinematic preset, so a room swap
+    // best wall - never a resize. It is 0 off the cinematic preset, so a room swap
     // mid-game still cannot move a seated player. The arc is deliberately NOT a dep: it
     // reaches the camera through `fitDistance` and the re-fit effect below, which move
     // the camera without re-seating it.
@@ -379,7 +379,7 @@ export function CameraRig({
   //
   // It moves the camera IN as well as out, which the first version did not: a fit is
   // "where this preset belongs on this canvas", and a rig that could only ever retreat
-  // kept whatever the widest — or the most bogus — measurement it ever saw. `fitDistance`
+  // kept whatever the widest - or the most bogus - measurement it ever saw. `fitDistance`
   // is floored by the preset's own tuned distance, so this can never come closer than
   // the framing the presets were designed for.
   useEffect(() => {
@@ -393,7 +393,7 @@ export function CameraRig({
   }, [controlsRef, fitDistance, measured]);
 
   // Cinematic idle sweep. `cinematic` arrives as a prop (never a store hook in the
-  // render loop — §D.12 rule 7) and interaction is tracked on a ref.
+  // render loop - §D.12 rule 7) and interaction is tracked on a ref.
   //
   // A pendulum, not a circle: `orbitStep` eases the azimuth back and forth across the
   // room's arc, at `CAMERA_LIMITS.cinematicSpeed` as it crosses the middle. It hands back
@@ -405,7 +405,7 @@ export function CameraRig({
     // A showcase board pauses its frameloop off screen, and r3f's clock keeps running
     // while it is paused: the first delta after a resume covers the whole pause and
     // would swing the camera through a quarter-turn in one frame. Cap it at one slow
-    // frame's worth (~6 fps) — the sweep picks up where the eye left it.
+    // frame's worth (~6 fps) - the sweep picks up where the eye left it.
     const step = orbitStep(sweepHalfArc, orbitPhase.current, Math.min(delta, MAX_ORBIT_DELTA));
     orbitPhase.current = step.phase;
     if (step.deltaAzimuth !== 0) controls.rotate(step.deltaAzimuth, 0, false);

@@ -10,7 +10,7 @@ export { cn } from "@/lib/utils";
 export const focusRing =
   "outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:border-ring";
 
-/** Same ring drawn inside the element — for anything flush with its container. */
+/** Same ring drawn inside the element - for anything flush with its container. */
 export const focusRingInset =
   "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset";
 

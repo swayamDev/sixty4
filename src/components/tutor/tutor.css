@@ -1,7 +1,7 @@
 /* src/components/tutor/tutor.css
    Panel-local CSS (docs/PRO_TUTOR.md §3). Only what a Tailwind utility cannot
    express: the collapsed tab's vertical lettering, the annotation chip's tone
-   dot, and the one entrance the panel authors. No new colours — everything
+   dot, and the one entrance the panel authors. No new colours - everything
    below reads a token that already exists in globals.css. */
 
 /* The 44px rail the column becomes when it is hidden. `sideways-lr` puts the
@@ -15,7 +15,7 @@
 
 /* The chip's tone mark: a filled dot with a faint ring of the same colour, so it
    reads as a swatch rather than as a bullet. The word beside it always names the
-   tone — colour is never the only signal (DESIGN.md, §4 of the contract). */
+   tone - colour is never the only signal (DESIGN.md, §4 of the contract). */
 .tutor-tone-dot {
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--tutor-tone) 22%, transparent);
 }

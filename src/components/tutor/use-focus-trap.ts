@@ -1,7 +1,7 @@
 "use client";
 // src/components/tutor/use-focus-trap.ts
 // docs/PRO_TUTOR.md §3: while the tutor is an overlay it is a layer, so it
-// behaves like one — focus moves into it when it opens, Tab cycles inside it,
+// behaves like one - focus moves into it when it opens, Tab cycles inside it,
 // and focus returns to whatever opened it when it closes.
 import { useEffect, useRef } from "react";
 
@@ -12,7 +12,7 @@ const FOCUSABLE = [
   "input:not([disabled])",
   "select:not([disabled])",
   // `:not([disabled])` matters: a Base UI `Button` renders `tabindex="0"` even when
-  // it is disabled (the composer's Send button, whenever the field is empty — which
+  // it is disabled (the composer's Send button, whenever the field is empty - which
   // is its state the whole time a member is reading an answer). Without this the
   // disabled button became the trap's `tail`, the browser never focused it, and the
   // wrap below never fired, so Tab walked straight out of the layer.
@@ -73,7 +73,7 @@ export function useFocusTrap<T extends HTMLElement>(active: boolean, containFocu
       node.removeEventListener("keydown", onKeyDown);
       // Focus goes back to whatever opened the layer. Unconditional on purpose:
       // the only ways out are Escape and the panel's own collapse control, both
-      // of which leave focus inside a subtree React is about to remove — after
+      // of which leave focus inside a subtree React is about to remove - after
       // which `document.activeElement` is the body and nothing is left to test.
       const back = opener.current;
       if (back !== null && back.isConnected &&

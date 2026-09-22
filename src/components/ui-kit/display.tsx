@@ -22,7 +22,7 @@ export interface DisplayProps extends React.ComponentProps<"h1"> {
 
 /**
  * Fraunces headline. Wrap at most one word in `<em>` and it renders italic in
- * brass — the only decoration the system allows on a headline (§1.1, §1.2).
+ * brass - the only decoration the system allows on a headline (§1.1, §1.2).
  */
 export function Display({ level = 1, as, className, ...props }: DisplayProps) {
   const Tag = as ?? (`h${level}` as "h1" | "h2" | "h3" | "h4");

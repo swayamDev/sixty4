@@ -23,7 +23,7 @@ export interface DifficultyConfig {
    * It is used in exactly ONE place: the RAW ENGINE FALLBACK, i.e. when the agent
    * route failed and the client asks Stockfish itself to play a move
    * (`fallbackEngineMove` in `engine/fallback-move.ts`). There the engine's own
-   * weakening is what we want — at Skill Level < 20 Stockfish picks a randomised
+   * weakening is what we want - at Skill Level < 20 Stockfish picks a randomised
    * sub-optimal move at depth `1 + level` (stockfish.md §6).
    *
    * It is deliberately NOT used for candidate generation or for hints, which both
@@ -35,11 +35,11 @@ export interface DifficultyConfig {
   /**
    * PRD §3.8's selection policy, word for word, in both places it is applied:
    * pushed to the agent as `clientContext.selectionPolicy` (the primary chooser)
-   * and implemented in `selectCandidate` (the fallback). The two MUST agree —
+   * and implemented in `selectCandidate` (the fallback). The two MUST agree -
    * `difficulty.test.ts` asserts each string is also the matching row of
    * `agent/instructions.md`, so edit all three together.
    *
-   * Candidate generation itself carries no handicap — it always runs at Skill
+   * Candidate generation itself carries no handicap - it always runs at Skill
    * Level 20 so the ranking is honest; this policy is the handicap for the
    * agent/JS path, and `skillLevel` above is the handicap for the raw engine path.
    */

@@ -9,7 +9,7 @@
 // link says "Open" rather than "Replay".
 //
 // Rating change: `games.myRecentGames` returns `vGameSummary`, which carries
-// `rated` but no delta — the Elo movement is applied to the player document and
+// `rated` but no delta - the Elo movement is applied to the player document and
 // never stored per game. So an unrated game reads "unrated", a rated one reads
 // "rated", and a delta is shown only where one is actually known. Product
 // principle 1: nothing fake behind the glass. There is a request in the builder's
@@ -39,7 +39,7 @@ const MARK_LETTER: Record<Exclude<ResultOutcome, "ongoing">, string> = {
 
 // §3.4 wants "W in baize, L in ember, D in parchment, each with the letter so colour
 // is never the only signal". The tint used to sit BEHIND the letter in its own hue,
-// which dragged W to 3.88:1 and L to 3.82:1 in light theme — sub-threshold for exactly
+// which dragged W to 3.88:1 and L to 3.82:1 in light theme - sub-threshold for exactly
 // the readers the letter was added for. The chip is neutral now and the letter carries
 // the colour: 5.04:1 / 4.97:1 light, 4.91:1 / 4.57:1 dark.
 const MARK_CLASS: Record<Exclude<ResultOutcome, "ongoing">, string> = {
@@ -168,7 +168,7 @@ export function ScoresheetEmpty() {
   );
 }
 
-/** Pure — the /dev/pages harness renders this with fixed rows. */
+/** Pure - the /dev/pages harness renders this with fixed rows. */
 export function ScoresheetView({ games }: { games: ScoresheetGame[] }) {
   if (games.length === 0) return <ScoresheetEmpty />;
 

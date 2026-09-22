@@ -7,7 +7,7 @@
 // Everything in this file follows eve-agent.md Appendix A:
 //   * a per-turn `outputSchema` is the ONLY way to get a machine-checkable move
 //     (`defineAgent({ outputSchema })` applies to task mode, not interactive turns);
-//   * the schema is a prompt hint, NOT enforced — `result.data === undefined` with
+//   * the schema is a prompt hint, NOT enforced - `result.data === undefined` with
 //     `status: "waiting"` is the OUTPUT_SCHEMA_NOT_FULFILLED shape, so we re-parse
 //     locally and never branch on `status`;
 //   * the 10 s budget is the caller's job: arm the AbortController BEFORE awaiting
@@ -19,7 +19,7 @@ import type { z } from "zod";
 
 /** Basic-auth username shared with `agent/channels/eve.ts`. */
 export const EVE_BASIC_USERNAME = "chess-server";
-/** Gateway id — same model as `agent/agent.ts`, used by the no-eve fallback. */
+/** Gateway id - same model as `agent/agent.ts`, used by the no-eve fallback. */
 export const FALLBACK_MODEL_ID = "anthropic/claude-haiku-4.5";
 
 /** Exactly what `SendTurnOptions.clientContext` accepts (eve's readonly JsonObject). */
@@ -122,7 +122,7 @@ function eveClient(host: string): Client {
 
 /**
  * True when a failed eve call means "eve did not answer" rather than "eve answered
- * badly" — the §F.6 direct-model fallback is worth a try only in the first case.
+ * badly" - the §F.6 direct-model fallback is worth a try only in the first case.
  * 401/403 belong here: a Deployment Protection or basic-auth challenge is indis-
  * tinguishable from eve being down as far as this request is concerned, and
  * without it every move would silently degrade to the Stockfish fallback.
@@ -171,7 +171,7 @@ export async function runAgentTurn<T>(
           // Attach at the current tail + 1 so the stream begins with our own turn.
           const tail = await readTailIndex(client, reuse, controller.signal);
           if (tail.kind === "gone") {
-            // The session really is not there any more — a fresh one is correct.
+            // The session really is not there any more - a fresh one is correct.
             sessionId = undefined;
             failure = "session-restarted";
             continue;
@@ -245,7 +245,7 @@ export async function runAgentTurn<T>(
     clearTimeout(timer);
     input.signal?.removeEventListener("abort", abortOuter);
     if (controller.signal.aborted && sessionId !== undefined) {
-      // Detaching the client never stops server-side work — cancel the turn so the
+      // Detaching the client never stops server-side work - cancel the turn so the
       // session is parked at `session.waiting` for the next move (A.8).
       void client.sessions
         .attach(sessionId)
@@ -259,7 +259,7 @@ export async function runAgentTurn<T>(
 
 /**
  * Direct AI SDK 7 path, used only when eve itself is unreachable (§F.6).
- * `generateObject` is deprecated since AI SDK 6 — this is `generateText` + `Output.object`.
+ * `generateObject` is deprecated since AI SDK 6 - this is `generateText` + `Output.object`.
  */
 export async function runDirectTurn<T>(
   schema: z.ZodType<T>,

@@ -1,13 +1,13 @@
-// src/app/api/ai/hint/route.ts — FR-40
+// src/app/api/ai/hint/route.ts - FR-40
 //
 // The same pipeline as /api/ai/move with three differences (§F.6):
 //   * a hint-flavoured prompt and a `{ san, text }` output schema;
-//   * NO session reuse — every hint is a one-shot `sessions.create`, so the game's
+//   * NO session reuse - every hint is a one-shot `sessions.create`, so the game's
 //     durable opponent session is never polluted with coaching turns;
 //   * plain JSON, no streaming (a hint is one short sentence).
 //
 // FR-40's 3-per-game limit is CHARGED HERE, by this handler, through
-// `api.games.useHint` with the caller's own Clerk token — the browser no longer
+// `api.games.useHint` with the caller's own Clerk token - the browser no longer
 // pre-charges it. A direct POST that skips the client is therefore capped like any
 // other caller; charging client-side left the cap enforceable only by cooperation.
 import { Chess } from "chess.js";
@@ -117,7 +117,7 @@ export async function POST(request: Request): Promise<Response> {
   };
 
   // NFR-5: one budget for the whole agent phase, shared by the eve call and the
-  // §F.6 direct-model retry — not one each.
+  // §F.6 direct-model retry - not one each.
   const deadline = Date.now() + EVE_BUDGET_MS;
   const turn = await runAgentTurn(hintOutputSchema, {
     host: resolveEveHost(request.url),
@@ -152,7 +152,7 @@ export async function POST(request: Request): Promise<Response> {
     san === null
       ? {
           san: fallbackSan,
-          text: `Try ${fallbackSan} — it is the strongest continuation the engine sees here.`,
+          text: `Try ${fallbackSan}. It is the strongest continuation the engine sees here.`,
           source: "fallback",
         }
       : { san, text: data?.text.trim().slice(0, MAX_COMMENTARY_LENGTH) ?? "", source: "eve" };

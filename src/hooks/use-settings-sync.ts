@@ -15,7 +15,7 @@ const WRITE_DEBOUNCE_MS = 400;
  * Settings the player has changed by hand this session. The seed below lands
  * whenever `players.me` first resolves, which can be AFTER a change the user has
  * already made (the form unblocks on the synchronous localStorage rehydrate, the
- * query needs a round trip and, on a first sign-in, `ensurePlayer` before it) —
+ * query needs a round trip and, on a first sign-in, `ensurePlayer` before it) -
  * seeding those keys would visibly revert a control the user just touched while
  * Convex already holds the new value.
  *
@@ -65,12 +65,12 @@ export function useSettingsSync(): void {
       qualityTier: me.qualityTier,
       postFxEnabled: me.postFxEnabled,
     };
-    // Anything the player already changed while this query was in flight wins —
+    // Anything the player already changed while this query was in flight wins -
     // its own write is on its way to Convex, and because the seed only ever runs
     // once, overwriting it here would stick until a reload.
     const local = selectPersistedSettings(useUiStore.getState());
 
-    // Not a React setState — zustand's `set` is safe under react-hooks/set-state-in-effect.
+    // Not a React setState - zustand's `set` is safe under react-hooks/set-state-in-effect.
     hydrateFromServer({
       boardView: preferLocal("boardView", server, local),
       roomPreset: preferLocal("roomPreset", server, local),
@@ -94,7 +94,7 @@ export function useSettingsSync(): void {
 /**
  * The write-back half. Returns a debounced patch function for the settings UI:
  * every control updates the ui-store synchronously (live preview) and calls this
- * to persist. Colour drags fire dozens of times a second, so coalesce them —
+ * to persist. Colour drags fire dozens of times a second, so coalesce them -
  * never one mutation per drag tick (FR-21j).
  */
 export function useSettingsWriter(): (patch: Partial<PlayerSettings>) => void {
@@ -107,7 +107,7 @@ export function useSettingsWriter(): (patch: Partial<PlayerSettings>) => void {
   const queued = useRef<Partial<PlayerSettings>>({});
 
   // Mirrored into a ref so the rejection path can read the current server state
-  // without `flush` — and therefore the returned callback — changing identity on
+  // without `flush` - and therefore the returned callback - changing identity on
   // every emission of a query that also carries ratings and W/L/D.
   const server = useRef<PlayerSettings | null>(null);
   useEffect(() => {
@@ -132,7 +132,7 @@ export function useSettingsWriter(): (patch: Partial<PlayerSettings>) => void {
     updateSettings(patch).catch((error: unknown) => {
       console.error("[settings-sync] updateSettings failed", error);
       // Every control applies its change to the store first, so a rejected write
-      // leaves the UI showing a value Convex never stored — and /settings promises
+      // leaves the UI showing a value Convex never stored - and /settings promises
       // the opposite ("Changes save themselves"). Say so, and put the store back
       // to what the server actually holds so the two agree again.
       toast.error(describeConvexError(error, "Could not save that setting."));

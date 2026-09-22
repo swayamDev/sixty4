@@ -1,8 +1,8 @@
 // src/components/ai/chat-model.ts  [U2]
 // UI_REDESIGN §5.1: "the chat merges both in ply order".
 //
-// The Chat tab has two sources — the persisted `commentary` rows and the move
-// list itself — and they have to interleave: the AI's line about move 12 sits
+// The Chat tab has two sources - the persisted `commentary` rows and the move
+// list itself - and they have to interleave: the AI's line about move 12 sits
 // directly under "You played Nf3". Doing that merge in a pure function keeps the
 // ordering rule out of the render tree and testable on its own.
 import type { Colour, GameMode } from "@/lib/types";
@@ -55,7 +55,7 @@ function displayPersona(raw: string | undefined, fallback: string): string {
   return raw[0]!.toUpperCase() + raw.slice(1);
 }
 
-/** "12." after White's move, "12…" after Black's — standard notation. */
+/** "12." after White's move, "12…" after Black's - standard notation. */
 export function plyLabel(ply: number): string {
   const moveNumber = Math.ceil(ply / 2);
   return ply % 2 === 1 ? `${moveNumber}.` : `${moveNumber}…`;

@@ -6,7 +6,7 @@ import type { Doc, Id } from "../../convex/_generated/dataModel";
 
 /* ------------------------------------------------------------------ primitives */
 
-export type SquareId = Square; // 'a1' … 'h8' (chess.js literal union — free exhaustiveness)
+export type SquareId = Square; // 'a1' … 'h8' (chess.js literal union - free exhaustiveness)
 export type Colour = "w" | "b";
 export type PieceSymbol = "p" | "n" | "b" | "r" | "q" | "k";
 export type PromotionPiece = "q" | "r" | "b" | "n";
@@ -50,7 +50,7 @@ export type RatingHistoryDoc = Doc<"ratingHistory">;
 export type PlayerId = Id<"players">;
 export type GameId = Id<"games">;
 
-/** Public projection of another player — everything `players.getByUsername` and
+/** Public projection of another player - everything `players.getByUsername` and
  *  `games.get` are allowed to expose. Never widen this to `PlayerDoc`. */
 export interface PlayerSummary {
   _id: PlayerId;
@@ -152,7 +152,7 @@ export interface LastMove {
   colour: Colour;
   captured?: PieceSymbol;
   /** Where the captured piece actually stood. Only set when it differs from `to`, i.e.
-   *  en passant — the pawn taken sits one rank behind the destination (FR-17). */
+   *  en passant - the pawn taken sits one rank behind the destination (FR-17). */
   capturedSquare?: SquareId;
   promotion?: PromotionPiece;
 }
@@ -176,10 +176,10 @@ export type RenderFailureReason = "webgl-unavailable" | "context-lost" | "low-en
  * THE shared board contract. `Board2D` (P3) and `Board3D` (P4) are two
  * implementations of `(props: BoardViewProps) => JSX.Element` and nothing else.
  * Neither board may call Convex, read the ui-store for game state, or own chess
- * logic — every field below is computed by `useGameController` (P3).
+ * logic - every field below is computed by `useGameController` (P3).
  */
 export interface BoardViewProps {
-  /** Position being rendered — live FEN, or the FEN at `reviewPly`. */
+  /** Position being rendered - live FEN, or the FEN at `reviewPly`. */
   fen: string;
   /** Same position as pieces with stable ids (drives animation). */
   position: BoardPiece[];
@@ -318,7 +318,7 @@ export interface HintResult {
 /** NDJSON frames streamed by POST /api/ai/move (one JSON object per line).
  *  INTEGRATION: the `status` heartbeat is mandated by the patched §E.4 step 8 but was
  *  missing from §D.2's snapshot of this union; §E.4 wins. `delta` is kept for forward
- *  compatibility only — with a per-turn `outputSchema` eve emits no text deltas. */
+ *  compatibility only - with a per-turn `outputSchema` eve emits no text deltas. */
 export type AiStreamEvent =
   | { t: "status"; d: AiPhase }
   | { t: "delta"; d: string }

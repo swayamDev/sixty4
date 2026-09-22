@@ -48,7 +48,12 @@ const CREDITS: { label: string; body: React.ReactNode }[] = [
   },
   {
     label: "Engine",
-    body: <>Stockfish, licensed under the GPL v3. It runs in your browser, not on a server.</>,
+    body: (
+      <>
+        Stockfish, licensed under the GPL v3. It runs in your browser, not on a
+        server.
+      </>
+    ),
   },
 ];
 
@@ -59,15 +64,16 @@ export function LandingFooter() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
             {/* §2.5: the wordmark at headline size, with the knight that is the
-                brand's mark (PRODUCT.md, "Brand Commitments"). */}
-            <p className="font-display flex items-baseline gap-3 text-[2.5rem] leading-none text-foreground">
+                brand's mark (matches the header's icon in site-header.tsx). */}
+            <p className="font-display flex items-baseline gap-1 text-[2.5rem] leading-none text-foreground">
               <span aria-hidden className="text-primary">
                 ♞
               </span>
               Sixty4
             </p>
             <p className="mt-4 max-w-[42ch] text-[13px] text-muted-foreground">
-              An online chess club with rooms you can sit in. Free, and it runs in your browser.
+              An online chess club with rooms you can sit in. Free, and it runs
+              in your browser.
             </p>
           </div>
 

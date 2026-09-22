@@ -1,4 +1,4 @@
-// convex/games.ts — the authoritative game surface (FR-7…FR-13, FR-28…FR-46)
+// convex/games.ts - the authoritative game surface (FR-7…FR-13, FR-28…FR-46)
 //
 // chess.js is imported directly here: it runs in the DEFAULT Convex runtime, no
 // `"use node"` (chessjs.md §12). Every position change replays `game.moves` from
@@ -160,7 +160,7 @@ export const createAiGame = mutation({
   returns: v.id("games"),
   handler: async (ctx, args) => {
     const player = await requirePlayer(ctx);
-    // FR-26: one game at a time, and starting one leaves the queue — otherwise
+    // FR-26: one game at a time, and starting one leaves the queue - otherwise
     // `queue.pair` could pair this player into a second, rated game they never see.
     await requireFreeToStart(ctx, player._id);
     const now = Date.now();
@@ -304,7 +304,7 @@ export const myActiveGame = query({
   },
 });
 
-/** FR-53 — the caller's own history. */
+/** FR-53 - the caller's own history. */
 export const myRecentGames = query({
   args: { limit: v.number() },
   returns: v.array(vGameSummary),
@@ -316,12 +316,12 @@ export const myRecentGames = query({
   },
 });
 
-/** FR-53 — someone else's history, resolved by username. */
+/** FR-53 - someone else's history, resolved by username. */
 export const gamesForProfile = query({
   args: { username: v.string(), limit: v.number() },
   returns: v.array(vGameSummary),
   handler: async (ctx, args) => {
-    // `.first()` — a duplicate `usernameLower` must not 500 the profile page.
+    // `.first()` - a duplicate `usernameLower` must not 500 the profile page.
     const player = await ctx.db
       .query("players")
       .withIndex("by_usernameLower", (q) =>
@@ -447,7 +447,7 @@ async function commitMove(
   });
 
   if (outcome.status !== "active") {
-    // Same transaction as the move (FR-49) — ratings can never be observed stale.
+    // Same transaction as the move (FR-49) - ratings can never be observed stale.
     await finalizeGame(
       ctx,
       game,
@@ -492,7 +492,7 @@ export const resign = mutation({
 /**
  * FR-31. Offering into a standing offer from the other side accepts it. Rejected
  * for `ai` games: the AI has no seat, so it can never answer, and the human cannot
- * answer their own offer — the offer would just sit on the document unanswerable.
+ * answer their own offer - the offer would just sit on the document unanswerable.
  */
 export const offerDraw = mutation({
   args: { gameId: v.id("games") },
@@ -550,8 +550,8 @@ async function agreeDraw(ctx: MutationCtx, game: Doc<"games">): Promise<void> {
 }
 
 /**
- * FR-43/44/46. Rejected outright for online games, and — like every other
- * mutation — for a game that has already ended: `finalizeGame` has committed Elo,
+ * FR-43/44/46. Rejected outright for online games, and - like every other
+ * mutation - for a game that has already ended: `finalizeGame` has committed Elo,
  * the W/L/D record and a `ratingHistory` row by then, and reopening the game would
  * leave all three describing a game that is live again (FR-49). Rebuilds the
  * position by replaying the truncated SAN list, permanently unrates the game,
@@ -663,13 +663,13 @@ export const presenceFor = query({
 });
 
 /**
- * FR-32. Writes to the `presence` table, NEVER to the game document — patching
+ * FR-32. Writes to the `presence` table, NEVER to the game document - patching
  * `games` every 15 s would push a new doc to every subscriber (§I-2).
  *
  * Scoped, not "any signed-in player may write a row on any game" (CONVEX-AUTHZ-07):
  *
  *  - participants always count, in every mode;
- *  - a non-participant is only ever the audience of an ONLINE game — that is what
+ *  - a non-participant is only ever the audience of an ONLINE game - that is what
  *    keeps `spectatorCount` (FR-8) working. `ai` and `local` games have no audience,
  *    so a stranger cannot plant presence rows on someone else's private board;
  *  - a finished game takes no heartbeats, but that is a silent no-op rather than a
@@ -737,7 +737,7 @@ export const useHint = mutation({
 });
 
 /**
- * docs/PRO_TUTOR.md §5.3. The tutor's per-game spend guard — NOT the Pro gate.
+ * docs/PRO_TUTOR.md §5.3. The tutor's per-game spend guard - NOT the Pro gate.
  *
  * Clerk cannot put `pla`/`fea` in a custom JWT template, so Convex never sees the
  * caller's plan (docs/research/clerk-billing.md). Pro is enforced in the Next.js
@@ -748,17 +748,17 @@ export const useHint = mutation({
  * may ask the tutor about a game they are SPECTATING, and about one that is already
  * over. But "no seat check" is not "no check". A `mutation` is public API, game ids
  * are published by `listLive` to the spectate list and the landing ticker, and the
- * counter never resets — so without this, any signed-in member could call it 40 times
+ * counter never resets - so without this, any signed-in member could call it 40 times
  * on a stranger's game and permanently switch a PAID feature off for the two people
  * actually playing it. The rule is §5.2's, and the same one `heartbeat` already
  * applies (CONVEX-AUTHZ-07):
  *
  *  - participants always, in every mode;
- *  - anyone else only on an ONLINE game — `ai` and `local` games have no audience at
+ *  - anyone else only on an ONLINE game - `ai` and `local` games have no audience at
  *    all, so a stranger can never touch someone's private board;
  *  - and while that online game is still ACTIVE, only if they are really in the room:
  *    a `presence` row, which is what §5.2's "spectator with access" means. That is the
- *    case the attack needs — a game in progress whose players would be left with the
+ *    case the attack needs - a game in progress whose players would be left with the
  *    quota copy for the rest of it. Once the game is over there is no live feature
  *    left to break, and §1 sells the tutor for "replay" as well as for spectating, so
  *    a member reviewing a finished game they did not play is not asked for presence
@@ -868,7 +868,7 @@ export const sweepAbandoned = internalMutation({
     const now = Date.now();
     const cutoff = now - ABANDON_TIMEOUT_MS;
 
-    /* 1 — abandonment */
+    /* 1 - abandonment */
     const stale = await ctx.db
       .query("games")
       .withIndex("by_mode_and_status_and_lastMoveAt", (q) =>
@@ -902,7 +902,7 @@ export const sweepAbandoned = internalMutation({
       );
     }
 
-    /* 2 — TTL for solo games */
+    /* 2 - TTL for solo games */
     const ttlCutoff = now - STALE_GAME_TTL_MS;
     for (const mode of ["ai", "local"] as const) {
       const forgotten = await ctx.db

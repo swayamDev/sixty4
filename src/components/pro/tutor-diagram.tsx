@@ -3,7 +3,7 @@
 // ui-kit with one annotation layer drawn over it in the same tones the real boards
 // use (`ANNOTATION_TONE_TOKEN`, src/lib/tutor/annotations.ts).
 //
-// This is a MARKETING diagram, not the board's annotation layer — that one lives in
+// This is a MARKETING diagram, not the board's annotation layer - that one lives in
 // src/components/board2d and src/components/board3d and is another builder's. What
 // the two share is the tone vocabulary and the geometry helper (`gridPosition`), so
 // a square marked "threat" here is the same colour as a square marked "threat" in a

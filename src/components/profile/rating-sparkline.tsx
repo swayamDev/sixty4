@@ -1,6 +1,6 @@
 "use client";
 // src/components/profile/rating-sparkline.tsx  [U4]
-// The rating card of UI_REDESIGN §6. FR-53: hand-rolled inline SVG — no chart
+// The rating card of UI_REDESIGN §6. FR-53: hand-rolled inline SVG - no chart
 // library, no extra dependency.
 import { useState } from "react";
 import { useQuery } from "convex/react";
@@ -96,7 +96,7 @@ export interface RatingSparklineViewProps {
   gameCount: number;
 }
 
-/** Pure — the /dev/pages harness renders this with a fixed series. */
+/** Pure - the /dev/pages harness renders this with a fixed series. */
 export function RatingSparklineView({
   pool,
   onPoolChange,

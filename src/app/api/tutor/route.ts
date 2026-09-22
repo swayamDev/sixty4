@@ -1,8 +1,8 @@
-// src/app/api/tutor/route.ts — docs/PRO_TUTOR.md §5
+// src/app/api/tutor/route.ts - docs/PRO_TUTOR.md §5
 //
 // The tutor's turn. Everything that can refuse the request lives in
 // `src/lib/tutor/guard.ts` (and is unit-tested there); what is left here is the one
-// thing that cannot be unit-tested — the model call and the stream back.
+// thing that cannot be unit-tested - the model call and the stream back.
 //
 // Runtime: Node, which is the App Router's default in this version of Next (the Edge
 // runtime is deprecated; `node_modules/next/dist/docs/01-app/03-api-reference/
@@ -53,7 +53,7 @@ export async function POST(request: Request): Promise<Response> {
   const messages = validated.data;
 
   // `convertToModelMessages` throws on a conversation the SDK cannot express as model
-  // messages — a tool call left without an output, say. That is a bug in the panel
+  // messages - a tool call left without an output, say. That is a bug in the panel
   // rather than something a member can type, but it must not surface as a 500.
   let modelMessages: Awaited<ReturnType<typeof convertToModelMessages>>;
   try {
@@ -88,7 +88,7 @@ export async function POST(request: Request): Promise<Response> {
   // whoever is reading the response, so a slow or stalled reader cannot leave the tool
   // loop half-run. `result.stream` tees, so this consumer and the UI stream below get
   // their own copies. A member who closes the panel aborts `request.signal` and the
-  // turn stops there — the conversation is not persisted, so finishing it buys nothing.
+  // turn stops there - the conversation is not persisted, so finishing it buys nothing.
   void result.consumeStream();
 
   return createUIMessageStreamResponse({

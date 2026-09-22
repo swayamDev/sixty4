@@ -1,6 +1,6 @@
 // src/lib/engine/parse-uci.ts
 //
-// UCI output parser shared by BOTH shipped builds — stockfish@18.0.8 lite-single (the
+// UCI output parser shared by BOTH shipped builds - stockfish@18.0.8 lite-single (the
 // default) and stockfish@11.0.0 (the no-SIMD fallback). See docs/research/stockfish.md
 // §5 (SF18) and §11.2 (SF11).
 // Every line the worker emits is a plain string. Only two line shapes matter:
@@ -93,13 +93,13 @@ export function parseInfoLine(line: string): PvLine | null {
       }
       case "lowerbound":
       case "upperbound":
-        // Partial result from an aborted window search — the ranking it implies
+        // Partial result from an aborted window search - the ranking it implies
         // is not trustworthy, so the whole line is discarded (stockfish.md §5).
         return null;
       case "pv": {
         // Take moves until the first non-move token. This build (the ddugovic /
         // chess.com fork shipped as stockfish@11.0.0) appends `bmc <float>` AFTER
-        // the pv — verified live: "… pv c7c5 b1c3 … f1c4 bmc 5.09171".
+        // the pv - verified live: "… pv c7c5 b1c3 … f1c4 bmc 5.09171".
         const moves: string[] = [];
         for (let j = i + 1; j < tokens.length; j++) {
           if (!isUciMove(tokens[j])) break;

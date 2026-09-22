@@ -85,7 +85,7 @@ export function BoardSurface(props: BoardViewProps) {
       // fills the whole board column, so its edges land on the column's own seams
       // (the nameplates above and below, the sidebar hairline) and the room reads as
       // the column's background. No mask: the owner asked for the room to stay
-      // sharp to the edge (2026-09-11) — the earlier dissolve smeared the backdrop
+      // sharp to the edge (2026-09-11) - the earlier dissolve smeared the backdrop
       // into a brown halo, worst on the ivory ground of the light theme. The 2D
       // branch below keeps the square: its outer files and ranks are information.
       <div className="size-full overflow-hidden [&>*]:min-h-0">
@@ -100,7 +100,7 @@ export function BoardSurface(props: BoardViewProps) {
     );
   }
   return (
-    // §4.2: the shell keeps the square box around THIS branch only — the 2D board
+    // §4.2: the shell keeps the square box around THIS branch only - the 2D board
     // stays a centred square with square corners, while the 3D canvas above fills
     // the whole column.
     <div className="grid size-full place-items-center">

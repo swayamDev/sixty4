@@ -1,6 +1,6 @@
 "use client";
 // src/components/play/roving.ts  [U5]
-// Arrow keys move focus inside a group of buttons — the persona roster, the
+// Arrow keys move focus inside a group of buttons - the persona roster, the
 // colour segments, the room row. Focus only: selection still needs Enter, Space
 // or a click, so a keyboard player can look along the row without committing to
 // an opponent (Pro Max "Keyboard Navigation": every control operable, tab order

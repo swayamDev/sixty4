@@ -2,14 +2,14 @@
 // The three points of §1, verbatim, as a ledger rather than three matching cards:
 // full-width rows on a seam hairline, the point on the left and the drawing it
 // describes on the right. Every position is real and every claim beside it is true of
-// the board next to it — the diagrams are the product, not an illustration of it.
+// the board next to it - the diagrams are the product, not an illustration of it.
 import { Display, Section } from "@/components/ui-kit";
 import { TutorDiagram, type TutorDiagramProps } from "@/components/pro/tutor-diagram";
 
 export interface Point {
   /** §1, verbatim. */
   title: string;
-  /** One line about the position beside it — the board, not the product. */
+  /** One line about the position beside it - the board, not the product. */
   note: string;
   diagram: Omit<TutorDiagramProps, "className">;
 }
@@ -68,7 +68,7 @@ export function ProPoints() {
             <div className="grid grid-cols-1 items-center gap-6 py-10 lg:grid-cols-12 lg:gap-x-8 lg:py-12">
               <div className="lg:col-span-6 lg:col-start-1">
                 {/* headline-sm: one step under the section title, flat at every
-                    width — these are points, not another page header. */}
+                    width - these are points, not another page header. */}
                 <h3 className="font-display text-[2rem] leading-[1.1] tracking-[-0.01em] text-balance text-foreground">
                   {point.title}
                 </h3>
@@ -77,7 +77,7 @@ export function ProPoints() {
                 </p>
               </div>
 
-              {/* Flush with the heading's left edge below lg — a square object centred
+              {/* Flush with the heading's left edge below lg - a square object centred
                   under left-aligned type reads as two unrelated blocks. */}
               <div className="flex justify-start lg:col-span-5 lg:col-start-8 lg:justify-end">
                 <TutorDiagram {...point.diagram} />

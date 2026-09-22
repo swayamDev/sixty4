@@ -11,7 +11,7 @@ import { api } from "../../convex/_generated/api";
 
 /**
  * `enabled` should be false for finished games and while the viewer is not
- * signed in — `games.heartbeat` requires a provisioned player.
+ * signed in - `games.heartbeat` requires a provisioned player.
  */
 export function useHeartbeat(gameId: GameId, enabled: boolean): void {
   const heartbeat = useMutation(api.games.heartbeat);

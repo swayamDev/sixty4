@@ -6,14 +6,14 @@ import type {
 } from "./types";
 import { DEFAULT_FEN, PIECE_VALUES } from "./constants";
 
-/** Replay a SAN list. Throws on the first illegal SAN — callers treat that as a bug. */
+/** Replay a SAN list. Throws on the first illegal SAN - callers treat that as a bug. */
 export function replay(moves: string[]): Chess {
   const chess = new Chess();
   for (const san of moves) chess.move(san);
   return chess;
 }
 
-/** FEN after `ply` half-moves (ply 0 = start position). O(ply) — memoise per game. */
+/** FEN after `ply` half-moves (ply 0 = start position). O(ply) - memoise per game. */
 export function fenAtPly(moves: string[], ply: number): string {
   if (ply <= 0) return DEFAULT_FEN;
   return replay(moves.slice(0, ply)).fen();
@@ -27,7 +27,7 @@ export function legalTargetsFor(fen: string, from: SquareId): LegalTarget[] {
     const existing = seen.get(to);
     const target: LegalTarget = {
       to,
-      // NOTE: isCapture() is false for en passant (chessjs.md §5) — use `captured`.
+      // NOTE: isCapture() is false for en passant (chessjs.md §5) - use `captured`.
       isCapture: Boolean(m.captured),
       isPromotion: m.isPromotion(),
       isCastle: m.isKingsideCastle() || m.isQueensideCastle(),
@@ -38,7 +38,7 @@ export function legalTargetsFor(fen: string, from: SquareId): LegalTarget[] {
   return [...seen.values()];
 }
 
-/** FR-11: a promotion picker must be shown before the move is submitted —
+/** FR-11: a promotion picker must be shown before the move is submitted -
  *  chess.js has no implicit auto-queen and rejects the move without it. */
 export function needsPromotion(fen: string, from: SquareId, to: SquareId): boolean {
   return new Chess(fen)

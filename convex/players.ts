@@ -1,4 +1,4 @@
-// convex/players.ts — FR-1…FR-5, FR-15, FR-21e/j/k/l, FR-31
+// convex/players.ts - FR-1…FR-5, FR-15, FR-21e/j/k/l, FR-31
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import type { MutationCtx } from "./_generated/server";
@@ -24,7 +24,7 @@ const HEX_COLOUR = /^#[0-9a-fA-F]{6}$/;
 /**
  * `usernameLower` has to be collision-free: three public queries resolve a profile
  * through `by_usernameLower`, and two rows sharing a name would make all of them
- * throw. Clerk only guarantees uniqueness for the username claim — `name` (the
+ * throw. Clerk only guarantees uniqueness for the username claim - `name` (the
  * display name we fall back to) is not unique, so the candidate is checked here
  * and disambiguated with the Clerk subject before it is written.
  */
@@ -59,7 +59,7 @@ function assertHexColours(colors: {
 }
 
 /**
- * Upsert the caller's row from their Clerk identity (FR-3). Idempotent — the
+ * Upsert the caller's row from their Clerk identity (FR-3). Idempotent - the
  * client calls it once per session. No client-supplied user id is ever accepted
  * (FR-5): everything comes from `ctx.auth.getUserIdentity()`.
  */
@@ -134,7 +134,7 @@ export const me = query({
   },
 });
 
-/** Public profile projection — never leaks settings or `clerkId` (FR-53). */
+/** Public profile projection - never leaks settings or `clerkId` (FR-53). */
 export const getByUsername = query({
   args: { username: v.string() },
   returns: v.union(vPlayerProfile, v.null()),

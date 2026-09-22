@@ -31,12 +31,12 @@ export interface FirstFrameProps {
 /**
  * Calls back once, after the first frame has genuinely been drawn (§10.4: the landing
  * fades its canvas in on this, and board-3d.tsx drops its skeleton on it). `useFrame`
- * runs BEFORE `gl.render()`, so the callback is deferred to the next macrotask — by
+ * runs BEFORE `gl.render()`, so the callback is deferred to the next macrotask - by
  * then `update()` has returned and the frame is in the drawing buffer.
  *
  * It is deliberately NOT deferred with `requestAnimationFrame`, which is what this used
  * to do. A board can render a frame in a document the browser is not servicing
- * animation frames for — <FrameloopGate> below forces exactly that — and an rAF
+ * animation frames for - <FrameloopGate> below forces exactly that - and an rAF
  * deferral there never fires, so the signal that the canvas has something on it would
  * be withheld precisely when the skeleton most needs to come down.
  *
@@ -121,7 +121,7 @@ export interface FrameloopGateProps {
  * 1. Everything up to the first one. r3f stops its requestAnimationFrame entirely once a
  *    "demand" root has no invalidated frames left (`loop()` cancels itself when
  *    `repeat === 0`), and switching the `frameloop` prop back to "always" only writes
- *    state — nothing restarts the rAF. The ask has to come from inside the Canvas so it
+ *    state - nothing restarts the rAF. The ask has to come from inside the Canvas so it
  *    runs after `configure()` has applied the new frameloop; and because the scene
  *    itself mounts behind a <Suspense>, one ask at this component's own mount is too
  *    early to be the one that counts. So while `painted` is false it keeps asking.
@@ -130,12 +130,12 @@ export interface FrameloopGateProps {
  *    over the board and invalidate the root as a side effect of raycasting.
  * 3. The document becoming visible again, and every unpause.
  *
- * WHY ASKING IS NOT ENOUGH — the bug this component exists to close.
+ * WHY ASKING IS NOT ENOUGH - the bug this component exists to close.
  * `invalidate()` does not render. It raises a flag and, if r3f's loop is not already
  * running, schedules a requestAnimationFrame. That loop and its `running` flag are
  * MODULE-LEVEL and shared by every root on the page. So when a board mounts in a
- * document the browser is not servicing animation frames for — a background tab, an
- * occluded window, a hidden preview pane — r3f schedules its frame, the callback is
+ * document the browser is not servicing animation frames for - a background tab, an
+ * occluded window, a hidden preview pane - r3f schedules its frame, the callback is
  * never delivered, and `running` stays true with nothing pending. From that moment
  * `invalidate()` is a no-op for the rest of the page's life: the assets finish loading,
  * React commits the whole scene, the canvas is correctly sized, `isContextLost()` is
@@ -180,7 +180,7 @@ export function FrameloopGate({ paused, signature, painted = false }: FrameloopG
     let cancel = requestFrame();
     // Deliberately not gated on `document.visibilityState`. A board that mounts in a
     // background tab is exactly the case that strands r3f's loop, and a hidden document
-    // is where the blank ring is BUILT — the player only discovers it on arrival. The
+    // is where the blank ring is BUILT - the player only discovers it on arrival. The
     // cost is bounded: while the scene is still suspended a forced frame draws an empty
     // scene, and the moment it is not, one frame paints the board and this stops.
     const retry = window.setInterval(() => {

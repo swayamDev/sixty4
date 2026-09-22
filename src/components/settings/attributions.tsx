@@ -3,7 +3,7 @@ import { PIECE_MODEL_CREDIT } from "@/lib/constants";
 /**
  * MANDATORY (§I-7). The piece models are CC-BY 3.0, not CC0, so this credit is a
  * licence obligation and must stay reachable in the UI. The strings come from
- * `PIECE_MODEL_CREDIT` in `src/lib/constants.ts` — do not retype them; the full
+ * `PIECE_MODEL_CREDIT` in `src/lib/constants.ts` - do not retype them; the full
  * text lives in `public/models/ATTRIBUTION.md`.
  *
  * The Poly Haven HDRIs are CC0 and need no attribution; the photographers are
@@ -63,7 +63,7 @@ export function Attributions() {
         <ul className="mt-2 grid gap-1 text-xs text-muted-foreground">
           {HDRI_CREDITS.map((credit) => (
             <li key={credit.room}>
-              <span className="text-foreground">{credit.room}</span> — {credit.asset} by{" "}
+              <span className="text-foreground">{credit.room}</span>: {credit.asset} by{" "}
               {credit.author}
             </li>
           ))}

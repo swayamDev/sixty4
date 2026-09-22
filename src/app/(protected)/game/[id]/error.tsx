@@ -20,7 +20,7 @@ export default function GameError({
       <h1 className="text-xl font-semibold">This game could not be loaded</h1>
       <p className="text-sm text-muted-foreground">
         The live connection to this game dropped, or it is not a game you can open. The position
-        itself is safe on the server — trying again usually brings it straight back.
+        itself is safe on the server. Trying again usually brings it straight back.
       </p>
       <div className="flex gap-2">
         <Button onClick={reset}>Try again</Button>

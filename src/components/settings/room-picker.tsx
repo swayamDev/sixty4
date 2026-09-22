@@ -23,27 +23,27 @@ import type { PlayerSettings, RoomColors, RoomPresetId } from "@/lib/types";
 import { describeConvexError } from "@/components/providers/convex-errors";
 
 /**
- * FR-21m — "preset switching is instant (assets preloaded on the settings drawer open)".
+ * FR-21m - "preset switching is instant (assets preloaded on the settings drawer open)".
  *
- * TWO layers, both driven by INTENT — never by a bare mount. §I-8 caps what a page may
+ * TWO layers, both driven by INTENT - never by a bare mount. §I-8 caps what a page may
  * download speculatively, and `/settings` has no canvas and no drawer, so its trigger is
  * the first hover/focus on the room list rather than `useEffect(..., [])`: a visitor who
  * came for the sound toggle must not pay ~8 MB (5 HDRIs + the three/drei chunk) for it.
  *
- * 1. `preloadRoomAssets()` — the bulk warm, fired once per session from the in-game
+ * 1. `preloadRoomAssets()` - the bulk warm, fired once per session from the in-game
  *    settings drawer opening (game-shell) or the first room-list hover/focus here. It
  *    pulls the 3D chunk with a DYNAMIC import (so `/settings` still ships no three.js in
  *    its own bundle) and then uses drei's documented preload APIs:
  *    `useEnvironment.preload({ files })` for all five HDRIs and `useGLTF.preload()` for
  *    the piece GLB, via `preloadBoard3D` (r3f-drei.md §3/§4). Those populate drei's own
  *    loader cache, so a later preset switch inside the scene neither re-fetches nor
- *    re-decodes — an HTTP-cache-only warm would still pay the RGBE decode.
+ *    re-decodes - an HTTP-cache-only warm would still pay the RGBE decode.
  *    ~6.9 MB of HDRI + 96 KB of GLB; `next.config.ts` serves `/hdri/*` with
  *    `max-age=2592000`, so repeat sessions are cache hits. Skipped entirely on Save-Data
- *    and on 3g/2g/slow-2g connections (see §I-8) — those players keep layer 2 only, and
+ *    and on 3g/2g/slow-2g connections (see §I-8) - those players keep layer 2 only, and
  *    every room still works, it just downloads on demand.
  *
- * 2. `prefetchHdri()` — the per-room warm on hover/focus/selection, for exactly the
+ * 2. `prefetchHdri()` - the per-room warm on hover/focus/selection, for exactly the
  *    connections (and the repeat hovers) that layer 1 does not cover.
  */
 const warmed = new Set<string>();
@@ -80,7 +80,7 @@ let roomAssetsPreloaded = false;
  * links.
  *
  * The HDRIs are NOT marked warmed here. `preloadBoard3D` resolves as soon as the chunk
- * is imported — `useEnvironment.preload`/`useGLTF.preload` are fire-and-forget, so a
+ * is imported - `useEnvironment.preload`/`useGLTF.preload` are fire-and-forget, so a
  * file that 404s or dies on a flaky connection never reaches the `catch`. Marking them
  * up front therefore suppressed the hover retry permanently for the very users it
  * exists for; `prefetchHdri` owns the `warmed` set alone, and a duplicate request for
@@ -144,7 +144,7 @@ export function RoomPicker({ save }: { save: (patch: Partial<PlayerSettings>) =>
   function choose(preset: RoomPresetId) {
     setRoomPreset(preset);
     if (preset === "custom") {
-      // Custom is Minimal White's rig with the player's colours — `background:
+      // Custom is Minimal White's rig with the player's colours - `background:
       // "colour"` only drops the skybox, the HDRI is still the IBL source
       // (board3d/room.tsx). Warm it like any other preset or the first game after
       // picking Custom mounts unlit until minimal.hdr downloads.
@@ -172,7 +172,7 @@ export function RoomPicker({ save }: { save: (patch: Partial<PlayerSettings>) =>
     }
     if (file.size > MAX_ROOM_IMAGE_BYTES) {
       toast.error(
-        `That image is ${(file.size / 1024 / 1024).toFixed(1)} MB — the limit is ${
+        `That image is ${(file.size / 1024 / 1024).toFixed(1)} MB. The limit is ${
           MAX_ROOM_IMAGE_BYTES / 1024 / 1024
         } MB.`,
       );

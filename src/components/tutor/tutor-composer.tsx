@@ -2,7 +2,7 @@
 // src/components/tutor/tutor-composer.tsx
 // Asking the tutor a question: context-aware suggestions submit immediately,
 // with a context line that says which position
-// the answer will be about, and a field with a visible label — Enter sends,
+// the answer will be about, and a field with a visible label - Enter sends,
 // Shift+Enter starts a new line.
 import { useId, useRef } from "react";
 import { SendHorizontalIcon } from "lucide-react";
@@ -55,7 +55,7 @@ export function TutorComposer({
             }}
             // A GHOST pill: hairline, no fill, no tone dot. The annotation chips in
             // the bubbles above are filled and carry a dot because they report state
-            // — "this drawing is on the board" — and toggle it. These compose a
+            // - "this drawing is on the board" - and toggle it. These compose a
             // question. They were the same object at 28px on the same cellar fill,
             // and "Show me the threats" appeared as both, verbatim, on one screen.
             className={cn(
@@ -81,7 +81,7 @@ export function TutorComposer({
           rows={1}
           value={value}
           // `readOnly`, not `disabled`. A disabled textarea is dropped from the tab
-          // order the instant it becomes disabled — which happens the moment an
+          // order the instant it becomes disabled - which happens the moment an
           // answer starts streaming, with the member's focus still in it, so focus
           // fell to <body>, outside the overlay's own focus trap, mid-answer.
           // `readOnly` + `aria-disabled` says the same thing to AT and keeps the

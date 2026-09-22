@@ -1,6 +1,6 @@
 // src/components/board3d/showcase.ts  [U3]
 // The additive showcase contract of docs/UI_REDESIGN.md §10.4. It lives in its own
-// module — free of three, drei and "use client" — so U1 (landing) and U4 (settings
+// module - free of three, drei and "use client" - so U1 (landing) and U4 (settings
 // preview) can `import type { Board3DShowcase }` without pulling the 3D chunk in.
 import type { CameraPresetId, ResolvedQualityTier, RoomColors, RoomPresetId } from "@/lib/types";
 
@@ -16,7 +16,7 @@ export interface Board3DShowcase {
   roomPreset: RoomPresetId;
   /** Custom square/background colours; only meaningful with `roomPreset: "custom"`. */
   roomColors?: RoomColors | null;
-  /** Default `"cinematic"` — the slow idle orbit that never exits on interaction. */
+  /** Default `"cinematic"` - the slow idle orbit that never exits on interaction. */
   cameraPreset?: CameraPresetId;
   /** Default `"medium"`: the hero is scenery, not the game (§3). */
   tier?: ResolvedQualityTier;
@@ -47,7 +47,7 @@ export const SHOWCASE_DEFAULTS = {
   maxDpr: SHOWCASE_MAX_DPR,
 } as const satisfies Omit<ResolvedShowcase, "roomPreset" | "roomColors">;
 
-/** Fills the optional fields in. Pure — safe to call during render. */
+/** Fills the optional fields in. Pure - safe to call during render. */
 export function resolveShowcase(showcase: Board3DShowcase): ResolvedShowcase {
   return {
     roomPreset: showcase.roomPreset,

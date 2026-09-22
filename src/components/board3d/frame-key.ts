@@ -4,7 +4,7 @@
 // Why it exists: r3f only guarantees a redraw for a `frameloop="always"` root whose loop
 // is actually running. A root that has dropped to "demand" (the §10.4 offscreen pause),
 // or whose shared render loop has stalled (see the long note in frame-signals.tsx),
-// renders exactly the frames it is asked for — and nobody asks on its behalf. Feeding
+// renders exactly the frames it is asked for - and nobody asks on its behalf. Feeding
 // this key to <FrameloopGate> turns "what is on the board changed" into an explicit
 // request for a frame, so a new position reaches the screen without the player moving
 // the pointer to make it happen.
@@ -17,7 +17,7 @@ import type { BoardViewProps, CameraPresetId, RoomColors } from "@/lib/types";
  * The per-viewer view settings that change what the scene looks like without changing
  * the position: the room and its colours, the quality tier, post-processing, and where
  * the camera is being sent. Passed separately from `BoardViewProps` because the board
- * contract (§D.11) deliberately knows nothing about them — Board3D reads them from the
+ * contract (§D.11) deliberately knows nothing about them - Board3D reads them from the
  * ui-store, or from the showcase prop.
  */
 export interface BoardViewSettings {
@@ -32,7 +32,7 @@ export interface BoardViewSettings {
 }
 
 /**
- * Cheap on purpose — it runs on every render of the board. The FEN already covers piece
+ * Cheap on purpose - it runs on every render of the board. The FEN already covers piece
  * placement and the side to move, so the board half only needs the things the FEN cannot
  * see: which square is lit, which markers are down, whether the promotion overlay has
  * taken the board out of play, and which way round it is.
@@ -56,7 +56,7 @@ export function boardFrameKey(board: BoardViewProps, view?: BoardViewSettings): 
     board.interactive ? "i" : "-",
     board.animate ? "a" : "-",
     // The tutor's drawings are part of what the scene shows (PRO_TUTOR §4), and a new
-    // drawing arrives without the position changing — so the FEN cannot stand in for
+    // drawing arrives without the position changing - so the FEN cannot stand in for
     // it. `annotationsKey` is that fingerprint, and "-" when the board is clean.
     annotationsKey(board.annotations),
   ];

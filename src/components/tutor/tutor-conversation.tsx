@@ -21,7 +21,7 @@ const BOTTOM_SLACK = 24;
 
 export interface TutorConversationProps {
   messages: TutorUIMessage[];
-  /** SAN, oldest first — turns a ply into "after 12…Nf6". */
+  /** SAN, oldest first - turns a ply into "after 12…Nf6". */
   moves: string[];
   /** The ply the board is showing, for a message that carries no ply of its own. */
   ply: number;
@@ -33,7 +33,7 @@ export interface TutorConversationProps {
   className?: string;
 }
 
-/** "after 12…Nf6" — the half-move the answer is about, in the scoresheet's own hand. */
+/** "after 12…Nf6" - the half-move the answer is about, in the scoresheet's own hand. */
 export function plyLabel(moves: string[], ply: number): string | undefined {
   if (ply <= 0) return "from the start";
   const san = moves[ply - 1];
@@ -53,7 +53,7 @@ function plyOf(message: TutorUIMessage): number | null {
 }
 
 /**
- * The plain text of a message — the tutor's words without its drawings.
+ * The plain text of a message - the tutor's words without its drawings.
  *
  * Joined with a blank line, not with nothing: a turn that draws mid-answer streams
  * one text part per STEP, and concatenating them ran the last sentence of one step

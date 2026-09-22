@@ -1,4 +1,4 @@
-// src/lib/errors.ts  [shared — integration]
+// src/lib/errors.ts  [shared - integration]
 /**
  * THE single Convex-error-code → user-copy map.
  *
@@ -8,16 +8,16 @@
  * `[CONVEX M(games:makeMove)] [Request ID: …] Server Error\nUncaught Error: illegal-move\n  at …`,
  * so codes are matched as **substrings** of the message, never compared for equality.
  *
- * Two layers used to keep their own copies of this table — `providers/convex-errors.ts`
- * for the lobby/settings toasts and `useGameController` for the move path — which drifted
+ * Two layers used to keep their own copies of this table - `providers/convex-errors.ts`
+ * for the lobby/settings toasts and `useGameController` for the move path - which drifted
  * (same code, two different sentences). They now both read this module:
  *
- * - `describeConvexError()` — the toast layer (lobby, matchmaking, settings, room picker).
- * - `describeGameError()`   — the in-game layer; identical except for the handful of codes
+ * - `describeConvexError()` - the toast layer (lobby, matchmaking, settings, room picker).
+ * - `describeGameError()`   - the in-game layer; identical except for the handful of codes
  *   in `GAME_OVERRIDES`, where the game board says something more specific.
  *
  * Every string that either layer showed before the merge is preserved verbatim, because
- * `src/lib/__tests__/errors.test.ts` asserts them — and that same test re-reads `convex/**`
+ * `src/lib/__tests__/errors.test.ts` asserts them - and that same test re-reads `convex/**`
  * and fails if a newly thrown code has no copy here.
  */
 
@@ -77,7 +77,7 @@ const COPY: Record<ConvexErrorCode, string> = {
   "invalid-colour": "Those colours are not valid hex values.",
   "invalid-message-length": "Write a message between 1 and 1,000 characters.",
   "invalid-ply": "That position is no longer part of this game.",
-  "invalid-room-image": "That image is not usable — pick a PNG or JPEG under 5 MB.",
+  "invalid-room-image": "That image is not usable - pick a PNG or JPEG under 5 MB.",
   "no-draw-offer": "There is no draw offer to answer.",
   "not-a-participant": "You are watching this game, not playing it.",
   "not-ai-turn": "It is not the AI's turn.",
@@ -85,7 +85,7 @@ const COPY: Record<ConvexErrorCode, string> = {
   "not-your-turn": "It is not your turn.",
   "online-chat-only": "Player chat is available in online games.",
   "promotion-required": "Choose a promotion piece first.",
-  "stale-ai-move": "The position moved on — nothing was applied.",
+  "stale-ai-move": "The position moved on - nothing was applied.",
   // docs/PRO_TUTOR.md §3.5, with the cap read from the constant so the sentence and
   // the mutation can never disagree about the number.
   "tutor-limit": `The tutor has answered ${MAX_TUTOR_TURNS_PER_GAME} questions in this game. Start a new game to keep going.`,
@@ -106,7 +106,7 @@ const GAME_OVERRIDES: Partial<Record<ConvexErrorCode, string>> = {
 };
 
 /**
- * Longest code first, so a code that contains another (none do today — the test keeps it
+ * Longest code first, so a code that contains another (none do today - the test keeps it
  * that way) could never be shadowed by its shorter neighbour.
  */
 const MATCH_ORDER: readonly ConvexErrorCode[] = [...CONVEX_ERROR_CODES].sort(

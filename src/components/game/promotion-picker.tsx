@@ -33,7 +33,7 @@ export function PromotionPicker({ prompt, onChoose }: PromotionPickerProps) {
       <DialogContent showCloseButton={false} className="sm:max-w-xs">
         <DialogHeader>
           <DialogTitle>
-            {/* headline-sm — the app-frame overlay step of DESIGN.md's ramp. */}
+            {/* headline-sm - the app-frame overlay step of DESIGN.md's ramp. */}
             <Display level={4} as="span" className="block">
               Promote your pawn
             </Display>

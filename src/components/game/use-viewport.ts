@@ -26,7 +26,7 @@ function matches(query: string): boolean {
     : false;
 }
 
-/** True on phones and small tablets — the §5.3 layout. */
+/** True on phones and small tablets - the §5.3 layout. */
 export function useIsCompact(): boolean {
   const getSnapshot = useCallback(() => matches(COMPACT_QUERY), []);
   return useSyncExternalStore(subscribeCompact, getSnapshot, () => false);

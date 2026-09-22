@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 const NOOP_SUBSCRIBE = () => () => {};
 
 /**
- * `false` on the server and on the hydrating render, `true` afterwards — the
+ * `false` on the server and on the hydrating render, `true` afterwards - the
  * `ThemeToggle` pattern (§D.12 rule 6: no setState in an effect just to say
  * "mounted"). Guards anything that must not exist until the client is ready,
  * such as the hero's WebGL canvas.
@@ -39,7 +39,7 @@ export function useDocumentVisible(): boolean {
 /**
  * A media query as a boolean. `false` during SSR and on the hydrating render, so
  * it may only *upgrade* an experience (a bigger quality tier, a hover affordance),
- * never change layout — that stays in CSS, where there is no hydration gap.
+ * never change layout - that stays in CSS, where there is no hydration gap.
  */
 export function useMediaQuery(query: string): boolean {
   return useSyncExternalStore(

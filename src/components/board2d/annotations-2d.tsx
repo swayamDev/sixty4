@@ -47,11 +47,11 @@ function points(list: AnnotationPoint[]): string {
  * One arrow: the tone at full strength inside two casing rings (see
  * `ARROW_CASING_WIDTH` in src/lib/tutor/annotations.ts for why there are two).
  *
- * It is drawn as three `<polygon>`s from `arrowPolygon` — the very shapes the 3D
- * board extrudes — rather than as a `<line>` with a `<marker>`. The marker was the
+ * It is drawn as three `<polygon>`s from `arrowPolygon` - the very shapes the 3D
+ * board extrudes - rather than as a `<line>` with a `<marker>`. The marker was the
  * one place the two boards disagreed: an SVG marker's default `preserveAspectRatio`
  * scaled its 10x10 viewBox uniformly, so the 2D head came out 0.34 across where the
- * 3D head is ARROW_HEAD_WIDTH (0.46) — the same annotation, two shapes. Sharing the
+ * 3D head is ARROW_HEAD_WIDTH (0.46) - the same annotation, two shapes. Sharing the
  * polygon removes the seam instead of patching it.
  */
 function ArrowShape({
@@ -66,7 +66,7 @@ function ArrowShape({
   const casing = toneCasingTokens(tone);
   // The RINGS never fade with the step, only the core does. A casing composited at
   // 0.61 over a light square measures 2.4:1 against it, where the same ring at
-  // ARROW_OPACITY measures 3.4:1 — so a line's recession is carried by how solid the
+  // ARROW_OPACITY measures 3.4:1 - so a line's recession is carried by how solid the
   // tone reads, and the shape's edge stays at full strength on every step.
   const edge = ARROW_OPACITY;
   return (
@@ -102,7 +102,7 @@ function ArrowShape({
 
 export interface Annotations2DProps {
   annotations: BoardAnnotations;
-  /** Which seat the grid is drawn from — the only thing that moves a drawing. */
+  /** Which seat the grid is drawn from - the only thing that moves a drawing. */
   orientation: Colour;
   /** False under reduced motion: the drawing is simply there, with no fade. */
   animate: boolean;
@@ -111,7 +111,7 @@ export interface Annotations2DProps {
 export function Annotations2D({ annotations, orientation, animate }: Annotations2DProps) {
   // `useId` is per component instance, so two boards on one page (the harness renders
   // one; the landing showcase can render another) never share the fade's keyframe
-  // name. The colons React puts in the id are legal in HTML but not in XML names —
+  // name. The colons React puts in the id are legal in HTML but not in XML names -
   // strip them, because this markup is also served as XML-ish SVG inside `<svg>`.
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const key = annotationsKey(annotations);
@@ -119,7 +119,7 @@ export function Annotations2D({ annotations, orientation, animate }: Annotations
   // §3: annotations fade in over 160 ms and nothing else moves. The keyframes are
   // declared here, scoped to this instance's id, rather than in globals.css: this layer
   // is the only thing that uses them, and a CSS animation restarted by a remount (the
-  // `key` on the group below) needs no state, no effect and no cascading render — the
+  // `key` on the group below) needs no state, no effect and no cascading render - the
   // drawing is correct in the very first frame the server or the client paints.
   const fade = `${uid}-fade`;
 
@@ -142,7 +142,7 @@ export function Annotations2D({ annotations, orientation, animate }: Annotations
 
       <g key={key} className={animate ? fade : undefined}>
         {/* Square tints: a 45 % wash so the piece on the square still reads, and an
-            inset edge in the same hue pushed away from the square's own value — that
+            inset edge in the same hue pushed away from the square's own value - that
             edge is what carries the mark where tone and walnut share a luminance. */}
         {annotations.squares.map(({ square, tone }) => {
           const { x, y } = squareCentre2d(square, orientation);

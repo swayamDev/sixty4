@@ -2,7 +2,7 @@
 // From what the tutor SAID to what the board SHOWS (docs/PRO_TUTOR.md §6).
 //
 // Pure: no React, no store, no AI SDK client. It reads the typed tool parts of a
-// `TutorUIMessage` and returns `TutorDrawing`s — one per chip in the panel, each
+// `TutorUIMessage` and returns `TutorDrawing`s - one per chip in the panel, each
 // carrying the `BoardAnnotations` that chip puts on the board. The panel decides
 // which of them is active; `useTutorStore` holds the answer; both boards read it.
 //
@@ -42,7 +42,7 @@ export interface TutorDrawing {
 /** Whether the tutor is waiting on the player's engine, and how that ended. */
 export type TutorAnalysisState = "idle" | "running" | "ready" | "engine-busy" | "unavailable";
 
-/** The chip's full text, tone included — colour is never the only signal. */
+/** The chip's full text, tone included - colour is never the only signal. */
 export function drawingChipLabel(drawing: TutorDrawing): string {
   return `${drawing.label} · ${ANNOTATION_TONE_LABEL[drawing.tone]}`;
 }
@@ -51,7 +51,7 @@ function squares(list: readonly string[]): SquareId[] {
   return list.filter((value) => SQUARE_PATTERN.test(value)) as SquareId[];
 }
 
-/** "d5, f7" — long lists stop at five and count the rest, so a chip stays a chip. */
+/** "d5, f7" - long lists stop at five and count the rest, so a chip stays a chip. */
 function nameSquares(list: readonly SquareId[]): string {
   if (list.length <= 6) return list.join(", ");
   return `${list.slice(0, 5).join(", ")} +${list.length - 5}`;
@@ -66,8 +66,8 @@ function emptyAnnotations(): BoardAnnotations {
 /**
  * Every drawing in one tutor message, in the order it was made.
  *
- * `highlightSquares` and `drawArrows` are drawn from the tool INPUT — the server's
- * `execute` only counts them — so they appear the moment the call is complete.
+ * `highlightSquares` and `drawArrows` are drawn from the tool INPUT - the server's
+ * `execute` only counts them - so they appear the moment the call is complete.
  * `showLine` is drawn from the tool OUTPUT, because only chess.js knows which
  * squares a SAN move touches, and an illegal line comes back with a reason.
  */
@@ -295,8 +295,8 @@ export function latestDrawings(
  * What `sourceId` means on the board.
  *
  * A message id selects everything that answer drew (the default, the moment the
- * tutor finishes speaking); a drawing id selects that one chip. Anything else —
- * a stale id from a cleared conversation — resolves to nothing.
+ * tutor finishes speaking); a drawing id selects that one chip. Anything else -
+ * a stale id from a cleared conversation - resolves to nothing.
  */
 export function annotationsForSource(
   messages: readonly TutorUIMessage[],

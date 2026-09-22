@@ -13,7 +13,7 @@ import { cn, focusRing } from "@/lib/ui";
  * Client-side auth-aware header parts.
  *
  * Why client-side (and not the server `<Show>`): calling `auth()` in the root layout
- * (1) forces every route — including `/`, `/leaderboard` and the not-found page — to
+ * (1) forces every route - including `/`, `/leaderboard` and the not-found page - to
  * render dynamically, and (2) throws "Clerk can't detect clerkMiddleware()" whenever
  * a static-extension URL (e.g. `/favicon.png`) 404s, because the proxy matcher
  * deliberately skips those paths. `useAuth()` reads Clerk's client state instead;
@@ -23,7 +23,7 @@ import { cn, focusRing } from "@/lib/ui";
  * catch-all routes (`[[...sign-in]]`, required by Clerk). On Vercel with Next 16.3 the
  * router's segment-tree prefetch for those routes comes back with the catch-all param
  * replaced by the internal `…segments/_tree.segment.rsc` path, the client rejects the
- * mismatched tree and immediately re-prefetches — ~4 requests/second per visible link
+ * mismatched tree and immediately re-prefetches - ~4 requests/second per visible link
  * until it gives up (measured: 280+ requests in 12 s on one page view). The routes are
  * dynamic anyway, so there is nothing useful to prefetch.
  */

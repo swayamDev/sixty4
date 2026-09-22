@@ -64,7 +64,7 @@ export interface MiniBoardProps extends Omit<React.ComponentProps<"svg">, "child
 }
 
 /**
- * A static SVG board from a FEN, using the Board2D glyphs — thumbnails,
+ * A static SVG board from a FEN, using the Board2D glyphs - thumbnails,
  * spectate cards, recent-game rows and the WebGL-less hero fallback (§7).
  */
 export function MiniBoard({
@@ -93,7 +93,7 @@ export function MiniBoard({
     >
       {label ? <title>{label}</title> : null}
 
-      {/* squares — crispEdges so the grid never blurs at 48px */}
+      {/* squares - crispEdges so the grid never blurs at 48px */}
       <g shapeRendering="crispEdges">
         {SQUARES.map((square) => {
           const { row, col } = gridPosition(square, orientation);
@@ -126,7 +126,7 @@ export function MiniBoard({
         })}
       </g>
 
-      {/* pieces — a nested viewport per square keeps the glyph's own 45x45
+      {/* pieces - a nested viewport per square keeps the glyph's own 45x45
           viewBox intact without depending on CSS for geometry */}
       {pieces.map((piece) => {
         const { row, col } = gridPosition(piece.square, orientation);

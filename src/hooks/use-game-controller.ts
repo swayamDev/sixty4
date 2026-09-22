@@ -2,7 +2,7 @@
 // src/hooks/use-game-controller.ts  [P3]
 // THE controller contract (§D.11). It is the only place that calls `api.games.*`
 // mutations for a game; both boards receive `BoardViewProps` and nothing else.
-// There is deliberately NO optimistic update for moves — Convex is authoritative
+// There is deliberately NO optimistic update for moves - Convex is authoritative
 // (§E.3, NFR-4, §I-12).
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Chess, type Move } from "chess.js";
@@ -84,7 +84,7 @@ function toLastMove(stored: GameView["game"]["lastMove"]): LastMove | null {
  * chess.js SAN parsing is case-sensitive even in permissive mode (chessjs.md §4), but
  * the move box sets `autoCapitalize="off"`, so a phone or screen-reader user types
  * "nf3", "o-o" or "e8=q" (NFR-7). Try the text verbatim first, then the one obvious
- * normalisation — never a broad search, so a typo can never become a different move.
+ * normalisation - never a broad search, so a typo can never become a different move.
  */
 function sanCandidates(text: string): string[] {
   const castle = text.replace(/0/g, "O").replace(/[\s-]/g, "").toUpperCase();
@@ -103,7 +103,7 @@ function sanCandidates(text: string): string[] {
 /**
  * True when the typed text NAMED the promotion piece ("b8=Q", "b8Q", "b7b8q").
  * Bare LAN ("b7b8") does not: chess.js answers it with the first generated
- * promotion — a knight — so that move has to go through the picker (FR-11).
+ * promotion - a knight - so that move has to go through the picker (FR-11).
  */
 function namesPromotionPiece(text: string): boolean {
   return /[1-8][qrbnQRBN]$/.test(text.replace(/[=+#!?\s]/g, ""));
@@ -195,8 +195,8 @@ export function useGameController(
   // mutable tracker instance: `derivePieces` is a PURE transition, so calling it in the
   // render body is legal under the React Compiler (`react-hooks/purity`), and a discarded
   // or replayed render can never advance the ids behind React's back (review GF-5).
-  // The state is adjusted during render — the documented "derive state from props"
-  // escape hatch — because the ids must be correct in the SAME commit that shows the new
+  // The state is adjusted during render - the documented "derive state from props"
+  // escape hatch - because the ids must be correct in the SAME commit that shows the new
   // FEN, and `derivePieces` reaches a fixed point after one step (re-deriving a state's
   // own fen/ply returns it by reference), so this settles in exactly one extra render.
   // It is given the rendered PLY, not just `lastMove`: stepping backwards through the
@@ -386,7 +386,7 @@ export function useGameController(
           parsed = new Chess(fen).move(candidate);
           break;
         } catch {
-          // Not this spelling — fall through to the next candidate.
+          // Not this spelling - fall through to the next candidate.
         }
       }
       if (parsed === undefined) {
@@ -476,7 +476,7 @@ export function useGameController(
       await navigator.clipboard.writeText(toPgn());
       toast.success("PGN copied to clipboard");
     } catch {
-      toast.error("Could not copy the PGN — your browser blocked clipboard access.");
+      toast.error("Could not copy the PGN. Your browser blocked clipboard access.");
     }
   }, [toPgn]);
 
@@ -509,7 +509,7 @@ export function useGameController(
     turn,
     interactive,
     // §E.8.6: a review jump of more than one ply is not animated. Live play always
-    // is — `stepped` describes the last review navigation, not the last move.
+    // is - `stepped` describes the last review navigation, not the last move.
     animate: !reducedMotion && !flipping && (reviewPly === null || stepped),
     selectedSquare,
     legalTargets,

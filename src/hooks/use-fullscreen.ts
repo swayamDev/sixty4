@@ -12,7 +12,7 @@
 //    `layoutMode` regardless and treats `active` as a bonus.
 //
 // `active` is read through `useSyncExternalStore` so the server snapshot is
-// `false` and the first client render matches it — nothing shifts on hydration.
+// `false` and the first client render matches it - nothing shifts on hydration.
 import { useCallback, useSyncExternalStore } from "react";
 
 interface PrefixedDocument extends Document {
@@ -75,7 +75,7 @@ export function useFullscreen(): FullscreenApi {
       await target.webkitRequestFullscreen?.();
     } catch {
       // Rejected (no user gesture, or the browser simply refuses). The focus
-      // layout still applies — §5.2 treats real fullscreen as an enhancement.
+      // layout still applies - §5.2 treats real fullscreen as an enhancement.
     }
   }, []);
 

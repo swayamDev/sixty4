@@ -1,6 +1,6 @@
 "use client";
 // src/components/landing/landing-stats.tsx  [UI upgrade 2 §2.1]
-// "● 3 playing now · 14 games played" — the two live counters as one chip that
+// "● 3 playing now · 14 games played" - the two live counters as one chip that
 // reads as one sentence, numbers in mono. Both come from the public
 // `stats.landing` query and both are capped reads (see convex/stats.ts): at the
 // cap the second one prints "1,000+" rather than a number that would quietly

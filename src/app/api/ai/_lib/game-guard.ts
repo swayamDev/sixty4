@@ -5,7 +5,7 @@
 // Defence in depth: the proxy matcher covers /api/*, but Server Functions and
 // matcher edge cases mean every handler re-checks `auth()` itself, and the game
 // document is re-read server-side so the CLIENT NEVER SUPPLIES the position, the
-// difficulty or the session id — only the engine candidates, which are re-validated
+// difficulty or the session id - only the engine candidates, which are re-validated
 // against the server's FEN before they reach the model.
 import { auth } from "@clerk/nextjs/server";
 import { fetchQuery } from "convex/nextjs";
@@ -59,7 +59,7 @@ export async function guardAiGame(rawGameId: string): Promise<GuardResult> {
   return { ok: true, userId, game, viewerRole: view.viewerRole, userKey: hashUserId(userId) };
 }
 
-/** FNV-1a — enough to correlate turns in agent traces without carrying a Clerk id. */
+/** FNV-1a - enough to correlate turns in agent traces without carrying a Clerk id. */
 function hashUserId(userId: string): string {
   let hash = 0x811c9dc5;
   for (let i = 0; i < userId.length; i++) {

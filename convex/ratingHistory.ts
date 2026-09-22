@@ -1,4 +1,4 @@
-// convex/ratingHistory.ts — FR-53 sparkline data
+// convex/ratingHistory.ts - FR-53 sparkline data
 import { v } from "convex/values";
 import { query } from "./_generated/server";
 import { clampLimit, MAX_RATING_HISTORY } from "./lib/constants";
@@ -19,7 +19,7 @@ export const forPlayer = query({
   returns: v.array(vRatingHistoryRow),
   handler: async (ctx, args) => {
     const limit = clampLimit(args.limit, MAX_RATING_HISTORY);
-    // `.first()` — a duplicate `usernameLower` must not 500 the profile page.
+    // `.first()` - a duplicate `usernameLower` must not 500 the profile page.
     const player = await ctx.db
       .query("players")
       .withIndex("by_usernameLower", (q) =>
@@ -29,7 +29,7 @@ export const forPlayer = query({
     if (player === null) return [];
 
     // The pool filter is applied after the index scan, so read a wider window
-    // when it is set — otherwise a run of same-pool rows could hide every row of
+    // when it is set - otherwise a run of same-pool rows could hide every row of
     // the other pool behind the limit.
     const scan = args.pool === "all" ? limit : Math.min(limit * 2, MAX_RATING_HISTORY * 2);
     const rows = await ctx.db

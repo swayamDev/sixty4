@@ -39,7 +39,7 @@ function ScenarioSwitcher({ current }: { current: string }) {
     //
     // BELOW 640 it moves out of the header band entirely, to the bottom-left above
     // the mobile bar. It used to stay in the header's row, where at 390 it landed on
-    // "Sign in" and clipped whatever was under it — which made every phone-width
+    // "Sign in" and clipped whatever was under it - which made every phone-width
     // harness screenshot unreadable in its top 56px, and the harness exists to be
     // looked at. The bottom-left corner is the one place at 390 that carries neither
     // game chrome nor the bar's five buttons.
@@ -95,7 +95,7 @@ export function GameHarness({ scenario: requested }: { scenario: string | null }
   const controller = useMockGameController(scenario);
 
   // §8: the harness fakes Clerk's answer from the scenario and feeds the scripted
-  // conversation straight into the PURE view. Nothing here talks to /api/tutor —
+  // conversation straight into the PURE view. Nothing here talks to /api/tutor -
   // sending appends the member's own bubble so the composer, the "you" bubble and
   // the auto-scroll are the real ones.
   const tutor = scenario.tutor ?? null;
@@ -238,7 +238,7 @@ export function GameHarness({ scenario: requested }: { scenario: string | null }
     <>
       <ScenarioSwitcher current={id} />
       <TutorAccessProvider value={{ hasTutor: tutor === null ? undefined : tutor.access === "pro" }}>
-        {/* A scenario switch is a different game entirely — the mock controller
+        {/* A scenario switch is a different game entirely - the mock controller
             seeds its state once, and the tutor panel its conversation once, so the
             harness remounts the screen rather than trying to reconcile the two. */}
         <GameShellView

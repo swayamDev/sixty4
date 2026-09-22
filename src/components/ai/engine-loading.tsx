@@ -3,7 +3,7 @@
 //
 // First-load state for the Stockfish worker (§E.4 step 3).
 //
-// The default build is stockfish@18.0.8 `lite-single` — 5.64 MB gzipped, so the first
+// The default build is stockfish@18.0.8 `lite-single` - 5.64 MB gzipped, so the first
 // AI game of a session really does wait on a download. Its glue streams
 // `{percent, loaded, total}` over a MessagePort (stockfish.md §4), which
 // `use-stockfish` forwards into `aiStore.downloadPercent`, so the bar below is a REAL
@@ -61,7 +61,7 @@ export function EngineLoading({ onRetry, className }: EngineLoadingProps) {
         {build === "sf11" ? " (compatibility engine)" : null}
       </p>
       <Progress
-        // `value={null}` is Base UI's indeterminate mode — used until the first
+        // `value={null}` is Base UI's indeterminate mode - used until the first
         // progress event lands, and for the whole load on sf11 (no progress channel).
         value={percent > 0 ? percent : null}
         aria-labelledby="engine-loading-label"

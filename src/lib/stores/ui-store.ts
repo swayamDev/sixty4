@@ -13,12 +13,12 @@ import { SETTINGS_STORAGE_KEY, type EngineBuild } from "../constants";
 /**
  * The game screen's two shapes (UI_REDESIGN §5.2). `focus` hides the header and
  * the sidebar and gives the board the whole viewport; it is chosen per session,
- * never persisted — a reload starts back in the normal layout.
+ * never persisted - a reload starts back in the normal layout.
  */
 export type LayoutMode = "default" | "focus";
 
 export interface UiState {
-  /** True once settings from `players.me` have been merged in — gates the 3D mount
+  /** True once settings from `players.me` have been merged in - gates the 3D mount
    *  so SSR defaults never cause a hydration mismatch. */
   hydrated: boolean;
   /** null until the WebGL probe has run on the client. */
@@ -43,11 +43,11 @@ export interface UiState {
   /** UI_REDESIGN §5.2 board-focus layout. Session-only: NOT in `partialize`. */
   layoutMode: LayoutMode;
   /** FR-21k: signed Convex storage URL for the player's uploaded backdrop, mirrored from
-   *  `players.me`. Session-only — the URL expires, so it never goes to localStorage. */
+   *  `players.me`. Session-only - the URL expires, so it never goes to localStorage. */
   roomImageUrl: string | null;
   /** Which Stockfish binary the worker booted from ("sf18" by default, "sf11" on a
    *  browser without WASM SIMD), or null before an AI game has mounted the engine.
-   *  Session-only and NOT a user setting — it is detected, shown in the AI-move
+   *  Session-only and NOT a user setting - it is detected, shown in the AI-move
    *  source badge, and never persisted. */
   engineBuild: EngineBuild | null;
 
@@ -146,11 +146,11 @@ export const useUiStore = create<UiState>()(
           qualityTier: s.qualityTier,
           postFxEnabled: s.postFxEnabled,
         }),
-        // NOT a React setState — safe under react-hooks/set-state-in-effect.
+        // NOT a React setState - safe under react-hooks/set-state-in-effect.
         onRehydrateStorage: () => (state, error) => {
           if (error) console.error("[ui-store] rehydrate failed", error);
-          // On failure zustand calls back as `(undefined, error)` — e.g. the stored
-          // JSON is malformed — so `state?.` would skip the flag and leave /settings
+          // On failure zustand calls back as `(undefined, error)` - e.g. the stored
+          // JSON is malformed - so `state?.` would skip the flag and leave /settings
           // (and the 3D mount) stuck on their skeletons forever. The flag means
           // "storage has been consulted", not "storage had something", so set it
           // through the store itself, which is always there by the time this runs.

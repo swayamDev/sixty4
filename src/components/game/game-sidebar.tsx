@@ -1,7 +1,7 @@
 "use client";
 // src/components/game/game-sidebar.tsx  [U2]
 // UI_REDESIGN §5.1's right column: Chat (default in AI games) / Moves / Info.
-// Pure — the chat rows, the hint state and the presence chips all arrive as props.
+// Pure - the chat rows, the hint state and the presence chips all arrive as props.
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -97,7 +97,7 @@ function ReplayControls({
 
   return (
     // §4.4: the autoplay controls sit in a 36px row. `icon-lg` is the 36px token;
-    // `disabled` is honest here — a first move that does not exist yet has no
+    // `disabled` is honest here - a first move that does not exist yet has no
     // reason worth a tooltip, and the arrows say so by going quiet.
     <div className="flex h-9 items-center gap-1" role="group" aria-label="Replay controls">
       <Button
@@ -152,7 +152,7 @@ function ReplayControls({
 
 /**
  * FR-46's rewind, with the confirmation it always needed. Taking the game back to
- * move 8 DELETES every move after it — the one destructive thing on this screen,
+ * move 8 DELETES every move after it - the one destructive thing on this screen,
  * and it used to fire from a hover icon on the first click.
  */
 function RewindAction({
@@ -164,8 +164,8 @@ function RewindAction({
   pending: boolean;
   onRewind(): void;
 }) {
-  // `AlertDialogAction` is a plain Button in this shadcn port — it does not close
-  // the dialog — so the open state is held here and the action closes it itself.
+  // `AlertDialogAction` is a plain Button in this shadcn port - it does not close
+  // the dialog - so the open state is held here and the action closes it itself.
   const [open, setOpen] = useState(false);
   // `ply` is a half-move; players count in whole moves, and so does the status pill.
   // The SIDE is part of the button's name because both halves of a row round to the
@@ -348,7 +348,7 @@ function InfoTab({
   const room = resolveRoom(roomPreset, roomColors);
 
   // "Rated: Yes/No" is a database column, not an answer. The player is asking one
-  // question — does this game move my rating? — so the card answers it in a
+  // question - does this game move my rating? - so the card answers it in a
   // sentence, and says WHY when the answer is no (FR-43 unrates on a take-back).
   const ratingNote =
     mode === "local"
@@ -376,7 +376,7 @@ function InfoTab({
 
   return (
     <div className="min-h-0 flex-1 overflow-y-auto bg-card p-3">
-      {/* §4.4: the Info tab is a MATCH CARD — one definition list, no boxes
+      {/* §4.4: the Info tab is a MATCH CARD - one definition list, no boxes
           inside boxes, each row a fact a player might actually ask for. */}
       <dl className="divide-y divide-border/60">
         <InfoRow label="Mode">{formatMode(game.mode)}</InfoRow>
@@ -471,7 +471,7 @@ function InfoTab({
       </div>
 
       {/* MANDATORY (§I-7): the piece models are CC BY 3.0, so this credit is a
-          licence obligation — and the game screen is where people actually look at
+          licence obligation - and the game screen is where people actually look at
           them. Settings keeps the long version; this is the one-line one. */}
       <p className="mt-4 border-t border-border/60 pt-3 text-[12px] leading-relaxed text-muted-foreground">
         Pieces by{" "}
@@ -491,13 +491,13 @@ export interface GameSheetPeekProps {
   /** Who spoke the newest line, or null when it is one of the centred system chips. */
   speaker: string | null;
   /** The persona plate's mono line ("Beginner · 800"), shown when there is room
-   *  — §4.6: "the sheet peek shows the persona header line and the last bubble". */
+   *  - §4.6: "the sheet peek shows the persona header line and the last bubble". */
   speakerMeta?: string | null;
   /** The newest line in the panel; null until something has been said. */
   text: string | null;
   /** What the strip offers while the panel is quiet, e.g. "Moves and game info". */
   quiet: string;
-  /** The game's live truth beside the name — "your move", "to move", "watching". */
+  /** The game's live truth beside the name - "your move", "to move", "watching". */
   status?: string | null;
   /** True when `status` means "happening now" (Live Green): it gets the baize dot. */
   statusLive?: boolean;
@@ -510,7 +510,7 @@ export interface GameSheetPeekProps {
 /**
  * §5.3's bottom sheet, at rest.
  *
- * The sheet used to camp on 42dvh of a phone so the newest bubble stayed visible —
+ * The sheet used to camp on 42dvh of a phone so the newest bubble stayed visible -
  * which cost the board more than the bubble was worth. This is the same promise in
  * one 44px line: who spoke and what they said, tappable to open the full panel.
  * The board keeps the screen; the conversation keeps its voice.
@@ -528,10 +528,10 @@ export function GameSheetPeek({
 }: GameSheetPeekProps) {
   const label =
     text === null
-      ? `Open the game panel — ${quiet}`
+      ? `Open the game panel: ${quiet}`
       : speaker === null
-        ? `Open the game panel — ${text}`
-        : `Open the game panel — ${speaker} said: ${text}`;
+        ? `Open the game panel: ${text}`
+        : `Open the game panel. ${speaker} said: ${text}`;
 
   return (
     <button
@@ -545,7 +545,7 @@ export function GameSheetPeek({
         className,
       )}
     >
-      {/* §4.6: "the persona header line and the last bubble" — two lines, the same
+      {/* §4.6: "the persona header line and the last bubble" - two lines, the same
           plate the Chat tab opens with, so the peek is a compressed header rather
           than a bare name in front of a sentence. */}
       <span className="min-w-0 flex-1">

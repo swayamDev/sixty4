@@ -5,7 +5,7 @@
 //
 // Each overlay owns its material through a JSX ref: `react-hooks/immutability` forbids
 // writing to a value returned from a hook, so a shared useMemo'd material cannot be
-// animated. Geometry is still shared — it is only read, never assigned to.
+// animated. Geometry is still shared - it is only read, never assigned to.
 "use client";
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -89,7 +89,7 @@ export interface HighlightsProps {
   legalTargets: LegalTarget[];
   lastMove: LastMove | null;
   checkSquare: SquareId | null;
-  /** False for reduced motion / during a camera flip — the pulse freezes (NFR-10). */
+  /** False for reduced motion / during a camera flip - the pulse freezes (NFR-10). */
   animate: boolean;
 }
 

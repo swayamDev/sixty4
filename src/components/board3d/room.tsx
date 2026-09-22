@@ -91,7 +91,7 @@ export function Room({ room, imageUrl }: RoomProps) {
       {/* The HDRI is always the IBL source; `background` only controls the skybox.
           `backgroundBlurriness` rather than `blur`: only EnvironmentCube maps `blur` onto
           it, so the Park room (drei's `ground` path renders an EnvironmentMap) silently
-          lost its configured blur — and `blur` was applied to the THREE.Scene as a stray
+          lost its configured blur - and `blur` was applied to the THREE.Scene as a stray
           property instead. */}
       <Environment
         map={lighting}
@@ -105,7 +105,7 @@ export function Room({ room, imageUrl }: RoomProps) {
 
       {/* MUST stay after <Environment>. drei restores the previous skybox from a
           dependency-less layout effect whose cleanup runs in the mutation phase, in child
-          order — put this first and switching an HDRI room to a flat-colour room leaves
+          order - put this first and switching an HDRI room to a flat-colour room leaves
           the OLD room's HDRI as the background (FR-21j/FR-21m live preview). Ordered
           after, the restore happens first and this attach wins. Same rule, same reason,
           for the sharp backdrop below. */}

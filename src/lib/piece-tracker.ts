@@ -4,9 +4,9 @@
 // so 2D and 3D animate identically.
 //
 // The algorithm is exposed twice:
-//   * `derivePieces(state, ...)` — a PURE state transition, safe to call during render
+//   * `derivePieces(state, ...)` - a PURE state transition, safe to call during render
 //     (React Compiler / `react-hooks/purity`). `useGameController` uses this one.
-//   * `PieceTracker` — a thin mutable wrapper for callers that own the loop themselves
+//   * `PieceTracker` - a thin mutable wrapper for callers that own the loop themselves
 //     (the /dev/board3d preview, tests).
 import type { BoardPiece, Colour, LastMove, PieceSymbol, SquareId } from "./types";
 import { piecesFromFen } from "./chess";
@@ -23,7 +23,7 @@ const CASTLE_ROOK: Record<string, { from: SquareId; to: SquareId }> = {
 /**
  * Everything the next derivation needs, plus the list it produced. Treat it as opaque
  * and immutable: `derivePieces` never mutates its input, so the same state can be fed
- * to it any number of times — that is what makes it legal in a render body.
+ * to it any number of times - that is what makes it legal in a render body.
  */
 export interface PieceTrackerState {
   /** Occupied squares → the identity currently standing on them. */
@@ -52,7 +52,7 @@ export const EMPTY_PIECE_TRACKER_STATE: PieceTrackerState = {
  * Only an ADJACENT step has one move that explains the transition, and the direction
  * decides which move that is: stepping FORWARD to `ply` it is the move ending at `ply`;
  * stepping BACKWARD to `ply` it is the move ending at `ply + 1`, replayed in reverse.
- * Every other transition (first render, a review jump, a take-back) re-derives ids —
+ * Every other transition (first render, a review jump, a take-back) re-derives ids -
  * those are not animated (§E.8.6).
  *
  * `moveEndingAt` is called at most once, and only for an adjacent step, so the caller
@@ -143,7 +143,7 @@ export class PieceTracker {
     this.state = EMPTY_PIECE_TRACKER_STATE;
   }
 
-  /** See {@link derivePieces} — same semantics, with the state carried internally. */
+  /** See {@link derivePieces} - same semantics, with the state carried internally. */
   sync(
     fen: string,
     ply: number,

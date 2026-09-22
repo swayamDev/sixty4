@@ -9,7 +9,7 @@ export interface PlayerChipProps extends React.ComponentProps<"div"> {
   avatarUrl?: string | null;
   /** Shown in mono, tabular. */
   rating?: number | null;
-  /** Which colour they play — drawn as a pawn glyph. */
+  /** Which colour they play - drawn as a pawn glyph. */
   side?: Colour | null;
   /** Adds the baize dot and the "to move" label (§5.1 player rows). */
   toMove?: boolean;
@@ -50,7 +50,7 @@ export function PlayerChip({
               type="p"
               colour={side}
               // The glyph's own outline is near-black, which on a dark card puts the
-              // black pawn at about 1.3:1 against the surface — the shape all but
+              // black pawn at about 1.3:1 against the surface - the shape all but
               // disappears. Outlining it in the text colour instead reads in both
               // themes: ivory on espresso, ink on ivory, with the fill still saying
               // which side it is. The `title` carries the same fact to a screen

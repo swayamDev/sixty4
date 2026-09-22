@@ -1,7 +1,7 @@
 "use client";
 // src/components/play/spectate-list.tsx  [U5]
 // "At the boards" (UI_UPGRADE_2 §3.4): the games in progress as the SAME board
-// tiles the landing shows — `BoardTile` from the shared kit, a MiniBoard of the
+// tiles the landing shows - `BoardTile` from the shared kit, a MiniBoard of the
 // live position with a player chip at each end, the baize live dot and the whole
 // tile as one link. This file keeps the Convex plumbing; the tile itself is
 // shared so the two surfaces cannot drift apart.
@@ -10,7 +10,7 @@
 // ratings and counts but no FEN, and its return validator is shared with the
 // landing ticker, so widening it is not this package's call. `games.get` is the
 // existing query that carries the position, and a live game is a document that
-// changes a few times a minute — a handful of extra subscriptions on a lobby page
+// changes a few times a minute - a handful of extra subscriptions on a lobby page
 // is the cheaper half of that trade. The grid is capped at LIVE_GRID_LIMIT for
 // exactly that reason.
 import { useQuery } from "convex/react";
@@ -44,9 +44,9 @@ export interface SpectateCardViewProps {
   lastMove?: { from: SquareId; to: SquareId } | null;
 }
 
-/** Pure — the /dev/pages harness renders this with fixed positions.
+/** Pure - the /dev/pages harness renders this with fixed positions.
  *
- *  §3.4: "the same board tiles as the landing". It IS the landing's tile now —
+ *  §3.4: "the same board tiles as the landing". It IS the landing's tile now -
  *  `BoardTile` moved into the shared kit so the two surfaces cannot drift apart
  *  again. `fen === undefined` is the loading state (a skeleton, not a made-up
  *  position), which is exactly what the per-card subscription below hands it. */
@@ -64,7 +64,7 @@ function SpectateEmpty() {
 
 function SpectateCard({ game, enabled }: { game: SpectateGame; enabled: boolean }) {
   // `games.get` requires an identity, so it stays skipped until Convex has
-  // validated the session — otherwise the first render throws inside the query.
+  // validated the session - otherwise the first render throws inside the query.
   const view = useQuery(
     api.games.get,
     enabled ? { gameId: game._id as Id<"games"> } : "skip",
@@ -91,7 +91,7 @@ export interface SpectateGridViewProps {
   positions?: Record<string, string>;
 }
 
-/** Pure grid — used directly by the /dev/pages harness. */
+/** Pure grid - used directly by the /dev/pages harness. */
 export function SpectateGridView({ games, positions }: SpectateGridViewProps) {
   if (games.length === 0) return <SpectateEmpty />;
   return (

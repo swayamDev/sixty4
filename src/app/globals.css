@@ -5,14 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================================
-   "The Study" design system — U0.  docs/UI_REDESIGN.md §1.
+   "The Study" design system - U0.  docs/UI_REDESIGN.md §1.
    ----------------------------------------------------------------------------
    Two layers of variables live here:
 
-   1. STUDY TOKENS (`--bg`, `--fg`, `--accent`, …) — the palette of §1.1. These
+   1. STUDY TOKENS (`--bg`, `--fg`, `--accent`, …) - the palette of §1.1. These
       are the names designers and every other package quote. Hex on purpose: the
       contrast test (src/lib/ui/__tests__/contrast.test.ts) parses this file.
-   2. SHADCN ROLES (`--background`, `--primary`, …) — derived from layer 1 so the
+   2. SHADCN ROLES (`--background`, `--primary`, …) - derived from layer 1 so the
       installed base-nova primitives inherit the palette without being forked.
 
    NAME CLASH, read before editing: shadcn's own `--accent` means "subtle hover
@@ -25,7 +25,7 @@
   /* ---------------------------------------------------------------- fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  /* Card/Dialog titles keep Geist — Fraunces is headlines only (§1.2). */
+  /* Card/Dialog titles keep Geist - Fraunces is headlines only (§1.2). */
   --font-heading: var(--font-geist-sans);
   /*
    * `--font-display` is set on <html> by next/font (layout.tsx). It is NOT
@@ -85,7 +85,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Board tokens used by Board2D (P3), MiniBoard (U0) and the 3D custom-colour
-     fallback (P4). Same in both themes — a board is a board. */
+     fallback (P4). Same in both themes - a board is a board. */
   --color-board-light: var(--board-light);
   --color-board-dark: var(--board-dark);
   --color-board-select: var(--board-select);
@@ -122,7 +122,7 @@
   --live: #1f6b4d;
   --danger: #a63d27;
 
-  /* derived surfaces — same palette, one step of warmth apart */
+  /* derived surfaces - same palette, one step of warmth apart */
   --surface-2: #e9ece4;
   --surface-3: #dee3d8;
 
@@ -219,7 +219,7 @@
   }
   html {
     @apply font-sans;
-    /* 15px on marketing pages, 14px inside the app frame (§1.2) — set per page. */
+    /* 15px on marketing pages, 14px inside the app frame (§1.2) - set per page. */
     -webkit-tap-highlight-color: transparent;
   }
   /* The brass focus ring is the accessibility floor: never remove it. */
@@ -278,8 +278,8 @@
 
 /**
  * `headline-sm` (DESIGN.md type ramp): 2rem / 1.1 / 500, tracking -0.01em.
- * The app frame's verdicts and overlays — the result dialog, the turn overlay,
- * the promotion picker — sit here, one step under the marketing headline.
+ * The app frame's verdicts and overlays - the result dialog, the turn overlay,
+ * the promotion picker - sit here, one step under the marketing headline.
  * Named without a `font-` prefix on purpose, like `eyebrow` and `tabular`:
  * tailwind-merge reads `font-*` as the font-family group and would drop the
  * `font-display` beside it, taking Fraunces off the headline. Declared after
@@ -310,7 +310,7 @@
 
 /**
  * Scroll reveal (§1.3): opacity + 12px translate, once, 400ms (UI_UPGRADE_2 §2.6).
- * Set `data-revealed="true"` when the IntersectionObserver fires — see
+ * Set `data-revealed="true"` when the IntersectionObserver fires - see
  * `useReveal` in src/lib/ui/use-reveal.ts, which does exactly that.
  */
 @utility reveal {
@@ -347,7 +347,7 @@
  * links, the landing notation strip. Referenced by several components since the
  * redesign landed but never defined, so every one of them was showing a bar.
  * `scrollbar-width` covers Firefox and Chromium >= 121; the WebKit pseudo-element
- * covers Safari and older Chromium. Scrolling itself is untouched — keyboard and
+ * covers Safari and older Chromium. Scrolling itself is untouched - keyboard and
  * wheel still work, which is why this is safe on a focusable scroller.
  */
 @utility no-scrollbar {
@@ -383,7 +383,7 @@
    `ChatMessage` (ui-kit) is rendered by the game screen and by the landing
    page's pass-and-play artefact, so its two motions live here rather than in a
    screen-local stylesheet: a new line rises 6px over `--dur-bubble`, and the
-   opponent's thinking dots lift in turn — the rhythm of someone working, not a
+   opponent's thinking dots lift in turn - the rhythm of someone working, not a
    generic pulse. Both resolve to their final state under reduced motion. */
 @keyframes game-bubble-in {
   from {
@@ -454,7 +454,7 @@
 
 /* Below `lg` the hero is a stacked block, not a diagonal, so the desktop mask's
    corner bias has nothing to bias toward and the canvas reads as a photo card with
-   four straight edges. DESIGN.md: "its light is its edge" — an even feather off all
+   four straight edges. DESIGN.md: "its light is its edge" - an even feather off all
    four sides, over a canvas that bleeds to the viewport edges. */
 @media (max-width: 63.999rem) {
   .hero-canvas-blend {
@@ -466,7 +466,7 @@
 
 /* The game board's canvas, unframed. DESIGN.md: "Don't frame the 3D board with a
    border, card or box; its light is its edge." A hairline ring used to do exactly
-   that, so the room now dissolves into the page instead — the hero's technique at
+   that, so the room now dissolves into the page instead - the hero's technique at
    a fifth of the drama: no corner bias, no diagonal, just an even 5% fade off all
    four edges, so the board keeps its square and only the room's light softens.
    The 2D board is deliberately NOT given this: its outer files and ranks are

@@ -15,7 +15,7 @@ const CHANNELS: ReadonlyArray<{ key: Channel; label: string; hint: string }> = [
  * FR-21j: "live preview as you drag".
  *
  * React's `onChange` on `<input type="color">` is the DOM **input** event, which
- * fires on every drag tick — the DOM `change` event only fires when the picker is
+ * fires on every drag tick - the DOM `change` event only fires when the picker is
  * dismissed and would give a preview that updates once, at the end. So `onChange`
  * drives the store (instant, no network) and `onBlur` nudges the debounced Convex
  * write; the writer coalesces either way, so a drag never becomes one mutation

@@ -2,16 +2,16 @@
 //
 // Which Stockfish build this browser gets (§I-1, user decision 2026-09-09).
 //
-//   sf18 — stockfish@18.0.8 `lite-single`, the DEFAULT. NNUE, 5.64 MB gzipped,
+//   sf18 - stockfish@18.0.8 `lite-single`, the DEFAULT. NNUE, 5.64 MB gzipped,
 //          compiled with `-msimd128`, so it REQUIRES WASM SIMD. It defines its own
 //          non-shared memory, so no SharedArrayBuffer and no COOP/COEP are needed
 //          (stockfish.md §2).
-//   sf11 — stockfish@11.0.0, the automatic fallback for a browser without WASM SIMD
-//          (0 v128 locals in its wasm — stockfish.md §11.1). Never user-selectable.
+//   sf11 - stockfish@11.0.0, the automatic fallback for a browser without WASM SIMD
+//          (0 v128 locals in its wasm - stockfish.md §11.1). Never user-selectable.
 //
 // Detection is a `WebAssembly.validate` of a 31-byte module whose only function
 // returns a `v128`. The byte sequence is COPIED VERBATIM from `wasm-feature-detect`
-// (`dist/esm/index.js`, v1.9.0, `simd = async () => WebAssembly.validate(...)`) —
+// (`dist/esm/index.js`, v1.9.0, `simd = async () => WebAssembly.validate(...)`) -
 // it is not hand-rolled. Verified on Node 24.14.1: `validate` is `true` here and
 // `false` for a truncated copy of the same bytes.
 import type { EngineBuild } from "../constants";
@@ -25,7 +25,7 @@ const SIMD_PROBE = Uint8Array.from([
 let cached: boolean | null = null;
 
 /**
- * True when the engine can run the SIMD (SF18) build. Cached — the answer cannot
+ * True when the engine can run the SIMD (SF18) build. Cached - the answer cannot
  * change for the life of the page. Any throw (an exotic/absent `WebAssembly`) is
  * treated as "no SIMD", which is the safe direction: sf11 runs everywhere sf18 does.
  */

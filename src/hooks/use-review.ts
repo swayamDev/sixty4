@@ -17,7 +17,7 @@ export interface ReviewController {
   reviewPly: number | null;
   isLive: boolean;
   autoplay: boolean;
-  /** True when the last jump was a single step — larger jumps are not animated (§E.8.6). */
+  /** True when the last jump was a single step - larger jumps are not animated (§E.8.6). */
   stepped: boolean;
   goToPly(ply: number | null): void;
   stepReview(delta: number): void;

@@ -1,14 +1,14 @@
 "use client";
 // src/components/landing/use-showcase-game.ts  [U1]
 // The landing hero's position stream (UI_REDESIGN §1.4): Morphy vs Duke Karl and
-// Count Isouard, Paris 1858 — "the Opera Game" — replayed one move every 1.8 s,
+// Count Isouard, Paris 1858 - "the Opera Game" - replayed one move every 1.8 s,
 // looping with a 3 s pause on the mate.
 //
 // The game is public domain; the SAN below is validated by chess.js the first time
 // the hook renders (an illegal move throws out of `buildFrames`, and
 // `__tests__/showcase-game.test.ts` catches that in CI instead of in a visitor's
 // browser). Every frame is built once, so the 1.8 s tick is a pure array lookup plus
-// one `derivePieces` step — no engine work on the timer.
+// one `derivePieces` step - no engine work on the timer.
 import { useEffect, useMemo, useState } from "react";
 import { Chess } from "chess.js";
 import { checkSquareOf } from "@/lib/chess";
@@ -145,7 +145,7 @@ export interface ShowcaseGame {
 
 export interface UseShowcaseGameOptions {
   /**
-   * Stop the clock — the hero is offscreen or the tab is hidden. The position
+   * Stop the clock - the hero is offscreen or the tab is hidden. The position
    * stays where it was; the next tick resumes from there.
    */
   paused?: boolean;

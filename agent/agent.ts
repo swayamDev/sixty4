@@ -1,4 +1,4 @@
-// agent/agent.ts — §F.2
+// agent/agent.ts - §F.2
 //
 // Mounted at /eve/v1/* by `withEve(nextConfig)` in next.config.ts; there is no route
 // handler for eve's own routes and no second dev process.

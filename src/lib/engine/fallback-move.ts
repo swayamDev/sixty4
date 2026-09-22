@@ -5,10 +5,10 @@
 // Normal turn: candidates are generated at Skill Level 20 + MultiPV so the ranking is
 // honest, and the handicap is applied in JS (`selectCandidate`) or by the agent.
 // This module is the OTHER path: the agent route failed, so Stockfish itself plays
-// the move — and there the difficulty's `skillLevel` (PRD §3.8) is exactly the right
+// the move - and there the difficulty's `skillLevel` (PRD §3.8) is exactly the right
 // knob. At Skill Level < 20 the engine deliberately picks a randomised sub-optimal
 // move at iteration depth `1 + level`, and its `bestmove` no longer matches
-// `multipv 1` (stockfish.md §6) — which is fine here, because nobody is ranking
+// `multipv 1` (stockfish.md §6) - which is fine here, because nobody is ranking
 // anything: we play `bestmove` verbatim.
 //
 // MultiPV is pinned to 1: extra lines cost time we do not have on a path that has
@@ -28,12 +28,12 @@ export const FALLBACK_MIN_BUDGET_MS = 300;
  *
  * Two ways it must not run:
  *
- *  * `skillLevel >= STOCKFISH_CANDIDATE_SKILL_LEVEL` (Grandmaster) — the engine has no
+ *  * `skillLevel >= STOCKFISH_CANDIDATE_SKILL_LEVEL` (Grandmaster) - the engine has no
  *    handicap left to apply, and candidate generation ALREADY ran this exact search at
  *    the same depth and Skill Level 20. `bestmove` would be `candidates[0]` again, which
  *    is what `selectCandidate`'s "Always pick rank 1" returns for free, so a second
  *    search buys nothing for several seconds.
- *  * The turn's budget is spent — the agent route may have burned all of
+ *  * The turn's budget is spent - the agent route may have burned all of
  *    `AI_ROUTE_TIMEOUT_MS` before this path was reached, and `runSearch` waits
  *    `timeoutMs` plus a 4 s `bestmove` grace on top.
  *
@@ -53,7 +53,7 @@ export function fallbackSearchBudgetMs(
 export interface FallbackMoveInput {
   fen: string;
   difficulty: Difficulty;
-  /** `useStockfish().search` — injected so this is testable without a worker. */
+  /** `useStockfish().search` - injected so this is testable without a worker. */
   search(request: SearchRequest): Promise<SearchResult>;
   signal?: AbortSignal;
   /** Overrides the difficulty's `searchTimeoutMs` (the caller may have less budget left). */
@@ -66,7 +66,7 @@ export interface FallbackMoveInput {
  * @returns the move as a {@link Candidate} (so the caller can log its eval), or null
  * when the engine is unavailable, aborted, mated/stalemated (`bestmove (none)`) or
  * answered with something illegal in `fen`. A null answer means "fall through to the
- * JS selection policy" — this path must never throw a turn away.
+ * JS selection policy" - this path must never throw a turn away.
  */
 export async function fallbackEngineMove(input: FallbackMoveInput): Promise<Candidate | null> {
   const config = DIFFICULTIES[input.difficulty];

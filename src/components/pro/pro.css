@@ -4,7 +4,7 @@
  * can reach the sign-in card or the user-profile modal. Only existing tokens.
  *
  * Clerk's class convention is `cl-<element>` plus `cl-<element>__<id>` for the ones
- * that carry an id — verified against the rendered tree: the plan cards come out as
+ * that carry an id - verified against the rendered tree: the plan cards come out as
  * `cl-pricingTableCard cl-pricingTableCard__free_user` / `__pro`. If that convention
  * ever changes these rules stop matching and the table falls back to Clerk's own
  * layout, which is a degradation, not a break.
@@ -14,7 +14,7 @@
  *
  * §7 asks for "the PricingTable inside a walnut well", and the well is the card.
  * Clerk then draws each plan as a card of its own on cellar with a 20px radius, and
- * inside the Pro plan draws the feature block on a third, walnut-toned panel — so a
+ * inside the Pro plan draws the feature block on a third, walnut-toned panel - so a
  * single price list arrived as paper inside vellum inside paper, three nested boxes
  * that DESIGN.md's Cards/Containers section does not allow. The plan cards and that
  * inner panel are flattened onto the well; the two plans are separated by Clerk's own
@@ -47,7 +47,7 @@
 }
 
 /* Flat brass, like every other primary in the app. Clerk ships the Pro button with a
- * 1px brass ring, two drop shadows and an `rgba(255,255,255,0.07)` inner highlight —
+ * 1px brass ring, two drop shadows and an `rgba(255,255,255,0.07)` inner highlight -
  * a cool wash in a system whose stated rule is that every neutral is warm and no cool
  * wash appears anywhere. */
 [data-slot="pricing-well"] .cl-pricingTableCard__pro .cl-pricingTableCardFooterButton {
@@ -55,8 +55,8 @@
 }
 
 /* THE FOCUS RING, drawn here because Clerk's own is invisible on the solid button.
- * Measured on the rendered page: focusing the Pro "Subscribe" — the single conversion
- * control of this page — added `rgba(0, 0, 0, 0) 0 0 0 0` to its box-shadow in dark
+ * Measured on the rendered page: focusing the Pro "Subscribe" - the single conversion
+ * control of this page - added `rgba(0, 0, 0, 0) 0 0 0 0` to its box-shadow in dark
  * and nothing at all in light, with `outline: none 0px` in both. DESIGN.md: "the brass
  * focus ring is a 3px ring at 50% opacity outside the control". An `outline` rather
  * than a ring-shaped box-shadow, so Clerk's own box-shadow cannot overwrite it. */

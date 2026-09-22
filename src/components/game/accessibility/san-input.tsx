@@ -1,7 +1,7 @@
 "use client";
 // src/components/game/accessibility/san-input.tsx  [P3 → U2 §4.8 item 6]
 // NFR-7: keyboard move entry. Accepts SAN ("Nf3", "exd5", "O-O") and LAN
-// ("e2e4") — the controller parses it with chess.js's permissive parser.
+// ("e2e4") - the controller parses it with chess.js's permissive parser.
 //
 // Off turn the field is `aria-disabled` with a reason rather than `disabled`: a
 // disabled input drops out of the tab order and takes the explanation with it,

@@ -27,11 +27,11 @@ export function ActionBar({ label, variant = "default", className, ...props }: A
         // column is 861px at 1280 and 1023px at 1440, so the old `overflow-x-auto`
         // meant the last actions were simply off the end of a bar nobody thinks to
         // scroll. §5.1's rule is that every game action is visible and labelled, so
-        // the bar takes a second line instead — the board box above it is `flex-1`
+        // the bar takes a second line instead - the board box above it is `flex-1`
         // inside the column, so the square recomputes off the height that is left.
         "flex w-full flex-wrap items-center gap-x-0.5 gap-y-1 rounded-xl",
         // UI_UPGRADE_2 §4.5: structural layers carry a hairline and no shadow;
-        // floating layers rely on the soft shadow ALONE and drop the hairline —
+        // floating layers rely on the soft shadow ALONE and drop the hairline -
         // a 1px edge under a 60px blur is the generated-UI signature the
         // detector calls `gpt-thin-border-wide-shadow`.
         variant === "focus" ? "shadow-soft" : "border border-border",
@@ -59,7 +59,7 @@ export function ActionGroup({ className, ...props }: React.ComponentProps<"div">
   return (
     // `shrink-0` matters: the buttons inside a group cannot shrink (the Button base
     // sets `shrink-0`), so a group that CAN shrink gets squeezed by the flex line
-    // and its children spill over the group beside it — at 1440px "Resign" sat
+    // and its children spill over the group beside it - at 1440px "Resign" sat
     // underneath "PGN" and could not be clicked at its own centre. Holding the
     // group's width instead is what lets the bar wrap a whole group onto the next
     // line rather than tearing one in half.
@@ -128,7 +128,7 @@ export function ActionButton({
         render={
           <Button
             // DESIGN.md Buttons: 32px tall by default (`size="default"`), 36px for
-            // the large size (`size="lg"`) — shadcn's `sm` is 28px and was off the
+            // the large size (`size="lg"`) - shadcn's `sm` is 28px and was off the
             // token. A caller may still override: `props` is spread after this.
             size="default"
             variant={BUTTON_VARIANT[variant]}

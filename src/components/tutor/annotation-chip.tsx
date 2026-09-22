@@ -60,9 +60,9 @@ export function AnnotationChip({ drawing, active, onToggle }: AnnotationChipProp
         "pointer-coarse:min-h-11 pointer-coarse:px-3",
         focusRing,
         // DESIGN.md, Chips: the selected state is "a seam fill with ivory text and a
-        // brass ring". The ring is the half that actually reads — without it "this is
+        // brass ring". The ring is the half that actually reads - without it "this is
         // the drawing on the board right now" rested on a few percent of fill
-        // lightness — and it is the same ring the leaderboard pool tabs and the room
+        // lightness - and it is the same ring the leaderboard pool tabs and the room
         // cards use for selection.
         active
           ? "bg-line text-foreground ring-1 ring-primary"
@@ -85,10 +85,10 @@ export function AnnotationChip({ drawing, active, onToggle }: AnnotationChipProp
           The chip is one voice; the dot and the word carry the tone.
 
           DESIGN.md's Scoresheet Rule: "anything a player would write on a
-          scoresheet — moves, ratings, clocks, coordinates — is set in Geist Mono
+          scoresheet - moves, ratings, clocks, coordinates - is set in Geist Mono
           with tabular figures, never in the UI face". A chip's label is exactly two
-          things — a noun the tutor is speaking ("Squares", "Arrow", "Line") and then
-          notation ("e4, f7", "c4→f7", "Nxe4 Bxf7+") — so it is set in two hands, the
+          things - a noun the tutor is speaking ("Squares", "Arrow", "Line") and then
+          notation ("e4, f7", "c4→f7", "Nxe4 Bxf7+") - so it is set in two hands, the
           way the ply label two lines above it in the same bubble already is. */}
       <span className="truncate">
         {noun}

@@ -9,7 +9,7 @@ import { cn, useReducedMotion } from "@/lib/ui";
 const BOTTOM_SLACK = 24;
 
 export interface ChatListProps extends Omit<React.ComponentProps<"div">, "children"> {
-  /** `ChatMessage` elements — the list renders an <ol>, they render <li>. */
+  /** `ChatMessage` elements - the list renders an <ol>, they render <li>. */
   children: React.ReactNode;
   /** Bump whenever a message is appended; drives the auto-scroll and the pill. */
   messageCount: number;
@@ -69,7 +69,7 @@ export function ChatList({
     <div className={cn("relative flex min-h-0 flex-1 flex-col", className)} {...props}>
       {/* NOT a live region. Every row that lands here for a MOVE is already spoken
           by the game's sr-only move announcer, so announcing the list too read the
-          same move twice — once as notation, once as a chat line. The owner of the
+          same move twice - once as notation, once as a chat line. The owner of the
           chat decides what is worth interrupting for (see `GameChat`, which
           announces the opponent's messages and nothing else). */}
       <ol

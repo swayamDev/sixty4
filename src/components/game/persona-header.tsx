@@ -2,7 +2,7 @@
 // src/components/game/persona-header.tsx  [U2]
 // UI_UPGRADE_2 §4.4, the plate at the top of the Chat tab: lettered brass disc,
 // name, "{label} · {rating}" in mono, and a status line that is the game's live
-// truth — "thinking…" while the engine runs, "to move" with a baize dot when it
+// truth - "thinking…" while the engine runs, "to move" with a baize dot when it
 // is the opponent's turn, "your move" when it is yours, "watching" for
 // spectators.
 //

@@ -38,7 +38,7 @@ const COPY = {
   quota: `The tutor has answered ${MAX_TUTOR_TURNS_PER_GAME} questions in this game. Start a new game to keep going.`,
   network: "The tutor did not answer. Try again.",
   // 503 `tutor-unavailable`: the deployment has no usable gateway credential, so
-  // there is nothing to retry — the panel says what is true and stops there.
+  // there is nothing to retry - the panel says what is true and stops there.
   unavailable: "The tutor is not available right now.",
   engineBusy:
     "The engine is busy with the opponent's move; the tutor will answer without analysis.",
@@ -72,13 +72,13 @@ function ProChip() {
 
 export interface TutorTabProps {
   onOpen(): void;
-  /** True when the rail's own overlay is already on screen (1024–1279). */
+  /** True when the rail's own overlay is already on screen (1024-1279). */
   expanded?: boolean;
   className?: string;
 }
 
 /**
- * §3: what the column becomes when it is hidden — a 44 px rail on the left edge
+ * §3: what the column becomes when it is hidden - a 44 px rail on the left edge
  * that says what it opens and, for a member who has it, that it is a Pro thing.
  */
 export function TutorTab({ onOpen, expanded = false, className }: TutorTabProps) {
@@ -116,7 +116,7 @@ export interface TutorPanelViewProps {
   messages: TutorUIMessage[];
   status: ChatStatus;
   error: TutorErrorKind | null;
-  /** SAN, oldest first — the ply label on a tutor bubble reads from this. */
+  /** SAN, oldest first - the ply label on a tutor bubble reads from this. */
   moves: string[];
   /** The ply in view: `reviewPly`, or the number of moves played. */
   ply: number;
@@ -171,8 +171,8 @@ export function TutorPanelView({
       : `${latest.messageId}:${latest.drawings.filter((d) => d.state === "drawn").length}`;
   useEffect(() => {
     if (latest === null || latestKey === null) return;
-    // ONE resolver decides what a source id puts on the board — the pure, unit-tested
-    // `annotationsForSource` — rather than this effect merging inline and the reducer
+    // ONE resolver decides what a source id puts on the board - the pure, unit-tested
+    // `annotationsForSource` - rather than this effect merging inline and the reducer
     // being tested beside it. A message id means "everything that answer drew"; a
     // drawing id means that one chip.
     const annotations = annotationsForSource(messages, latest.messageId);
@@ -366,7 +366,7 @@ export function TutorPanelView({
 export interface TutorPanelProps
   extends Pick<TutorPanelViewProps, "moves" | "ply" | "reviewing" | "collapseLabel"> {
   gameId: string;
-  /** FEN of the position in view — what the engine is asked about. */
+  /** FEN of the position in view - what the engine is asked about. */
   fen: string;
   onCollapse?(): void;
 }

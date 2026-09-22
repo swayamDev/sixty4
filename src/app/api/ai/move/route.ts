@@ -1,6 +1,6 @@
-// src/app/api/ai/move/route.ts — FR-34…FR-38, NFR-5 (§E.4 steps 7-9, §F.6)
+// src/app/api/ai/move/route.ts - FR-34…FR-38, NFR-5 (§E.4 steps 7-9, §F.6)
 //
-// Contract: POST an `AiMoveRequest`, receive NDJSON — `{"t":"status"}` heartbeats
+// Contract: POST an `AiMoveRequest`, receive NDJSON - `{"t":"status"}` heartbeats
 // terminated by exactly one `{"t":"result"}` frame. There are no text deltas: with a
 // per-turn `outputSchema` eve routes the answer through a hidden `final_output` tool
 // whose input deltas are filtered out of the event stream (eve-agent.md A.1/A.6).
@@ -24,7 +24,7 @@ import { auth } from "@clerk/nextjs/server";
 import { guardAiGame, jsonError } from "../_lib/game-guard";
 import { resolveEveHost, runAgentTurn, runDirectTurn } from "../_lib/eve-agent";
 
-// `runtime` is Node.js by default and `'edge'` is deprecated in Next 16 — do not add it.
+// `runtime` is Node.js by default and `'edge'` is deprecated in Next 16 - do not add it.
 export const maxDuration = 30; // seconds; the 10 s Eve budget fits comfortably
 export const dynamic = "force-dynamic";
 
@@ -39,7 +39,7 @@ const candidateSchema = z.object({
 
 const bodySchema = z.object({
   gameId: z.string().min(1).max(128),
-  // fen / history / difficulty are echoed for debugging only — the handler uses the
+  // fen / history / difficulty are echoed for debugging only - the handler uses the
   // server's own game document for all three.
   fen: z.string().max(120).optional(),
   history: z.array(z.string().max(12)).max(600).optional(),
@@ -83,7 +83,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const difficulty: Difficulty = (game.difficulty ?? "casual") as Difficulty;
   const persona = DIFFICULTIES[difficulty].persona;
-  const fen = game.fen; // server-authoritative position — never the body's
+  const fen = game.fen; // server-authoritative position - never the body's
   const candidates = legalCandidates(fen, body.candidates);
   if (candidates.length === 0) {
     return Response.json({ error: "no-legal-candidates" }, { status: 400 });
@@ -211,7 +211,7 @@ async function resolveMove(input: ResolveMoveInput): Promise<AiMoveResult> {
 
   const remainingMs = input.deadline - Date.now();
   if (data === null && turn.unreachable && !input.signal.aborted && remainingMs >= AI_DIRECT_MIN_BUDGET_MS) {
-    // §F.6: eve itself is down — one direct AI SDK 7 attempt with what is left of
+    // §F.6: eve itself is down - one direct AI SDK 7 attempt with what is left of
     // the ONE NFR-5 budget. Giving it a fresh 8 s here is how a single move used to
     // occupy ~18 s of "Still thinking…" after a slow eve failure.
     const direct = await runDirectTurn(moveOutputSchema, {

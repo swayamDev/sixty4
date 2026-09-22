@@ -46,7 +46,7 @@ const CORNER_SEGMENTS = { low: 3, high: 6 } as const;
 
 /**
  * A rounded rectangle in the extruder's own XY plane, centred on the origin and wound
- * anticlockwise. `target` is a `Shape` for an outline and a `Path` for a hole — three's
+ * anticlockwise. `target` is a `Shape` for an outline and a `Path` for a hole - three's
  * `ExtrudeGeometry` takes the winding from `ShapeUtils`, so both may be drawn the same way.
  */
 function roundedRect<T extends Path>(target: T, width: number, depth: number, radius: number): T {
@@ -82,7 +82,7 @@ interface TrayGeometries {
   felt: ExtrudeGeometry;
 }
 
-/** One set of geometries, shared by BOTH trays — the block is symmetric in X. */
+/** One set of geometries, shared by BOTH trays - the block is symmetric in X. */
 function useTrayGeometries(curveSegments: number): TrayGeometries {
   const geometries = useMemo<TrayGeometries>(() => {
     const outline = () =>
@@ -114,7 +114,7 @@ function useTrayGeometries(curveSegments: number): TrayGeometries {
 
 export interface CapturedTrayFurnitureProps {
   table: TableFinish;
-  /** True on the Low tier — the same flag the table's lathes read. */
+  /** True on the Low tier - the same flag the table's lathes read. */
   lowDetail: boolean;
 }
 

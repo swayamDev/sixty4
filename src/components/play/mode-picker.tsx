@@ -25,7 +25,7 @@ import { cn } from "@/lib/ui";
 import "./play.css";
 
 const QUEUE_NOTICE =
-  "Starting an AI game takes you out of the queue — a player can only have one game going at a time.";
+  "Starting an AI game takes you out of the queue. A player can only have one game going at a time.";
 
 const IN_GAME_REASON = "You have a game in progress. Finish or resign it first.";
 const CHECKING_REASON = "Checking your games…";
@@ -80,13 +80,13 @@ export function ModePicker() {
   const roomPreset: RoomPresetId = roomOverride ?? me?.roomPreset ?? DEFAULT_ROOM;
 
   // "unset" until the first subscription value lands. A game that already exists
-  // when the page opens is offered as "Resume", never force-navigated — only a
+  // when the page opens is offered as "Resume", never force-navigated - only a
   // NEW id (i.e. a pairing that happened while we were watching) redirects.
   const baseline = useRef<"unset" | GameId | null>("unset");
 
   // An AI or local game created from this page ALSO makes a new id appear in
   // `myActiveGame`, and we are already navigating to it. Set before the create
-  // mutation is awaited — Convex resolves that promise having already pushed the
+  // mutation is awaited - Convex resolves that promise having already pushed the
   // new query value, so a flag set afterwards can lose the race. Cleared again if
   // the mutation rejects, so a later real pairing still redirects.
   const selfStarting = useRef(false);
@@ -103,14 +103,14 @@ export function ModePicker() {
     if (activeGameId !== null && activeGameId !== baseline.current) {
       baseline.current = activeGameId;
       if (selfStarting.current) return;
-      toast.success("Match found — good luck.");
+      toast.success("Match found. Good luck.");
       router.push(`/game/${activeGameId}`);
     }
   }, [activeGameId, router]);
 
   // §3.2: a `?mode=` deep link scrolls the matching seat into view and gives it
   // the brass ring for one second. The seats stay usable throughout, so this is a
-  // pointer, never a filter — and both derived values are computed during render,
+  // pointer, never a filter - and both derived values are computed during render,
   // so the deep link never costs a second pass.
   const deepLinked = modeFromParam(searchParams.get("mode"));
   const focusedSeat: Mode = seatFromUser ?? deepLinked ?? "match";

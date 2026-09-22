@@ -1,5 +1,5 @@
 // src/components/board3d/piece-materials.ts
-// Room presets are procedural PBR only — the GLB has no UVs, so `map`/`normalMap`/
+// Room presets are procedural PBR only - the GLB has no UVs, so `map`/`normalMap`/
 // `roughnessMap`/`aoMap` are impossible (assets.md §B3.7). Everything is driven by
 // colour + metalness + roughness + clearcoat + envMapIntensity against the room HDRI.
 import { Color, MeshPhysicalMaterial, MeshStandardMaterial } from "three";

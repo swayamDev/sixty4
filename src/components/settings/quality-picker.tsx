@@ -2,7 +2,7 @@
 // src/components/settings/quality-picker.tsx  [U4]
 // The Board and Graphics controls of UI_REDESIGN §6, split so each can sit in
 // its own section. FR-15, FR-29, FR-31: every change is applied to the store
-// first (so a game — or the settings preview — already on screen reacts on the
+// first (so a game - or the settings preview - already on screen reacts on the
 // same frame) and only then debounced to Convex.
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -13,7 +13,7 @@ import { cn, focusRing } from "@/lib/ui";
 
 const BOARD_VIEWS: ReadonlyArray<{ value: BoardView; label: string; hint: string }> = [
   { value: "3d", label: "3D", hint: "Full scene with lighting and reflections" },
-  { value: "2d", label: "2D", hint: "Flat board — lighter, and always available" },
+  { value: "2d", label: "2D", hint: "Flat board, lighter and always available" },
 ];
 
 const TIERS: ReadonlyArray<{ value: QualityTier; label: string; hint: string }> = [

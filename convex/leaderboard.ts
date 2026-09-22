@@ -1,4 +1,4 @@
-// convex/leaderboard.ts — FR-50…FR-52
+// convex/leaderboard.ts - FR-50…FR-52
 import { v } from "convex/values";
 import { query } from "./_generated/server";
 import { clampLimit, LEADERBOARD_SIZE } from "./lib/constants";

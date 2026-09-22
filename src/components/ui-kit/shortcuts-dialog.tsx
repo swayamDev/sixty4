@@ -27,7 +27,7 @@ export interface ShortcutsDialogProps {
   trigger?: React.ReactNode;
   title?: string;
   description?: string;
-  /** A closing line under the list — how to make a move, where reset lives. */
+  /** A closing line under the list - how to make a move, where reset lives. */
   note?: React.ReactNode;
   className?: string;
 }

@@ -48,8 +48,8 @@ export function ProPricing() {
         <WelcomeNotice />
       </Suspense>
 
-      {/* §7's "walnut well". Clerk paints its plan cards in `colorMuted` — cellar in
-          this palette — so the panel under them is walnut and the tone steps DOWN
+      {/* §7's "walnut well". Clerk paints its plan cards in `colorMuted` - cellar in
+          this palette - so the panel under them is walnut and the tone steps DOWN
           into each card: espresso ground, walnut panel, cellar cards. Depth is
           tonal here, never a shadow (DESIGN.md, Elevation). */}
       <div
@@ -74,7 +74,7 @@ export function ProPricing() {
  * The state a member arrives in from checkout (`/pro?welcome=1`).
  *
  * `has` is read from the session token, and the token that came back from checkout
- * predates the subscription — so the session is reloaded exactly once here before the
+ * predates the subscription - so the session is reloaded exactly once here before the
  * answer is believed. The ref, not a state flag, is what makes it once: `isLoaded`
  * flipping and Clerk's context re-identifying would otherwise both re-run the effect.
  */

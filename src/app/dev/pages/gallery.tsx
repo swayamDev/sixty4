@@ -3,7 +3,7 @@
 // The presentational halves of /play, /leaderboard, /profile and /settings with
 // fixed data, so they can be reviewed (and screenshotted at 1440x900 and
 // 390x844) without a Clerk session. Every component below is the SAME one the
-// real page renders — only the data source is faked.
+// real page renders - only the data source is faked.
 import { useState } from "react";
 import { AiSetup } from "@/components/play/ai-setup";
 import { LocalSetup } from "@/components/play/local-setup";
@@ -147,7 +147,7 @@ export function PagesGallery({ only = null }: { only?: SectionId | null }) {
           <Eyebrow>Development harness</Eyebrow>
           <p className="mt-2 max-w-prose text-[15px] text-muted-foreground">
             The presentational halves of the signed-in pages, with fixed data. Buttons here start
-            nothing — the containers that own the Convex mutations are not mounted.
+            nothing - the containers that own the Convex mutations are not mounted.
           </p>
         </Section>
       ) : null}
@@ -157,7 +157,7 @@ export function PagesGallery({ only = null }: { only?: SectionId | null }) {
             three seats, the waiting state frozen, the preview in its 2D fallback,
             the board tiles and the scoresheet. The Convex-connected containers
             (ModePicker, FindMatchPanel, SpectateList, Scoresheet) are deliberately
-            not mounted — nothing here starts a game. */}
+            not mounted - nothing here starts a game. */}
         <div className="lobby grid gap-12">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]">
             <div className="lobby-seats min-w-0">
@@ -166,7 +166,7 @@ export function PagesGallery({ only = null }: { only?: SectionId | null }) {
               <LocalSetup onStart={NOOP} />
             </div>
 
-            {/* §3.5: the preview in its 2D fallback form — the harness never
+            {/* §3.5: the preview in its 2D fallback form - the harness never
                 mounts a WebGL context, so a screenshot pass is deterministic. */}
             <TablePreview
               className="hidden lg:sticky lg:top-20 lg:block"

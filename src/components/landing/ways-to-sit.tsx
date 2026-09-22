@@ -1,6 +1,6 @@
 "use client";
 // src/components/landing/ways-to-sit.tsx  [UI upgrade 2 §2.2]
-// "Three ways to sit down." — a ledger, not a card grid: three full-width rows
+// "Three ways to sit down." - a ledger, not a card grid: three full-width rows
 // separated by seam hairlines, each one a 12-column split with the title and the
 // copy on the left and a working artefact on the right. The title is the row's
 // only link, and each artefact is a piece of the real product rather than an
@@ -83,7 +83,7 @@ function LedgerRow({ way, index }: { way: Way; index: number }) {
               href={way.href}
               className={cn(
                 // headline-sm (2rem) on a phone, the full headline step (2.5rem)
-                // from `sm` up — the ledger titles are the page's second voice.
+                // from `sm` up - the ledger titles are the page's second voice.
                 "font-display group/row inline-flex min-h-9 items-baseline gap-2.5 rounded-sm py-1 text-[2rem] leading-[1.05] text-foreground",
                 "transition-colors duration-(--dur-micro) hover:text-primary sm:text-[2.5rem]",
                 focusRing,
@@ -102,7 +102,7 @@ function LedgerRow({ way, index }: { way: Way; index: number }) {
           </p>
 
           {/* All three artefacts end at the same right edge as the seam hairlines
-              above and below the row — the section's right margin used to staircase
+              above and below the row - the section's right margin used to staircase
               inward because rows 2 and 3 floated centred in their column. */}
           <div className="order-3 flex justify-center lg:order-3 lg:justify-end lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:self-center">
             {way.artefact(active)}

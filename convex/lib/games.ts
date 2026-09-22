@@ -44,7 +44,7 @@ export function requireParticipant(
 
 /**
  * May this player act for `colour`? In `local` mode the owner (whiteId) drives
- * BOTH sides — that is the whole point of pass-and-play (FR-21a).
+ * BOTH sides - that is the whole point of pass-and-play (FR-21a).
  */
 export function canActAs(
   game: Doc<"games">,
@@ -157,7 +157,7 @@ export interface FinalizeOptions {
   /**
    * Skip ratings AND the W/L/D record: the game did not really happen as far as
    * either player's record is concerned (abandoned by both sides, and the TTL
-   * sweep of solo games nobody ever came back to — §C.7).
+   * sweep of solo games nobody ever came back to - §C.7).
    */
   skipRatings?: boolean;
   /** Pinned wall clock; mutations get one consistent `Date.now()` per transaction. */
@@ -178,7 +178,7 @@ function scoreFor(colour: Colour, winner: Winner): Score {
  * Two independent switches, deliberately NOT one (FR-45/FR-48/FR-49, §C.7):
  *
  *  - `game.rated` gates ONLY the Elo change and its `ratingHistory` row. A game with
- *    a take-back "does not affect rating" — it is still a game that was won, lost or
+ *    a take-back "does not affect rating" - it is still a game that was won, lost or
  *    drawn, so `wins/losses/draws` still move. That is what makes the result dialog's
  *    "Won with 2 take-backs" (FR-45) consistent with the profile record;
  *  - `mode === "local"` and `opts.skipRatings` skip BOTH: pass-and-play never counts

@@ -1,7 +1,7 @@
 // src/components/board3d/board-3d.tsx
 // P4's entry point: a drop-in `(props: BoardViewProps) => JSX.Element`, default-exported
 // for `next/dynamic({ ssr: false })`. It imports nothing from Convex and owns no chess
-// logic — every field it draws is computed by `useGameController` (§D.11).
+// logic - every field it draws is computed by `useGameController` (§D.11).
 //
 // U3 adds the optional `showcase` prop of UI_REDESIGN §10.4 on top of that contract:
 // the same board, driven by values passed in instead of the ui-store, running as
@@ -35,7 +35,7 @@ import { WebglFallbackNotice, WebglProbe, notifyRenderFailure } from "./webgl-fa
 
 /**
  * Warms the 3D chunk's assets: the piece GLB plus any HDRIs passed in (FR-21m, NFR-2a),
- * and — because a room is a light probe AND a skybox — the sharp backdrop that goes with
+ * and - because a room is a light probe AND a skybox - the sharp backdrop that goes with
  * each of those HDRIs. Callers keep passing `.hdr` paths; the pairing lives in
  * `src/lib/rooms.ts`, so nothing on the calling side has to know a backdrop exists.
  */
@@ -56,8 +56,8 @@ export interface Board3DProps extends BoardViewProps {
   /**
    * Hide the in-canvas camera overlay without entering showcase mode. The game shell
    * (§5.1) puts White / Black / Top / Orbit / Reset in its own DOM action bar, and two
-   * copies of the same five buttons — one of them sitting over the bottom rank of the
-   * board — is worse than either alone. Outside showcase mode the wrapper stays a
+   * copies of the same five buttons - one of them sitting over the bottom rank of the
+   * board - is worse than either alone. Outside showcase mode the wrapper stays a
    * `role="application"` widget with its keyboard camera control (NFR-7) intact; only
    * the buttons go. In showcase mode this is `showcase.hideControls` and the board
    * becomes a picture instead.
@@ -77,7 +77,7 @@ const MEASURE_RETRY_MS = 300;
 /** …and how many times to nudge it before accepting that something else is wrong. */
 const MAX_MEASURE_NUDGES = 20;
 
-/** Keyboard camera control (NFR-7) — the board itself is operated by P3's SAN input. */
+/** Keyboard camera control (NFR-7) - the board itself is operated by P3's SAN input. */
 const KEY_ROTATE = 0.14;
 const KEY_POLAR = 0.09;
 const KEY_DOLLY = 0.9;
@@ -112,7 +112,7 @@ export default function Board3D(props: Board3DProps) {
   // "percentage" asks for the map three actually uses; the visual result is identical.
   // The upshot for FR-31: High and Medium both get PERCENTAGE-CLOSER filtered shadows
   // (they differ in shadow-map size and dpr, not technique) and Low gets hard-edged
-  // BasicShadowMap plus a baked ContactShadows pass. Nothing here is PCSS — see the
+  // BasicShadowMap plus a baked ContactShadows pass. Nothing here is PCSS - see the
   // shadow note in scene.tsx for why drei's <SoftShadows> cannot be used with r185.
   const canvasShadows = quality.shadows === false ? false : quality.shadows === "basic" ? "basic" : "percentage";
 
@@ -127,7 +127,7 @@ export default function Board3D(props: Board3DProps) {
   const [regressedTier, setRegressedTier] = useState<ResolvedQualityTier | null>(null);
   const onRegressDpr = useCallback(() => setRegressedTier(tier), [tier]);
   const onRestoreDpr = useCallback(() => setRegressedTier(null), []);
-  // §10.4: showcase caps the resolution on top of the tier — a hero must never cost
+  // §10.4: showcase caps the resolution on top of the tier - a hero must never cost
   // more than the game it advertises.
   const maxDpr = showcase?.maxDpr ?? Infinity;
   const canvasDpr: [number, number] | number =
@@ -141,7 +141,7 @@ export default function Board3D(props: Board3DProps) {
   const registerSelected = useCallback((mesh: Mesh | null) => setSelectedMesh(mesh), []);
 
   // A WebGL canvas is transparent until the renderer has drawn into it, and everything
-  // that could draw — the piece GLB, the room HDRI, the 1.2 MB chunk itself — suspends
+  // that could draw - the piece GLB, the room HDRI, the 1.2 MB chunk itself - suspends
   // for a while first. `painted` is the honest answer to "is there anything on this
   // canvas yet", and it gates both the skeleton below and the `data-first-frame` hook
   // the harnesses and the e2e suite read.
@@ -184,7 +184,7 @@ export default function Board3D(props: Board3DProps) {
       // Tearing the Canvas down (route change, HMR, a tier switch) also fires
       // `webglcontextlost`. Reporting that as a failure would bounce the player into the
       // 2D board on the way OUT of the game, so wait a tick and only report if the canvas
-      // is still in the document — a genuine runtime loss leaves it mounted.
+      // is still in the document - a genuine runtime loss leaves it mounted.
       window.setTimeout(() => {
         if (!mountedRef.current) return;
         if (canvas && !canvas.isConnected) return;
@@ -195,7 +195,7 @@ export default function Board3D(props: Board3DProps) {
     [reportFailure],
   );
 
-  // FR-24: touching the camera ends the idle orbit — except in showcase mode, where the
+  // FR-24: touching the camera ends the idle orbit - except in showcase mode, where the
   // orbit IS the point and nothing the visitor does may stop it (§10.4).
   const exitCinematic = useCallback(() => {
     if (showcase) return;
@@ -253,7 +253,7 @@ export default function Board3D(props: Board3DProps) {
   }, []);
 
   // §10.4: while the wrapper is off screen the Canvas drops to `frameloop="demand"`,
-  // which renders only what invalidates. Only showcase boards do this — the game board
+  // which renders only what invalidates. Only showcase boards do this - the game board
   // is always the thing being looked at.
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const pauseWhenOffscreen = showcase?.pauseWhenOffscreen ?? false;
@@ -280,7 +280,7 @@ export default function Board3D(props: Board3DProps) {
   // at the HTML default of 300x150 inside a wrapper that has a perfectly good size, and
   // nothing inside the Canvas exists to ask for a frame. The measurement is delivered by
   // a ResizeObserver, and react-use-measure DROPS the reading if it arrives before its
-  // own `mounted` ref is set — without recording it and without retrying, and the
+  // own `mounted` ref is set - without recording it and without retrying, and the
   // element's size never changes again, so no second callback ever comes. (A document
   // the browser is not rendering delivers that callback late, which is what makes the
   // race easy to lose.) A window resize re-measures through a different code path, so
@@ -347,7 +347,7 @@ export default function Board3D(props: Board3DProps) {
   const controlsHidden = props.hideControls ?? Boolean(showcase?.hideControls);
   // A SHOWCASE board with no controls is a picture, not a widget: it must not offer
   // keyboard camera control it does not have, and it must not sit in the tab order.
-  // A game board with `hideControls` is the opposite case — the controls moved to the
+  // A game board with `hideControls` is the opposite case - the controls moved to the
   // shell's action bar, so the arrow keys, the tab stop and the orientation live
   // region all stay exactly where they were.
   const widget = !(showcase !== null && controlsHidden);
@@ -458,7 +458,7 @@ export default function Board3D(props: Board3DProps) {
 }
 
 /**
- * All the per-viewer view settings the board reads (never game state — §D.11).
+ * All the per-viewer view settings the board reads (never game state - §D.11).
  *
  * With a `showcase` prop it reads those values instead of the ui-store and never
  * writes the store back (§10.4); the WebGL probe result is the one exception, because

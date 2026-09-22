@@ -1,13 +1,13 @@
 // convex/lib/chess.ts
 //
 // Server-authoritative chess helpers (NFR-4). chess.js runs in the DEFAULT Convex
-// runtime — no `"use node"` (chessjs.md §12.1, proven on this deployment).
+// runtime - no `"use node"` (chessjs.md §12.1, proven on this deployment).
 //
 // Two rules that everything here exists to enforce:
 //  1. `games.moves` (SAN) is the source of truth. Every position change replays it
 //     from the start, because a `Chess` built from a stored FEN has no history and
 //     therefore can never detect threefold repetition (chessjs.md §3).
-//  2. A `Move` is a CLASS instance and is NOT a Convex value — it throws at the
+//  2. A `Move` is a CLASS instance and is NOT a Convex value - it throws at the
 //     function boundary. Always flatten it (chessjs.md §12.5a).
 import { Chess } from "chess.js";
 import type { Move } from "chess.js";
@@ -31,14 +31,14 @@ export type GameOutcome =
   | { status: "active" }
   | { status: TerminalStatus; winner: Winner; endReason: EndReason };
 
-/** Denormalised `games.lastMove` — a plain object, never a `Move` instance. */
+/** Denormalised `games.lastMove` - a plain object, never a `Move` instance. */
 export interface StoredLastMove {
   from: string;
   to: string;
   san: string;
   colour: Colour;
   captured?: string;
-  /** Only set when the captured piece did NOT stand on `to` — i.e. en passant. */
+  /** Only set when the captured piece did NOT stand on `to` - i.e. en passant. */
   capturedSquare?: string;
   promotion?: string;
 }
@@ -46,7 +46,7 @@ export interface StoredLastMove {
 /**
  * Rebuild the authoritative position by replaying the stored SAN list.
  * Throws `"corrupt-move-list"` if a stored SAN no longer parses (should be
- * impossible — chess.js generated every entry itself).
+ * impossible - chess.js generated every entry itself).
  */
 export function replay(sans: readonly string[]): Chess {
   const chess = new Chess();
@@ -93,7 +93,7 @@ export function applyMove(
 }
 
 /**
- * Apply SAN (or LAN — the default parser is permissive, which is what the model
+ * Apply SAN (or LAN - the default parser is permissive, which is what the model
  * needs; chessjs.md §4). Throws `"illegal-move"`.
  */
 export function applySan(chess: Chess, san: string): Move {
@@ -105,7 +105,7 @@ export function applySan(chess: Chess, san: string): Move {
 }
 
 /**
- * True when from→to requires a promotion choice (FR-11 — chess.js has no
+ * True when from→to requires a promotion choice (FR-11 - chess.js has no
  * implicit auto-queen; the object form rejects a promotion move without it).
  */
 export function needsPromotion(chess: Chess, from: string, to: string): boolean {
@@ -157,7 +157,7 @@ export function toStoredLastMove(move: Move): StoredLastMove {
   return stored;
 }
 
-/** PGN `Result` tag for a finished game (chess.js never infers it — §12.3). */
+/** PGN `Result` tag for a finished game (chess.js never infers it - §12.3). */
 export function pgnResult(winner: Winner | undefined): "1-0" | "0-1" | "1/2-1/2" | null {
   if (winner === "w") return "1-0";
   if (winner === "b") return "0-1";

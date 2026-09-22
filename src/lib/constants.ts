@@ -50,8 +50,8 @@ export const MOVE_ANIMATION_MS = 250; // FR-17
 export const CAMERA_FLIP_MS = 800; // FR-21c
 /**
  * camera-controls damps with Unity-style `smoothDamp` (omega = 2 / smoothTime) and only
- * dispatches `rest` — which resolves the `setLookAt` promise and releases the rig's input
- * lock — once the remaining delta drops under `restThreshold` (0.01). For the half-turn
+ * dispatches `rest` - which resolves the `setLookAt` promise and releases the rig's input
+ * lock - once the remaining delta drops under `restThreshold` (0.01). For the half-turn
  * between the two seats (delta theta = PI) that happens at omega*t ~= 7.95, i.e.
  * t ~= 3.98 * smoothTime. Derive it from CAMERA_FLIP_MS so the rig's lock and the
  * controller's `flipping` timer can never drift apart (FR-21c).
@@ -99,15 +99,15 @@ export const AI_TARGET_LATENCY_MS = 3_000; // FR-38 target; UI shows "still thin
 export const AI_ROUTE_MAX_DURATION = 30; // seconds; `export const maxDuration` on the route
 /**
  * Which engine binary a worker was booted from.
- *   sf18 — stockfish@18.0.8 `lite-single`: the DEFAULT (user decision 2026-09-09).
+ *   sf18 - stockfish@18.0.8 `lite-single`: the DEFAULT (user decision 2026-09-09).
  *          NNUE, 5.64 MB gzipped, needs WASM SIMD, no SharedArrayBuffer/COOP+COEP.
- *   sf11 — stockfish@11.0.0: the automatic fallback for browsers without WASM SIMD.
+ *   sf11 - stockfish@11.0.0: the automatic fallback for browsers without WASM SIMD.
  *          Classical eval, 669 KB gzipped. NOT a user-facing setting.
  */
 export type EngineBuild = "sf18" | "sf11";
 
 /**
- * Classic, same-origin workers loaded by URL STRING from `public/` — never
+ * Classic, same-origin workers loaded by URL STRING from `public/` - never
  * `new Worker(new URL(...))` (Turbopack appends a `#params=[…]` fragment and both
  * glues read `location.hash` as the wasm-path override). Each `.js` resolves its
  * `.wasm` as a sibling, so the basenames and directories must not change without
@@ -140,7 +140,7 @@ export type PieceMeshName = "King" | "Queen" | "Rook" | "Bishop" | "Knight" | "P
 export const MESH_BY_TYPE: Record<"p" | "n" | "b" | "r" | "q" | "k", PieceMeshName> = {
   p: "Pawn", n: "Knight", b: "Bishop", r: "Rook", q: "Queen", k: "King",
 };
-/** Measured heights in board-square units — use for tray stacking and camera framing. */
+/** Measured heights in board-square units - use for tray stacking and camera framing. */
 export const PIECE_HEIGHTS: Record<PieceMeshName, number> = {
   King: 1.75, Queen: 1.572, Bishop: 1.1121, Knight: 1.0875, Rook: 0.9432, Pawn: 0.845,
 };
@@ -153,9 +153,9 @@ export const KNIGHT_YAW: Record<"w" | "b", number> = {
   w: -Math.PI / 2, // face -Z (toward black)
   b: Math.PI / 2,  // face +Z (toward white)
 };
-/** Mandatory CC-BY 3.0 credit — must be rendered somewhere a user can see it. */
+/** Mandatory CC-BY 3.0 credit - must be rendered somewhere a user can see it. */
 export const PIECE_MODEL_CREDIT = {
-  text: "Chess pieces by Jarlan Perez via Poly Pizza — CC BY 3.0",
+  text: "Chess pieces by Jarlan Perez via Poly Pizza, CC BY 3.0",
   authorUrl: "https://poly.pizza",
   licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
 };

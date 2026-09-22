@@ -2,15 +2,15 @@
 // src/components/board3d/tutor-annotations.tsx
 // The tutor's drawings in the 3D scene (docs/PRO_TUTOR.md §4): square tints, arrows
 // and a numbered candidate line, drawn flat in the board plane just above
-// <Highlights>. Same shapes as the 2D layer — both call the geometry helpers in
+// <Highlights>. Same shapes as the 2D layer - both call the geometry helpers in
 // src/lib/tutor/annotations.ts, so a drawing does not change when the player swaps
 // boards mid-game.
 //
 // WHERE THE COLOURS COME FROM. The four tones are SEMANTIC (good / bad / threat /
 // idea) and DESIGN.md gives each one a token: --live, --danger, --board-capture,
 // --accent. The panel's annotation chips use those same tokens, and a chip and its
-// drawing have to be the same colour or the pairing is a puzzle. The alternative —
-// mapping tones onto `room.highlight` — was rejected: those five colours mean
+// drawing have to be the same colour or the pairing is a puzzle. The alternative -
+// mapping tones onto `room.highlight` - was rejected: those five colours mean
 // select / legal / capture / last / check, they are decoration that changes per room
 // (the arcade room's are magenta and cyan), and a "good" square would turn hot pink
 // in one room and green in another. So this reads the four CSS custom properties off
@@ -62,7 +62,7 @@ import { HIGHLIGHT_Y, TILE_SIZE } from "./layout";
 const FADE_MS = 160;
 /**
  * Deliberately LOWER than <Highlights>' 0.9-1.6. Those markers are decoration and are
- * allowed to blow out into the bloom; a tutor's drawing carries meaning in its hue —
+ * allowed to blow out into the bloom; a tutor's drawing carries meaning in its hue -
  * measured at 1.15 the ember, capture and brass tones all clipped to near-white on the
  * lit board and stopped being tellable apart. At 0.4 each tone keeps its colour and
  * still sits above the walnut.
@@ -72,7 +72,7 @@ const EMISSIVE = 0.4;
 const POLYGON_OFFSET = -3;
 /** How far a line's numbered badge floats over the board, in squares. */
 const BADGE_LIFT = 0.3;
-/** 0.28 across plus the disc's own hairline — the 2D badge's size, in squares.
+/** 0.28 across plus the disc's own hairline - the 2D badge's size, in squares.
  *  It was 0.46: half a square, sitting on the piece whose move it numbered. */
 const BADGE_SIZE = 0.32;
 
@@ -194,7 +194,7 @@ function numberTexture(step: number, fill: string, ink: string): Texture | null 
 
 /**
  * The tint's edge as a flat frame (a square with a square hole), the 3D twin of the 2D
- * layer's inset stroke — and the same argument: on a lit walnut board the wash alone is
+ * layer's inset stroke - and the same argument: on a lit walnut board the wash alone is
  * a hue change, the frame is what gives the mark a value change.
  */
 function frameGeometry(outer: number, width: number): ShapeGeometry {

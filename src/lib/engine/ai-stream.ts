@@ -1,6 +1,6 @@
 // src/lib/engine/ai-stream.ts
 //
-// The NDJSON wire format of POST /api/ai/move — one JSON object per line
+// The NDJSON wire format of POST /api/ai/move - one JSON object per line
 // (§E.4 step 8, patched). Shared by the route handler (encode) and the browser
 // hook (decode); no React, no worker, no Node built-ins, so both runtimes can import it.
 //
@@ -54,7 +54,7 @@ export function isAiMoveResult(value: unknown): value is AiMoveResult {
 
 /**
  * Decode an NDJSON body into frames. Malformed lines are skipped rather than
- * throwing — a truncated tail must never lose the frames that already arrived.
+ * throwing - a truncated tail must never lose the frames that already arrived.
  */
 export async function* readNdjson(
   body: ReadableStream<Uint8Array>,

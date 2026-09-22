@@ -1,6 +1,6 @@
 // convex/lib/auth.ts
 //
-// Identity always comes from `ctx.auth.getUserIdentity()` — never from a function
+// Identity always comes from `ctx.auth.getUserIdentity()` - never from a function
 // argument (FR-5, Convex auth guidelines). `tokenIdentifier` ("<issuer>|<subject>")
 // is the canonical key; `by_tokenIdentifier` is the only index auth paths use.
 import type { UserIdentity } from "convex/server";
@@ -37,7 +37,7 @@ export async function requirePlayer(ctx: AnyCtx): Promise<Doc<"players">> {
   return player;
 }
 
-/** `null` instead of a throw — for queries that render outside `<Authenticated>`. */
+/** `null` instead of a throw - for queries that render outside `<Authenticated>`. */
 export async function optionalPlayer(ctx: AnyCtx): Promise<Doc<"players"> | null> {
   const identity = await ctx.auth.getUserIdentity();
   if (identity === null) return null;

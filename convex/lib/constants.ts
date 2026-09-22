@@ -38,7 +38,7 @@ export const QUEUE_WIDEN_STEP = 100;
 export const QUEUE_WIDEN_INTERVAL_MS = 10_000;
 /** Queue rows older than this are dropped by the pairing sweep (§E.2 step 7). */
 export const QUEUE_MAX_WAIT_MS = 15 * 60_000;
-/** Rows scanned by one `queue.pair` tick — bounds the read set and the O(n²) scan. */
+/** Rows scanned by one `queue.pair` tick - bounds the read set and the O(n²) scan. */
 export const QUEUE_SCAN_LIMIT = 200;
 
 /** Rating window for a queue entry that joined `joinedAt`, evaluated at `now`. */

@@ -2,7 +2,7 @@
 // src/components/ui-kit/move-list.tsx  [U0 → U2 §4.4]
 // The Moves tab as a SCORESHEET: a mono number column in parchment, White and
 // Black's SAN as buttons in mono, and the current ply on a seam plate with brass
-// text — DESIGN.md's selected-chip treatment rather than the 2px brass rule the
+// text - DESIGN.md's selected-chip treatment rather than the 2px brass rule the
 // craft floor calls a costume.
 //
 // The row carrying the current ply scrolls itself into view, so arrowing through
@@ -19,7 +19,7 @@ export interface MoveListProps extends Omit<React.ComponentProps<"div">, "onSele
   /**
    * Per-cell slot revealed on hover/focus, e.g. the "Rewind to move 8" button that
    * opens its confirmation (§5.1). It is rendered as a SIBLING of the cell button,
-   * overlaid on its right edge — a button inside a button is invalid HTML and
+   * overlaid on its right edge - a button inside a button is invalid HTML and
    * breaks hydration. The slot may render a dialog trigger, so keep it a sibling
    * rather than nesting it in the cell.
    */
@@ -41,14 +41,14 @@ function MoveCell({
   if (!move) return <span aria-hidden className="px-2 py-1.5" />;
 
   const cellClass = cn(
-    // `w-fit`: the brass plate marks the MOVE, not the row — it used to stretch the
+    // `w-fit`: the brass plate marks the MOVE, not the row - it used to stretch the
     // full width of its grid cell for a three-character move.
     "flex w-fit min-w-[3.25rem] items-center rounded-md px-2 py-1.5 text-left text-[13px]",
     focusRingInset,
     current
       ? // §4.4: "current ply on a seam plate with brass text". Brass on seam is
         // 6.34:1 in dark and only 3.71:1 in light, so the light theme sets the
-        // plate's text in ink and keeps the plate itself as the marker — the same
+        // plate's text in ink and keeps the plate itself as the marker - the same
         // split `chat-message.tsx` makes for the player's own bubble.
         "bg-line font-medium text-foreground dark:text-primary"
       : "text-muted-foreground",

@@ -14,7 +14,7 @@ import { useCallback, useRef } from "react";
 import { useUiStore } from "@/lib/stores/ui-store";
 import type { ResolvedQualityTier } from "@/lib/types";
 
-/** Never drop more than one tier per this many ms — a tier switch itself costs a hitch. */
+/** Never drop more than one tier per this many ms - a tier switch itself costs a hitch. */
 const COOLDOWN_MS = 8_000;
 
 export interface QualityWatchdog {

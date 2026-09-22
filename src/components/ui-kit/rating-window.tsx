@@ -2,9 +2,9 @@
 // The rating window as a measuring bracket on a rating rail.
 //
 // Shared, because §3.2.1 says the lobby's waiting state shows "the same visual as
-// the landing artefact, now live". The landing renders it with no numbers — the
+// the landing artefact, now live". The landing renders it with no numbers - the
 // rail is the scale a rating sits on and the bracket is the shape of the queue's
-// search, both labelled as such — and the lobby renders the same object with the
+// search, both labelled as such - and the lobby renders the same object with the
 // player's own rating at the centre and the bracket widening with the real range.
 //
 // The one-time "breath" on reveal is `.window-bracket` in landing.css, keyed off the
@@ -19,7 +19,7 @@ const TICKS = [800, 1200, 1600, 2000, 2400] as const;
 const RAIL_MIN = TICKS[0];
 const RAIL_MAX = TICKS[TICKS.length - 1];
 
-/** Where a rating falls on the rail, 0–100, clamped to the drawn scale. */
+/** Where a rating falls on the rail, 0-100, clamped to the drawn scale. */
 function railPercent(rating: number): number {
   return Math.min(100, Math.max(0, ((rating - RAIL_MIN) / (RAIL_MAX - RAIL_MIN)) * 100));
 }

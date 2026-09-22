@@ -31,5 +31,5 @@ const nextConfig: NextConfig = {
 };
 
 // withEve mounts /eve/v1/* on this origin (dev rewrite to `eve dev`, Vercel Build Output service).
-// eveRoot defaults to ./agent — do not pass `agents` as well.
+// eveRoot defaults to ./agent - do not pass `agents` as well.
 export default withEve(nextConfig);

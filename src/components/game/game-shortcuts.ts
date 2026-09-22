@@ -3,8 +3,8 @@
 // the dialog and `use-shortcuts.ts` can never drift apart.
 //
 // The collision this round fixed: the 3D board's camera used the bare arrow keys,
-// which are the review keys everywhere else on the screen, and R — which flips
-// the board — also reset the camera. The camera now takes Shift+arrows and the
+// which are the review keys everywhere else on the screen, and R - which flips
+// the board - also reset the camera. The camera now takes Shift+arrows and the
 // bracket keys; the arrows and R keep one meaning each.
 import type { Shortcut } from "@/components/ui-kit";
 

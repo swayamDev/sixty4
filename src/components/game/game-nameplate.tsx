@@ -29,7 +29,7 @@ export interface GameNameplateProps extends React.ComponentProps<"div"> {
   /** "off" is dark, "to-move" is baize, "reviewing" is brass (§4.8 item 6). */
   lamp: NameplateLamp;
   captured: CapturedPieces;
-  /** "AI · Beginner", "Online · Rated", "Local" — the mode chip of §4.1. */
+  /** "AI · Beginner", "Online · Rated", "Local" - the mode chip of §4.1. */
   modeChip?: string;
   /** Spectators, shown on the near plate only when above zero. */
   watching?: number;
@@ -37,7 +37,7 @@ export interface GameNameplateProps extends React.ComponentProps<"div"> {
   stale?: boolean;
   /** Which edge carries the seam hairline. */
   seam?: "top" | "bottom";
-  /** Slot before the tray — the status pill sits here on the far plate. */
+  /** Slot before the tray - the status pill sits here on the far plate. */
   children?: React.ReactNode;
 }
 
@@ -125,7 +125,7 @@ export function GameNameplate({
       </div>
 
       {/* §4.1: the tray is this player's material, so it sits with this player's
-          name — not parked at the far edge of a 1040px plate where a single pawn
+          name - not parked at the far edge of a 1040px plate where a single pawn
           glyph reads as a stray icon. The mode chip takes the `ml-auto` instead. */}
       <CapturedTray captured={captured} colour={colour} collapsible className="shrink-0" />
 

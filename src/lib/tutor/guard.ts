@@ -29,13 +29,13 @@ import type { LanguageModel } from "ai";
 import { describeGatewayCredential, resolveGatewayModel } from "./model";
 
 /**
- * The body the panel posts. `messages` is checked only for shape here — the route
+ * The body the panel posts. `messages` is checked only for shape here - the route
  * validates it properly with `safeValidateUIMessages` once the tools exist, because
  * that is the check that knows what a tool part may contain.
  */
 /**
- * The whole request, in bytes. Generous for a real conversation — 80 turns of an
- * answer under 120 words is well under 100 kB — and a hard stop on anything else.
+ * The whole request, in bytes. Generous for a real conversation - 80 turns of an
+ * answer under 120 words is well under 100 kB - and a hard stop on anything else.
  */
 export const MAX_TUTOR_BODY_BYTES = 200_000;
 
@@ -91,7 +91,7 @@ export async function guardTutorRequest(request: Request): Promise<TutorGuardRes
 
   // 3. The schema bounds the NUMBER of messages (80) but each element is
   // `z.unknown()`, and neither `safeValidateUIMessages` nor `convertToModelMessages`
-  // caps text length — so 80 megabyte-scale parts would all be forwarded to the
+  // caps text length - so 80 megabyte-scale parts would all be forwarded to the
   // gateway for one quota turn. The counter caps how many model calls a game may
   // make, not what each one costs; this caps the cost. Read as text once, so the
   // ceiling is on bytes rather than on whatever the parsed shape happens to be.
@@ -105,7 +105,7 @@ export async function guardTutorRequest(request: Request): Promise<TutorGuardRes
   }
 
   // 4. The caller's own token: Convex re-derives identity, and a signed-in member may
-  // read any game they can open — a player, or a spectator watching it.
+  // read any game they can open - a player, or a spectator watching it.
   const token = await getAuthToken();
   let view: GameView | null;
   try {

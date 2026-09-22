@@ -1,7 +1,7 @@
 "use client";
 // src/app/error.tsx  [U4]
 // Root error boundary. Must be a client component and must render its own
-// markup — it replaces layout.tsx's children, not the layout itself.
+// markup - it replaces layout.tsx's children, not the layout itself.
 // Copy voice (§2): say what happened and what to do. Never "Oops".
 import { useEffect } from "react";
 import Link from "next/link";
@@ -29,7 +29,7 @@ export default function RootError({
         This page stopped <em>mid-move</em>.
       </Display>
       <p className="text-[15px] leading-relaxed text-muted-foreground">
-        Nothing on the server was lost — your games, ratings and settings are exactly where you
+        Nothing on the server was lost. Your games, ratings and settings are exactly where you
         left them. Try again, and if it keeps happening, go back to the lobby.
       </p>
       {error.digest ? (

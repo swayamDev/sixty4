@@ -35,7 +35,7 @@ export function uciToSan(fen: string, uci: string): string | null {
 }
 
 /**
- * Accepts SAN *or* UCI/LAN (the model may emit either — chessjs.md §5 documents the
+ * Accepts SAN *or* UCI/LAN (the model may emit either - chessjs.md §5 documents the
  * permissive parser) and returns the canonical SAN, or null when illegal in `fen`.
  */
 export function normaliseMove(fen: string, move: string): string | null {
@@ -73,7 +73,7 @@ export function linesToCandidates(fen: string, lines: PvLine[]): Candidate[] {
 /**
  * Engine-less last resort: build candidates straight from the legal move list so a
  * broken/blocked worker can never stall the game (§E.4 "Failure modes"). Scores are
- * null — the agent's instructions treat a scoreless list as "no engine opinion".
+ * null - the agent's instructions treat a scoreless list as "no engine opinion".
  */
 export function candidatesFromLegalMoves(fen: string, limit = 5): Candidate[] {
   let verbose: ReturnType<Chess["moves"]> = [];

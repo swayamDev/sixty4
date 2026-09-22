@@ -35,12 +35,12 @@ let sf18Failed = false;
  * Warm the wasm, and recover from a dead sf18 build.
  *
  * sf18 is a 7.3 MB asset: if it 404s from a bad deploy, the download is cut off, or the
- * device cannot allocate the NNUE memory, `init()` rejects and — without this — every
+ * device cannot allocate the NNUE memory, `init()` rejects and - without this - every
  * later `init()` (including the retry button's) would hit the same URL forever, leaving
  * the game with no candidate generation and no hints while sf11 sat unused on disk.
  * The first such failure swaps the SHARED engine to sf11; `onSharedEngineChange` re-points
  * every mounted consumer, which boots the replacement. Never more than one downgrade,
- * and never for sf11 itself — there is nothing left to fall back to.
+ * and never for sf11 itself - there is nothing left to fall back to.
  */
 function bootEngine(engine: StockfishEngine): void {
   void engine.init().catch(() => {
@@ -77,7 +77,7 @@ export interface UseStockfish {
 }
 
 /**
- * @param enabled true only for `game.mode === "ai"` — never boot the engine for
+ * @param enabled true only for `game.mode === "ai"` - never boot the engine for
  *                online, local or spectated games.
  */
 export function useStockfish(enabled: boolean): UseStockfish {
@@ -128,7 +128,7 @@ export function useStockfish(enabled: boolean): UseStockfish {
       detach?.();
       engineRef.current = null;
       // The engine is REFCOUNTED and shared (the hint button holds it too), so only
-      // the last consumer out may blank the status — otherwise unmounting one of two
+      // the last consumer out may blank the status - otherwise unmounting one of two
       // consumers would put a perfectly healthy engine back on "Loading…" in the
       // other's UI (review AI-7). A remaining count of 0 means the shared worker is
       // on its way to `dispose()`, which sets "idle" itself if a re-acquire does not

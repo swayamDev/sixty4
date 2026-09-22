@@ -1,7 +1,7 @@
 // src/lib/engine/ai-client.ts
 //
 // Browser-side callers for the two AI route handlers. Nothing here knows about
-// React or Convex — `use-ai-turn` and `hint-button` own that side.
+// React or Convex - `use-ai-turn` and `hint-button` own that side.
 import type { AiMoveRequest, AiMoveResult, AiPhase, Candidate, HintResult } from "@/lib/types";
 import { readNdjson } from "./ai-stream";
 
@@ -16,7 +16,7 @@ export class AiRouteError extends Error {
 }
 
 export interface AiMoveCallbacks {
-  /** Heartbeat frames — keep the "thinking" indicator alive. */
+  /** Heartbeat frames - keep the "thinking" indicator alive. */
   onStatus?(phase: AiPhase): void;
   /**
    * Text deltas. Reserved: with a per-turn `outputSchema` eve emits none
@@ -73,7 +73,7 @@ export async function postAiMove(
 /**
  * FR-40. One-shot JSON, no streaming. The route charges the 3-per-game limit
  * itself (`api.games.useHint`) before it does any model work, so the caller must
- * NOT pre-charge it — that would spend two hints per press. The position and
+ * NOT pre-charge it - that would spend two hints per press. The position and
  * history come from the server's own game document; only the engine candidates
  * travel from the browser.
  */

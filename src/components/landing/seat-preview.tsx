@@ -1,7 +1,7 @@
 "use client";
 // src/components/landing/seat-preview.tsx  [UI upgrade 2 §2.2]
 // The artefact beside "Pass and play": one board that turns to face whoever is
-// to move, with the two seat chips swapping ends as it turns — which is the
+// to move, with the two seat chips swapping ends as it turns - which is the
 // whole of what pass-and-play does.
 //
 // It turns once when the row scrolls in (the row's own small motion, §2.6) and
@@ -45,7 +45,7 @@ export function SeatPreview({ active, className }: SeatPreviewProps) {
   const { ref, revealed } = useReveal<HTMLDivElement>({ disabled: reducedMotion });
   const [demo, setDemo] = useState(false);
 
-  // One turn on reveal, then back — the artefact showing its own trick once.
+  // One turn on reveal, then back - the artefact showing its own trick once.
   useEffect(() => {
     if (!revealed || reducedMotion) return;
     const turn = window.setTimeout(() => setDemo(true), DEMO_DELAY_MS);

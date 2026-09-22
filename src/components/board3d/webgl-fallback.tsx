@@ -51,7 +51,7 @@ export interface WebglFallbackNoticeProps {
 
 /**
  * In-place message for the board area when 3D cannot be shown at all.
- * The copy is `renderFailureMessage` and only that — src/lib/errors.ts is the single
+ * The copy is `renderFailureMessage` and only that - src/lib/errors.ts is the single
  * source of error wording (§10.6), so this component adds framing, never sentences.
  */
 export function WebglFallbackNotice({ reason }: WebglFallbackNoticeProps) {

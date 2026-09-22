@@ -33,7 +33,7 @@ function PersonaDisc({ initial }: { initial: string }) {
 
 /**
  * Three pulsing dots that grow a "still thinking…" tail (§5.1). Its own component
- * so mounting and unmounting resets the timer — a `thinking` bubble that turns
+ * so mounting and unmounting resets the timer - a `thinking` bubble that turns
  * into a real message and back must start counting from zero again.
  */
 function ThinkingDots({ personaName, afterMs }: { personaName?: string; afterMs: number }) {
@@ -91,7 +91,7 @@ export function ChatMessage({
     return (
       <li className={cn("flex justify-end", className)} {...props}>
         {/* DESIGN.md `chat-bubble-you` and The One Metal Rule: the player's own
-            bubbles are SEAM, never a brass wash — a brass fill read as a pressable
+            bubbles are SEAM, never a brass wash - a brass fill read as a pressable
             surface, and brass is reserved for things you can press.
             The TEXT, though, can only be brass where brass is readable: light brass
             (--accent #806018) on light seam (--line #d9cdb7) is 3.71:1, under the

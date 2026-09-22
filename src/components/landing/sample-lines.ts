@@ -6,7 +6,7 @@
 import type { Difficulty } from "@/lib/types";
 
 export const SAMPLE_LINE: Record<Difficulty, string> = {
-  beginner: "I nearly moved my queen out there. Glad I did not — your knight looks mean.",
+  beginner: "I nearly moved my queen out there. Glad I did not. Your knight looks mean.",
   casual: "Coffee first, then castling. That is the correct order, my friend.",
   intermediate: "Your knight has nowhere to go now. The pin is doing all the work.",
   advanced: "Your bishop is a spectator. Mine is not.",

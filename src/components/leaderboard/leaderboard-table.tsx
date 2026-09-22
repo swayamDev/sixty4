@@ -1,7 +1,7 @@
 "use client";
 // src/components/leaderboard/leaderboard-table.tsx  [U4]
 // UI_REDESIGN §6: the top three as a podium row, the table below, pool tabs
-// above. FR-50 / FR-52 are unchanged — top 100, live via subscription, three
+// above. FR-50 / FR-52 are unchanged - top 100, live via subscription, three
 // rating pools. The signed-in player is NOT pinned when outside the top 100:
 // `leaderboard.top` returns a window, not a rank lookup, and the spec says to
 // omit the pin rather than fake it.

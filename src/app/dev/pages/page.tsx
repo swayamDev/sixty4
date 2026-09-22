@@ -4,7 +4,7 @@
 // halves of /play, /leaderboard, /profile and /settings are rendered here with
 // fixed data. The route does not exist in production.
 //
-// `?section=play|leaderboard|profile|settings` renders one slice on its own —
+// `?section=play|leaderboard|profile|settings` renders one slice on its own -
 // the only way to screenshot the lower slices in a headless pane that composites
 // a single frame per navigation.
 import { notFound } from "next/navigation";

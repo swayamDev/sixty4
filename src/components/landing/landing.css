@@ -4,7 +4,7 @@
    globals.css). Everything here is scoped to a class this package owns, uses
    only the tokens globals.css already declares, and introduces no colour.
 
-   Imported once, from hero.tsx — the landing page's top-level client component.
+   Imported once, from hero.tsx - the landing page's top-level client component.
    --------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------- surfaces */
@@ -49,7 +49,7 @@
 /* -------------------------------------------------------------- room swatch */
 /* §2.1: a 36px round swatch per room "painted from the room's own colours (two
    halves: floor and light)". Both halves arrive as inline custom properties
-   read straight out of src/lib/rooms.ts — no colour is invented here. */
+   read straight out of src/lib/rooms.ts - no colour is invented here. */
 .room-swatch {
   background-image: linear-gradient(
     160deg,

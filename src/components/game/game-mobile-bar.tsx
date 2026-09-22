@@ -1,8 +1,8 @@
 "use client";
 // src/components/game/game-mobile-bar.tsx  [U2]
 // UI_REDESIGN §5.3: "sticky action bar (5 primary buttons + 'More' sheet)".
-// The five that matter with a thumb — board view, flip, fullscreen, the one
-// game verb this mode offers, and the panel — stay out; everything else moves
+// The five that matter with a thumb - board view, flip, fullscreen, the one
+// game verb this mode offers, and the panel - stay out; everything else moves
 // into a Drawer so the board keeps the screen.
 import {
   BoxIcon,
@@ -62,20 +62,20 @@ export interface GameMobileBarProps {
   canOfferDraw: boolean;
   hint: { available: boolean; remaining: number; disabledReason: string | null; request(): void };
   actions: GameActions;
-  /** The tab the sheet will land on — names the panel button (§4 "say what happens"). */
+  /** The tab the sheet will land on - names the panel button (§4 "say what happens"). */
   panelTab: MobilePanelTab;
   onToggleView(): void;
   onToggleFocus(): void;
   onOpenPanel(): void;
   /**
    * docs/PRO_TUTOR.md §3: opens the tutor sheet. Present only when the game has a
-   * tutor at all — and when it is, the tutor takes Fullscreen's place on the bar
+   * tutor at all - and when it is, the tutor takes Fullscreen's place on the bar
    * (measured at 390px: six captions leave 57px each and "Fullscreen" needs 62,
    * so it truncates to nothing readable; five keep every cap whole). Fullscreen
    * moves into "More", beside the other board controls.
    *
    * It is handed its own button so the shell can put focus back on it when the
-   * sheet closes — Base UI's non-modal drawer drops focus on <body>.
+   * sheet closes - Base UI's non-modal drawer drops focus on <body>.
    */
   onOpenTutor?(event: React.MouseEvent<HTMLButtonElement>): void;
   onOpenRoom(): void;
@@ -94,7 +94,7 @@ const CAMERA_ITEMS: { preset: CameraPresetId; label: string }[] = [
  * One thumb-sized button: icon over a 10px caption, so nothing is a mystery glyph.
  *
  * `min-h-11` is the 44px touch floor, and the caption is the accessible name unless
- * `srLabel` gives a fuller one — "Exit" reads as a whole verb under the icon while a
+ * `srLabel` gives a fuller one - "Exit" reads as a whole verb under the icon while a
  * screen reader still hears "Exit fullscreen".
  */
 function BarButton({

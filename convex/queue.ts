@@ -1,4 +1,4 @@
-// convex/queue.ts — matchmaking (FR-22…FR-26)
+// convex/queue.ts - matchmaking (FR-22…FR-26)
 //
 // Split writer model (convex-clerk-nextjs.md §4.8.2): `join`/`leave` are per-caller
 // mutations with a NARROW read set (only that player's own rows), while `pair` is
@@ -81,7 +81,7 @@ export const myStatus = query({
 /**
  * FR-23: greedy oldest-first pairing with a rating window that widens by 100 every
  * 10 s. Both entries must accept each other, so the test is symmetric on the wider
- * of the two windows. Colours are random (FR-23) — `Math.random()` is seeded per
+ * of the two windows. Colours are random (FR-23) - `Math.random()` is seeded per
  * transaction by Convex, so an OCC re-run reproduces the same assignment.
  */
 export const pair = internalMutation({

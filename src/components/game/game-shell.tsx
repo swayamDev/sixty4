@@ -32,7 +32,7 @@ import { GameShellView, type GameShellMeta } from "./game-shell-view";
 
 export interface GameShellProps {
   gameId: GameId;
-  /** Server-preloaded `api.games.get` result — the first render uses it verbatim. */
+  /** Server-preloaded `api.games.get` result - the first render uses it verbatim. */
   initialView: GameView | null;
 }
 
@@ -56,7 +56,7 @@ export function GameShell({ gameId, initialView }: GameShellProps) {
 
   // FR-15: the in-game 2D/3D toggle is a PLAYER SETTING, so it has to survive a
   // reload. The controller may only touch `api.games.*`, so the write-back is
-  // wired here — one writer for the whole shell, shared with <SettingsForm/>, so
+  // wired here - one writer for the whole shell, shared with <SettingsForm/>, so
   // a change never queues two debounced `players.updateSettings` calls.
   const saveSettings = useSettingsWriter();
   const setBoardViewPersisted = useCallback(
@@ -90,13 +90,13 @@ export function GameShell({ gameId, initialView }: GameShellProps) {
   // docs/PRO_TUTOR.md §4: the tutor's marks belong to ONE game. Cleared here, in
   // the container, rather than in a cleanup inside the panel: this effect runs
   // after every child's, so it can never race the panel's own "put the newest
-  // answer on the board" — and a brand-new screen has no answers to lose.
+  // answer on the board" - and a brand-new screen has no answers to lose.
   useEffect(() => {
     useTutorStore.getState().clearAnnotations();
   }, [gameId]);
 
   // P5 owns the pipeline; the game page is where it has to be mounted.
-  // Spectators must never drive it — `games.makeAiMove` requires a participant.
+  // Spectators must never drive it - `games.makeAiMove` requires a participant.
   const aiTurn = useAiTurn(mode === "ai" && !isSpectator ? gameId : null);
 
   const commentaryRows = useQuery(

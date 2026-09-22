@@ -10,7 +10,7 @@
 // Bloom is threshold-based rather than selective: highlight materials are
 // `toneMapped={false}` with `emissiveIntensity > 1`, and the composer's HalfFloat buffer
 // keeps those values, so only the highlights glow. No <Selection> provider is mounted
-// anywhere — it would silently override the manual `selection` prop.
+// anywhere - it would silently override the manual `selection` prop.
 "use client";
 import { useMemo } from "react";
 import {

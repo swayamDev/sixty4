@@ -3,8 +3,8 @@
 // The game screen of UI_REDESIGN §5, as a PURE component.
 //
 // Split rule (§10.3): this file may not import `convex/react`. Everything that
-// needs the backend — the controller, commentary rows, presence, the rating
-// delta, the rematch mutation, the settings drawer — is handed in by
+// needs the backend - the controller, commentary rows, presence, the rating
+// delta, the rematch mutation, the settings drawer - is handed in by
 // `GameShell`, which is why `/dev/game` can render the real screen against a
 // mocked controller with no Clerk and no Convex.
 //
@@ -87,11 +87,11 @@ export interface GameShellMeta {
   onRetryEngine?(): void;
   /**
    * The tutor panel (docs/PRO_TUTOR.md §3), already wired to its access and its
-   * conversation. Absent — a game with no tutor at all — and this screen is
+   * conversation. Absent - a game with no tutor at all - and this screen is
    * exactly what it was before Pro: two columns, five buttons on the phone.
    */
   tutor?: React.ReactNode;
-  /** Contents of the Room drawer — `<SettingsForm/>` in the app. */
+  /** Contents of the Room drawer - `<SettingsForm/>` in the app. */
   roomSettings?: React.ReactNode;
   onRoomOpenChange?(open: boolean): void;
 }
@@ -114,7 +114,7 @@ function seatOf(role: ViewerRole): Colour | "both" | null {
  *
  * Derived during render rather than in an effect: `react-hooks/set-state-in-effect`
  * is an error in this repo, and this is the documented "adjust state when a prop
- * changes" escape hatch — it settles in one extra render.
+ * changes" escape hatch - it settles in one extra render.
  */
 function usePresenceChips(online: boolean | null): ChatSystemChip[] {
   const [state, setState] = useState<{ online: boolean | null; chips: ChatSystemChip[] }>({
@@ -184,7 +184,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   // True when the column is showing the room: the canvas then fills the column and
   // the square constraint belongs to the 2D branch only (§4.2).
   const boardIs3d = boardView === "3d" && webglAvailable !== false;
-  // The room's key light — study is a warm lamp, space a cold one, arcade magenta.
+  // The room's key light - study is a warm lamp, space a cold one, arcade magenta.
   // A custom room has no key light of its own (it borrows Minimal's), so it uses the
   // glow derived from its own squares instead.
   const layoutMode = useUiStore((s) => s.layoutMode);
@@ -196,13 +196,13 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   const focus = layoutMode === "focus";
 
   const isAi = game?.mode === "ai";
-  // §5.1: Chat leads in an AI game, Moves otherwise — unless the shell opens straight
+  // §5.1: Chat leads in an AI game, Moves otherwise - unless the shell opens straight
   // into a reviewed position (a shared link, the dev harness), where the move list is
   // the whole point.
   const [tab, setTab] = useState<SidebarTab>((isAi || meta.playerChat) && controller.isLive ? "chat" : "moves");
 
   // Stepping back into the game (§5.1 "click to review") is a request to look at the
-  // move list, so the sidebar goes there the moment review starts — the reviewing
+  // move list, so the sidebar goes there the moment review starts - the reviewing
   // banner is what brings you back, and the reader is free to switch tabs again while
   // still reviewing. Derived from a render-time comparison rather than an effect, so
   // the list is already on screen for the first reviewed position.
@@ -240,7 +240,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   /* ---------------------------------------------------------------- tutor */
 
   // PRO_TUTOR §3: one panel, three shapes. A third grid track from 1280, an
-  // overlay over the board's left half from 1024, a 60dvh sheet below that —
+  // overlay over the board's left half from 1024, a 60dvh sheet below that -
   // and the same overlay in the focus layout, opened from the HUD.
   const tutorNode = meta.tutor ?? null;
   const tutorSurface = useTutorSurface();
@@ -253,7 +253,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   /** The mobile bar's "Tutor" button, so closing the sheet can hand focus back. */
   const tutorOpener = useRef<HTMLButtonElement | null>(null);
 
-  // §3: anywhere the panel is a LAYER — below 1280, and in the focus layout —
+  // §3: anywhere the panel is a LAYER - below 1280, and in the focus layout -
   // it starts collapsed, because it opens over the board and so has to be asked
   // for. Written when the shape changes, never on every render, so a member who
   // opened it keeps it open for as long as that shape holds.
@@ -277,7 +277,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   // Neither the focus layout nor a phone at rest shows the panel, so anything Pip
   // says while the board has the screen would otherwise arrive silently. One count
   // and a baseline stamped the moment the panel goes away is all the bookkeeping
-  // this needs — no per-row ids, no read receipts, and it resets itself the moment
+  // this needs - no per-row ids, no read receipts, and it resets itself the moment
   // the panel is back (leaving focus, or opening the sheet).
   const messageCount =
     meta.commentary.length +
@@ -297,7 +297,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   /* --------------------------------------------------------------- focus */
 
   // §5.2: the header is hidden by an attribute on <html>, which `SiteHeader`
-  // already styles against — no cross-package import in either direction.
+  // already styles against - no cross-package import in either direction.
   useEffect(() => {
     const root = document.documentElement;
     if (focus) root.dataset.layout = "focus";
@@ -329,7 +329,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   const toggleFocus = useCallback(() => {
     const next = useUiStore.getState().layoutMode === "focus" ? "default" : "focus";
     useUiStore.getState().setLayoutMode(next);
-    // §5.2: real fullscreen is an enhancement — the layout switches either way.
+    // §5.2: real fullscreen is an enhancement - the layout switches either way.
     if (next === "focus") void enterFullscreen();
     else void exitFullscreen();
   }, [enterFullscreen, exitFullscreen]);
@@ -399,7 +399,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
             text:
               controller.drawOfferFrom === seat
                 ? "You offered a draw"
-                : "Draw offered — accept or decline above the board",
+                : "Draw offered · accept or decline above the board",
           },
         ]
       : []),
@@ -417,8 +417,8 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   ];
 
   // The peek strip carries whatever sits at the BOTTOM of the panel. `GameChat`
-  // sorts system chips with no ply after every bubble, so a chip — "Draw declined",
-  // "Game over · 1-0" — outranks the last thing the persona said here too, and the
+  // sorts system chips with no ply after every bubble, so a chip - "Draw declined",
+  // "Game over · 1-0" - outranks the last thing the persona said here too, and the
   // strip and the list never disagree about what was said most recently.
   const lastChip = systemChips.at(-1) ?? null;
   const lastComment = meta.commentary.at(-1) ?? null;
@@ -497,7 +497,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   );
 
   // FR-31: the same banner in both layouts. In focus it is a persistent HUD
-  // layer rather than a row above the action bar — an offer that fades out while
+  // layer rather than a row above the action bar - an offer that fades out while
   // the clock runs is an offer the player never answered.
   const drawOfferOpen = controller.drawOfferFrom !== null && seat !== null;
   const drawOffer = (
@@ -515,7 +515,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
   );
 
   // §4.8 item 1: the newest thing the opponent said, as a card on the board in
-  // the focus layout. Dismissible, outside the fading layer, desktop only — on a
+  // the focus layout. Dismissible, outside the fading layer, desktop only - on a
   // phone the board is already the whole screen.
   const lastOpponentLine = isAi ? (meta.commentary.at(-1) ?? null) : null;
   const focusNote =
@@ -586,7 +586,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
     <div
       className={cn(
         "relative flex w-full flex-col bg-background",
-        // The board never scrolls (§5.1) — at every width the screen is exactly
+        // The board never scrolls (§5.1) - at every width the screen is exactly
         // one viewport tall and the board takes whatever height is left over.
         focus ? "fixed inset-0 z-50 h-[100dvh]" : "h-[calc(100dvh-3.5rem)] overflow-hidden",
       )}
@@ -595,12 +595,12 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
       // selection rather than inheriting the browser's.
       data-slot="game-frame"
     >
-      {/* The screen is full-bleed by design (§5.1) — the status pill, not a title,
-          carries the state — but a document with no heading at all is a dead end for
+      {/* The screen is full-bleed by design (§5.1) - the status pill, not a title,
+          carries the state - but a document with no heading at all is a dead end for
           a screen-reader user landing here from the lobby. One sr-only h1 names the
           board; everything visible stays exactly as designed. */}
       <h1 className="sr-only">
-        {`${view.whiteName} versus ${view.blackName} — ${
+        {`${view.whiteName} versus ${view.blackName}, ${
           game.mode === "ai" ? "against the computer" : game.mode === "local" ? "pass and play" : "online game"
         }`}
       </h1>
@@ -649,7 +649,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
               open as dead space above and below the board with the near plate
               stranded at the bottom of the screen; centring the GROUP puts the
               two nameplates back against the board where they belong. The
-              wrapper is unconditional — the board box below has to stay the same
+              wrapper is unconditional - the board box below has to stay the same
               element in both layouts or the WebGL context is torn down (§5.2). */}
           <div
             className={cn(
@@ -751,7 +751,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
                 }
                 aside={focusNote}
                 topCenter={
-                  // §4.8 item 1: the status — Check included — never hides with
+                  // §4.8 item 1: the status - Check included - never hides with
                   // the HUD, so it lives outside the fading layer alongside
                   // anything still waiting on an answer.
                   <div className="flex flex-col items-center gap-2">
@@ -840,7 +840,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
 
             {/* --------------------------------------------- tutor overlay
                 §3: from 1024, and in the focus layout, the panel is a layer over
-                the board's LEFT HALF — inside the board box, so it never covers a
+                the board's LEFT HALF - inside the board box, so it never covers a
                 nameplate or a single button of the action bar. The soft shadow
                 alone, no hairline (DESIGN.md's only-floating-things rule); Escape
                 closes it and Tab stays inside while it is open. */}
@@ -855,7 +855,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
                 aria-label="Tutor"
                 onKeyDown={(event) => {
                   // §3: "Escape closes". The global shortcut handler cannot do it
-                  // here — it returns early for INPUT/TEXTAREA targets, and the
+                  // here - it returns early for INPUT/TEXTAREA targets, and the
                   // composer is exactly where a member stands. `preventDefault`
                   // keeps that handler from also acting on the same key.
                   if (event.key !== "Escape" || event.defaultPrevented) return;
@@ -927,7 +927,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
                     onOpenPanel={() => setSheetOpen(true)}
                     // §3: the bar keeps FIVE buttons at 390px, so the tutor takes
                     // Fullscreen's place and Fullscreen moves into "More". The
-                    // sidebar still has exactly three tabs — the tutor is never
+                    // sidebar still has exactly three tabs - the tutor is never
                     // a fourth one.
                     onOpenTutor={
                       tutorNode === null
@@ -958,7 +958,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
       {/* ------------------------------------------- focus conversation
           §4.8 item 1: the same three tabs, as an overlay panel, so a fullscreen
           player can read what the opponent said and answer a draw without
-          leaving the layout. Only ever ONE GameSidebar is mounted — the aside
+          leaving the layout. Only ever ONE GameSidebar is mounted - the aside
           and the mobile sheet are both absent in focus. */}
       {focus && focusChatOpen ? (
         <div
@@ -998,7 +998,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
               full-height popup slid down, so its content is laid out for the whole
               viewport and the newest chat bubble ends up below the fold.
               `--drawer-height` is the shadcn popup's own hook. It is 60dvh because
-              the reader ASKED for it — at rest the panel is the one-line strip, and
+              the reader ASKED for it - at rest the panel is the one-line strip, and
               the board never loses the screen to a sheet nobody opened. */}
           <DrawerContent
             aria-label="Game panel"
@@ -1039,7 +1039,7 @@ export function GameShellView({ controller, viewerRole, meta }: GameShellViewPro
           onOpenChange={(open) => {
             setTutorOpen(open);
             // The panel's own "Hide tutor" already restores focus; Escape and a swipe
-            // do not, so the opener is refocused here — the same restore the overlay's
+            // do not, so the opener is refocused here - the same restore the overlay's
             // `useFocusTrap` performs when it unmounts.
             if (!open) tutorOpener.current?.focus();
           }}
