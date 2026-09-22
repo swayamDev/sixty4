@@ -134,7 +134,7 @@ export function GameNameplate({
           things drifting apart. */}
       <div className="ml-auto flex min-w-0 shrink-0 items-center gap-2">
         {modeChip ? (
-          <span className="hidden shrink-0 rounded-full bg-bg-sunken px-2 py-0.5 text-[12px] leading-none font-medium text-muted-foreground md:inline-block">
+          <span className="hidden shrink-0 rounded-full bg-bg-sunken px-2 py-0.5 text-[12px] leading-none font-medium text-muted-foreground sm:inline-block">
             {modeChip}
           </span>
         ) : null}
