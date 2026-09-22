@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SettingsWorkbench } from "@/components/settings/settings-workbench";
 import { Display, Eyebrow, Section } from "@/components/ui-kit";
 
-export const metadata: Metadata = { title: "Settings" };
+export const metadata: Metadata = { title: "Settings", description: "Manage your Sixty4 account and board preferences." };
 
 export default function SettingsPage() {
   return (

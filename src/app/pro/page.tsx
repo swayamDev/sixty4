@@ -1,5 +1,5 @@
 // src/app/pro/page.tsx  [PRO_TUTOR §7]
-// `/pro` — public, and not listed in `src/proxy.ts`'s protected prefixes, because a
+// `/pro` - public, and not listed in `src/proxy.ts`'s protected prefixes, because a
 // visitor has to be able to read what Pro is before signing in for it.
 //
 // A static shell: the hero, the three points, the FAQ and the footer are server
@@ -14,11 +14,16 @@ import { ProHero } from "@/components/pro/pro-hero";
 import { ProPoints } from "@/components/pro/pro-points";
 import { ProPricing } from "@/components/pro/pro-pricing";
 
+const DESCRIPTION =
+  "The tutor: ask about any position in any game, and get the idea explained and drawn on the board.";
+
 export const metadata: Metadata = {
   // Not the "%s · Sixty4" template: this page's name IS the product's name.
   title: { absolute: "Sixty4 Pro" },
-  description:
-    "The tutor: ask about any position in any game, and get the idea explained and drawn on the board.",
+  description: DESCRIPTION,
+  alternates: { canonical: "/pro" },
+  openGraph: { title: "Sixty4 Pro", description: DESCRIPTION, url: "/pro" },
+  twitter: { title: "Sixty4 Pro", description: DESCRIPTION },
 };
 
 export default function ProPage() {

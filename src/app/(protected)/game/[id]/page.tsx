@@ -12,6 +12,7 @@ import { api } from "../../../../../convex/_generated/api";
 
 export const metadata: Metadata = {
   title: "Game",
+  description: "A live game on Sixty4.",
 };
 
 /** Convex ids are opaque strings; anything obviously not one is a 404, not a crash. */

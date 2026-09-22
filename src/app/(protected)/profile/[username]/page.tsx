@@ -11,11 +11,11 @@ export async function generateMetadata(
   props: PageProps<"/profile/[username]">,
 ): Promise<Metadata> {
   const { username } = await props.params;
-  return { title: username };
+  return { title: username, description: `${username}'s Sixty4 profile and rating history.` };
 }
 
 /**
- * `params` is a Promise in Next 15+/16 — always await it.
+ * `params` is a Promise in Next 15+/16 - always await it.
  *
  * `players.getByUsername` is a public query, so no Convex token is needed. It is
  * preloaded rather than fetched so the same subscription that renders the first
@@ -23,7 +23,7 @@ export async function generateMetadata(
  * 404 instead of an empty page.
  */
 export default async function ProfilePage(props: PageProps<"/profile/[username]">) {
-  // Next already URL-decodes route params — decoding again would corrupt any
+  // Next already URL-decodes route params - decoding again would corrupt any
   // username containing a literal `%`. Links encode on the way in.
   const { username } = await props.params;
 

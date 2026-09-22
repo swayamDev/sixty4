@@ -3,12 +3,17 @@ import { LeaderboardTable } from "@/components/leaderboard/leaderboard-table";
 import { Display, Eyebrow, Section } from "@/components/ui-kit";
 import { LEADERBOARD_SIZE } from "@/lib/constants";
 
+const DESCRIPTION = `The top ${LEADERBOARD_SIZE} players by rating, updating live.`;
+
 export const metadata: Metadata = {
   title: "Leaderboard",
-  description: `The top ${LEADERBOARD_SIZE} players by rating, updating live.`,
+  description: DESCRIPTION,
+  alternates: { canonical: "/leaderboard" },
+  openGraph: { title: "Leaderboard", description: DESCRIPTION, url: "/leaderboard" },
+  twitter: { title: "Leaderboard", description: DESCRIPTION },
 };
 
-/** Public (§G) — `leaderboard.top` needs no identity. */
+/** Public (§G) - `leaderboard.top` needs no identity. */
 export default function LeaderboardPage() {
   return (
     <Section width="app" padding="md" className="pt-8 sm:pt-10">

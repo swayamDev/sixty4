@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { AuthCard } from "@/app/sign-in/auth-card";
 
-export const metadata: Metadata = { title: "Sign in" };
+export const metadata: Metadata = {
+  title: "Sign in",
+  description: "Sign in to Sixty4 and pick up your game.",
+};
 
 /**
  * The optional catch-all is MANDATORY, not stylistic: in non-production

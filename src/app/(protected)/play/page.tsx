@@ -4,7 +4,10 @@ import { ModePicker } from "@/components/play/mode-picker";
 import { Display, Section } from "@/components/ui-kit";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const metadata: Metadata = { title: "Play" };
+export const metadata: Metadata = {
+  title: "Play",
+  description: "Start a rated online game, play one of five AI opponents, or pass and play.",
+};
 
 export default function PlayPage() {
   return (
