@@ -13,7 +13,7 @@ export interface KeyLightConfig {
 export interface LightRig {
   key: KeyLightConfig;
   ambientIntensity: number;
-  /** drei <Environment environmentIntensity> — scales IBL on PBR materials. */
+  /** drei <Environment environmentIntensity> - scales IBL on PBR materials. */
   envIntensity: number;
   /** drei <Environment backgroundIntensity>. */
   bgIntensity: number;
@@ -69,13 +69,25 @@ export interface RoomFloor {
 }
 
 export interface RoomExtras {
-  stars?: { radius: number; depth: number; count: number; factor: number; speed: number };
-  sparkles?: { count: number; scale: number; size: number; speed: number; color: string };
+  stars?: {
+    radius: number;
+    depth: number;
+    count: number;
+    factor: number;
+    speed: number;
+  };
+  sparkles?: {
+    count: number;
+    scale: number;
+    size: number;
+    speed: number;
+    color: string;
+  };
 }
 
 /**
- * The furniture the board stands on. Its top face is `TABLE_TOP_Y` — exactly the plinth's
- * underside — in every room, so a table is never allowed to move a square.
+ * The furniture the board stands on. Its top face is `TABLE_TOP_Y` - exactly the plinth's
+ * underside - in every room, so a table is never allowed to move a square.
  */
 export interface TableFinish {
   /**
@@ -90,7 +102,7 @@ export interface TableFinish {
   /**
    * The felt in the bottom of the two captured-piece trays that stand on this top
    * (`src/components/board3d/trays.tsx`). Baize where the room is a club room, and the
-   * room's own darkness everywhere else — it is a surface the eye should read as cloth
+   * room's own darkness everywhere else - it is a surface the eye should read as cloth
    * and then stop reading, so every value here is well under the pieces standing on it.
    * Omit it and the tray gets a warm studio grey.
    */
@@ -103,7 +115,7 @@ export interface TableFinish {
    * `"legs"` is four turned legs on an apron. `"pedestal"` is one column, for a board
    * adrift where four legs would only argue with the stars. `"none"` is the top and its
    * apron alone, and it exists for the Park: drei's `<Environment ground>` projects that
-   * room's meadow onto a disk at world y = 0 — the height of the board itself — so a leg
+   * room's meadow onto a disk at world y = 0 - the height of the board itself - so a leg
    * there would be drawn standing in the middle of the grass rather than on it.
    */
   base: "legs" | "pedestal" | "none";
@@ -137,7 +149,7 @@ export interface RoomPreset {
   /**
    * The arc the idle cinematic camera sweeps in this room (FR-24), centred on the side
    * of the panorama that is worth looking at. Omit it and the room gets
-   * `DEFAULT_ORBIT_SWEEP` — 55 deg either side of the white seat, which is the right
+   * `DEFAULT_ORBIT_SWEEP` - 55 deg either side of the white seat, which is the right
    * answer for any room whose `envYaw` already put its best wall in front of that seat.
    *
    * `centerAzimuth` is a camera azimuth, not a panorama yaw: 0 is the white seat, and a
@@ -169,9 +181,10 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
   study: {
     id: "study",
     label: "Classic Study",
-    description: "Walnut bookshelves, soft daylight, and a quiet seat at the table.",
+    description:
+      "Walnut bookshelves, soft daylight, and a quiet seat at the table.",
     hdri: "/hdri/study.hdr", // polyhaven `combination_room`, CC0, Sergej Majboroda
-    backdrop: "/backdrops/study-library.png",
+    backdrop: "/backdrops/study-library.jpg",
     background: "hdri",
     lights: {
       key: { position: [4, 8, 5], intensity: 2.4, color: "#ffd9a8" },
@@ -188,16 +201,36 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       squareRoughness: 0.5,
       frameColor: "#4a2f1c",
       reflector: {
-        blur: [300, 100], mixBlur: 1, mixStrength: 0.8, mixContrast: 1,
-        mirror: 0.35, metalness: 0.1, roughness: 0.6, color: "#2a1a10",
+        blur: [300, 100],
+        mixBlur: 1,
+        mixStrength: 0.8,
+        mixContrast: 1,
+        mirror: 0.35,
+        metalness: 0.1,
+        roughness: 0.6,
+        color: "#2a1a10",
       },
     },
     pieces: {
-      white: { color: "#f0e2c8", metalness: 0.05, roughness: 0.45, clearcoat: 0.3, clearcoatRoughness: 0.3, envMapIntensity: 0.9 },
-      black: { color: "#2b1b12", metalness: 0.05, roughness: 0.4, clearcoat: 0.4, clearcoatRoughness: 0.25, envMapIntensity: 0.9 },
+      white: {
+        color: "#f0e2c8",
+        metalness: 0.05,
+        roughness: 0.45,
+        clearcoat: 0.3,
+        clearcoatRoughness: 0.3,
+        envMapIntensity: 0.9,
+      },
+      black: {
+        color: "#2b1b12",
+        metalness: 0.05,
+        roughness: 0.4,
+        clearcoat: 0.4,
+        clearcoatRoughness: 0.25,
+        envMapIntensity: 0.9,
+      },
     },
     floor: { kind: "none" },
-    // Walnut with a thin brass inlay round the edge — the study's own two materials.
+    // Walnut with a thin brass inlay round the edge - the study's own two materials.
     table: {
       kind: "wood",
       color: "#3c2718",
@@ -217,8 +250,9 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
   space: {
     id: "space",
     label: "Space",
-    description: "Luminous nebulae, silver pieces, and an endless field of stars.",
-    hdri: "/hdri/space.hdr", // polyhaven `qwantani_night_puresky`, CC0 — IBL only
+    description:
+      "Luminous nebulae, silver pieces, and an endless field of stars.",
+    hdri: "/hdri/space.hdr", // polyhaven `qwantani_night_puresky`, CC0 - IBL only
     // The night probe supplies reflections; a seam-free nebula shader supplies the sky.
     background: "colour",
     backgroundColor: "#152641",
@@ -237,13 +271,33 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       squareRoughness: 0.2,
       frameColor: "#263954",
       reflector: {
-        blur: [120, 60], mixBlur: 0.8, mixStrength: 0.8, mixContrast: 1,
-        mirror: 0.3, metalness: 0.15, roughness: 0.4, color: "#0a0e1c",
+        blur: [120, 60],
+        mixBlur: 0.8,
+        mixStrength: 0.8,
+        mixContrast: 1,
+        mirror: 0.3,
+        metalness: 0.15,
+        roughness: 0.4,
+        color: "#0a0e1c",
       },
     },
     pieces: {
-      white: { color: "#dce7ff", metalness: 0.35, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.1, envMapIntensity: 1.3 },
-      black: { color: "#364666", metalness: 0.25, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.15, envMapIntensity: 1.3 },
+      white: {
+        color: "#dce7ff",
+        metalness: 0.35,
+        roughness: 0.18,
+        clearcoat: 1,
+        clearcoatRoughness: 0.1,
+        envMapIntensity: 1.3,
+      },
+      black: {
+        color: "#364666",
+        metalness: 0.25,
+        roughness: 0.22,
+        clearcoat: 1,
+        clearcoatRoughness: 0.15,
+        envMapIntensity: 1.3,
+      },
     },
     floor: { kind: "none" },
     // One brushed pedestal, not four legs: adrift, the board should look moored rather
@@ -258,7 +312,9 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
     },
     // Nebula and stars surround both seats and the full cinematic sweep.
     orbit: { centerAzimuth: 0, halfArc: 0.95 },
-    extras: { stars: { radius: 50, depth: 20, count: 5000, factor: 5, speed: 0.4 } },
+    extras: {
+      stars: { radius: 50, depth: 20, count: 5000, factor: 5, speed: 0.4 },
+    },
     highlight: { ...HIGHLIGHT_DEFAULT, legal: "#5ad1ff", last: "#8f9bff" },
     glow: "#bcd4ff",
   },
@@ -278,8 +334,8 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       backgroundBlur: 0.15,
       // Re-checked at 4 yaws (assets.md §A2c): `meadow_2` is grass and trees the whole
       // way round and `floor: ground` projects the meadow under the board, so the seat
-      // view barely changes. -0.4 keeps the mown path — and not one of the bald patches
-      // at u ~ 0.6 / 0.75 — behind the board. Unchanged.
+      // view barely changes. -0.4 keeps the mown path - and not one of the bald patches
+      // at u ~ 0.6 / 0.75 - behind the board. Unchanged.
       envYaw: -0.4,
     },
     board: {
@@ -289,13 +345,33 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       squareRoughness: 0.7,
       frameColor: "#5a4632",
       reflector: {
-        blur: [400, 140], mixBlur: 1.2, mixStrength: 0.5, mixContrast: 1,
-        mirror: 0.2, metalness: 0.05, roughness: 0.75, color: "#3b3327",
+        blur: [400, 140],
+        mixBlur: 1.2,
+        mixStrength: 0.5,
+        mixContrast: 1,
+        mirror: 0.2,
+        metalness: 0.05,
+        roughness: 0.75,
+        color: "#3b3327",
       },
     },
     pieces: {
-      white: { color: "#f6f1e4", metalness: 0.02, roughness: 0.55, clearcoat: 0.2, clearcoatRoughness: 0.4, envMapIntensity: 1.0 },
-      black: { color: "#33322c", metalness: 0.02, roughness: 0.5, clearcoat: 0.25, clearcoatRoughness: 0.35, envMapIntensity: 1.0 },
+      white: {
+        color: "#f6f1e4",
+        metalness: 0.02,
+        roughness: 0.55,
+        clearcoat: 0.2,
+        clearcoatRoughness: 0.4,
+        envMapIntensity: 1.0,
+      },
+      black: {
+        color: "#33322c",
+        metalness: 0.02,
+        roughness: 0.5,
+        clearcoat: 0.25,
+        clearcoatRoughness: 0.35,
+        envMapIntensity: 1.0,
+      },
     },
     floor: { kind: "ground" }, // drei <Environment ground> so the HDRI floor sits under the board
     // Weathered oak, and no legs: this room's ground is projected at y = 0, which is the
@@ -304,13 +380,13 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
     table: {
       kind: "wood",
       color: "#8b7350",
-      // Baize again, a shade lighter than the study's — this one is under open sky,
+      // Baize again, a shade lighter than the study's - this one is under open sky,
       // not a lamp, so it needs less taking down.
       feltColor: "#1d5440",
       base: "none",
     },
     // `meadow_2` is grass and trees the whole way round and `floor: ground` projects the
-    // meadow under the board, so the sweep barely changes what is behind it — verified at
+    // meadow under the board, so the sweep barely changes what is behind it - verified at
     // 5 samples across a full swing. Symmetric about the white seat.
     orbit: { centerAzimuth: 0, halfArc: 0.95 },
     extras: {},
@@ -341,13 +417,33 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       squareRoughness: 0.32,
       frameColor: "#0b0810",
       reflector: {
-        blur: [80, 40], mixBlur: 0.6, mixStrength: 0.55, mixContrast: 1,
-        mirror: 0.2, metalness: 0.12, roughness: 0.38, color: "#08060d",
+        blur: [80, 40],
+        mixBlur: 0.6,
+        mixStrength: 0.55,
+        mixContrast: 1,
+        mirror: 0.2,
+        metalness: 0.12,
+        roughness: 0.38,
+        color: "#08060d",
       },
     },
     pieces: {
-      white: { color: "#f2f7ff", metalness: 0.15, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 0.9 },
-      black: { color: "#34354f", metalness: 0.25, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 0.9 },
+      white: {
+        color: "#f2f7ff",
+        metalness: 0.15,
+        roughness: 0.3,
+        clearcoat: 1,
+        clearcoatRoughness: 0.05,
+        envMapIntensity: 0.9,
+      },
+      black: {
+        color: "#34354f",
+        metalness: 0.25,
+        roughness: 0.3,
+        clearcoat: 1,
+        clearcoatRoughness: 0.08,
+        envMapIntensity: 0.9,
+      },
     },
     floor: { kind: "none" },
     // Black acrylic with the room's own magenta running round the edge, lit.
@@ -361,8 +457,16 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
     },
     // The geometric light pavilion is finished on both sides.
     orbit: { centerAzimuth: 0, halfArc: 0.95 },
-    extras: { sparkles: { count: 40, scale: 12, size: 2, speed: 0.3, color: "#7cf7ff" } },
-    highlight: { select: "#ff6ad5", legal: "#7cf7ff", capture: "#ffb347", last: "#ff6ad5", check: "#ff2d55" },
+    extras: {
+      sparkles: { count: 40, scale: 12, size: 2, speed: 0.3, color: "#7cf7ff" },
+    },
+    highlight: {
+      select: "#ff6ad5",
+      legal: "#7cf7ff",
+      capture: "#ffb347",
+      last: "#ff6ad5",
+      check: "#ff2d55",
+    },
     // Not the key light (see `lights.key`): the ENVIRONMENT is magenta here, and the
     // magenta is what spills off the board and onto the page.
     glow: "#ff6ad5",
@@ -382,7 +486,7 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       bgIntensity: 1.0,
       backgroundBlur: 0.4,
       // Re-checked at 4 yaws (assets.md §A2c). `white_studio_06` really is a working
-      // photo studio — beauty dish, stands, cables, a black curtain — but this is the
+      // photo studio - beauty dish, stands, cables, a black curtain - but this is the
       // one room with `floor: backdrop`, and drei's `<Backdrop>` cyclorama fills the
       // seat frame edge to edge, so none of that is ever on screen and the yaw makes no
       // visible difference. Left at 0.
@@ -395,13 +499,34 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
       squareRoughness: 0.35,
       frameColor: "#e6e8ec",
       reflector: {
-        blur: [200, 80], mixBlur: 1, mixStrength: 0.55, mixContrast: 1,
-        mirror: 0.3, metalness: 0.05, roughness: 0.4, color: "#eceef2",
+        blur: [200, 80],
+        mixBlur: 1,
+        mixStrength: 0.55,
+        mixContrast: 1,
+        mirror: 0.3,
+        metalness: 0.05,
+        roughness: 0.4,
+        color: "#eceef2",
       },
     },
     pieces: {
-      white: { color: "#fbfbfd", metalness: 0.0, roughness: 0.3, clearcoat: 0.5, clearcoatRoughness: 0.2, sheen: 0.2, envMapIntensity: 1.0 },
-      black: { color: "#2a2d33", metalness: 0.0, roughness: 0.3, clearcoat: 0.5, clearcoatRoughness: 0.2, envMapIntensity: 1.0 },
+      white: {
+        color: "#fbfbfd",
+        metalness: 0.0,
+        roughness: 0.3,
+        clearcoat: 0.5,
+        clearcoatRoughness: 0.2,
+        sheen: 0.2,
+        envMapIntensity: 1.0,
+      },
+      black: {
+        color: "#2a2d33",
+        metalness: 0.0,
+        roughness: 0.3,
+        clearcoat: 0.5,
+        clearcoatRoughness: 0.2,
+        envMapIntensity: 1.0,
+      },
     },
     floor: { kind: "backdrop", color: "#e1e5eb" },
     // White lacquer on white lacquer; the only edge is the shadow under the top.
@@ -424,7 +549,11 @@ export const ROOMS: Record<Exclude<RoomPresetId, "custom">, RoomPreset> = {
 };
 
 export const ROOM_ORDER: Exclude<RoomPresetId, "custom">[] = [
-  "study", "space", "park", "arcade", "minimal",
+  "study",
+  "space",
+  "park",
+  "arcade",
+  "minimal",
 ];
 export const DEFAULT_ROOM: RoomPresetId = "study";
 /** For useEnvironment.preload() when the settings drawer opens (FR-21m). */
@@ -463,7 +592,10 @@ function deriveGlow(colors: RoomColors): string {
 
 /** Resolve the preset a player should actually see. "custom" = Minimal White's
  *  rig with the player's three colours and a flat background (FR-21j). */
-export function resolveRoom(preset: RoomPresetId, colors: RoomColors | null): RoomPreset {
+export function resolveRoom(
+  preset: RoomPresetId,
+  colors: RoomColors | null,
+): RoomPreset {
   if (preset !== "custom") return ROOMS[preset];
   const base = ROOMS.minimal;
   const c = colors ?? DEFAULT_ROOM_COLORS;
