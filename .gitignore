@@ -44,6 +44,13 @@ next-env.d.ts
 .eve/
 .output/
 
+# AI coding tool state - regenerated locally by the tool, not part of the app
+.claude/
+.agents/
+CLAUDE.md
+AGENTS.md
+skills-lock.json
+
 # testing (vitest)
 /coverage/
 *.lcov
