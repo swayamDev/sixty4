@@ -53,6 +53,3 @@ next-env.d.ts
 /test-results/
 /blob-report/
 /playwright/.cache/
-
-.vercel
-.env*
