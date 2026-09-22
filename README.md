@@ -138,6 +138,11 @@ failing the game.
 | `pnpm typecheck` | Generate Next's route types, then run `tsc --noEmit` |
 | `pnpm convex` | Start the Convex dev deployment |
 | `pnpm copy:stockfish` | Refresh the committed Stockfish binaries under `public/stockfish/` from the installed engine packages (maintenance only; not needed for a normal setup) |
+| `pnpm test` | Run unit + integration tests (Vitest) |
+| `pnpm test:coverage` | Same, with a coverage report |
+| `pnpm e2e` | Run end-to-end tests (Playwright) |
+
+See [`TESTING.md`](TESTING.md) for what each test layer covers and what setup e2e needs.
 
 ## Project structure
 
