@@ -21,7 +21,7 @@
  * and fails if a newly thrown code has no copy here.
  */
 
-import { MAX_TUTOR_TURNS_PER_GAME } from "./constants";
+import { MAX_HINTS_PER_GAME, MAX_TUTOR_TURNS_PER_GAME } from "./constants";
 
 /** Every machine code thrown by `convex/**` (excluding the test harness). */
 export const CONVEX_ERROR_CODES = [
@@ -71,13 +71,15 @@ const COPY: Record<ConvexErrorCode, string> = {
   "draw-not-available": "Draws can only be agreed against another player.",
   "game-not-active": "That game has already finished.",
   "game-not-found": "That game no longer exists.",
-  "hint-limit": "You have used all three hints in this game.",
+  // FR-40, with the cap read from the constant so the sentence and the mutation
+  // can never disagree about the number.
+  "hint-limit": `You have used all ${MAX_HINTS_PER_GAME} hints in this game.`,
   "hints-unavailable": "Hints are only available at Beginner and Casual.",
   "illegal-move": "That move is not legal.",
   "invalid-colour": "Those colours are not valid hex values.",
   "invalid-message-length": "Write a message between 1 and 1,000 characters.",
   "invalid-ply": "That position is no longer part of this game.",
-  "invalid-room-image": "That image is not usable - pick a PNG or JPEG under 5 MB.",
+  "invalid-room-image": "That image is not usable. Pick a PNG or JPEG under 5 MB.",
   "no-draw-offer": "There is no draw offer to answer.",
   "not-a-participant": "You are watching this game, not playing it.",
   "not-ai-turn": "It is not the AI's turn.",
@@ -85,7 +87,7 @@ const COPY: Record<ConvexErrorCode, string> = {
   "not-your-turn": "It is not your turn.",
   "online-chat-only": "Player chat is available in online games.",
   "promotion-required": "Choose a promotion piece first.",
-  "stale-ai-move": "The position moved on - nothing was applied.",
+  "stale-ai-move": "The position moved on. Nothing was applied.",
   // docs/PRO_TUTOR.md §3.5, with the cap read from the constant so the sentence and
   // the mutation can never disagree about the number.
   "tutor-limit": `The tutor has answered ${MAX_TUTOR_TURNS_PER_GAME} questions in this game. Start a new game to keep going.`,
