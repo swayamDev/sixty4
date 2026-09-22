@@ -5,7 +5,7 @@ personalities, or share one device with a friend, all from a physically lit boar
 around. Switch to a flat 2D board any time, sit in one of five rooms, and if you're on Sixty4 Pro,
 ask an AI tutor to explain the position and watch it draw its explanation directly on your board.
 
-**Author:** Swayam Swarup Panda
+**Live at:** [https://chess.swayam.space](https://chess.swayam.space)
 
 ## What it does
 
@@ -178,6 +178,11 @@ Sixty4 deploys to Vercel, with Convex and Clerk as separate managed services.
 
 Deploy Convex before Vercel whenever `convex/` has changed; the app will otherwise call functions
 that don't exist yet on the new deployment.
+
+## Author
+
+Sixty4 was built by Swayam Swarup Panda. Play it live at
+[https://chess.swayam.space](https://chess.swayam.space).
 
 ## Third-party assets and licenses
 
