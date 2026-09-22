@@ -49,7 +49,11 @@ const WAYS: Way[] = [
     href: "/play?mode=online",
     title: "Find a match",
     copy: `Rated games against people near your rating. The window starts at ±${QUEUE_BASE_RANGE} and widens every ${WIDEN_SECONDS} seconds until someone sits down.`,
-    artefact: () => <RatingWindow />,
+    artefact: () => (
+      <div className="mx-auto w-full max-w-[22rem] lg:mr-0">
+        <RatingWindow />
+      </div>
+    ),
   },
   {
     href: "/play?mode=ai",

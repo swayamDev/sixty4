@@ -15,7 +15,7 @@ export function OpponentRoster() {
         {DIFFICULTY_ORDER.map((id, index) => {
           const config = DIFFICULTIES[id];
           return (
-            <li key={id} className="min-w-0 border-b border-border py-7 sm:px-5 lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
+            <li key={id} className="min-w-0 border-b border-border py-7 sm:px-5 sm:max-lg:odd:pl-0 sm:max-lg:even:pr-0 lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
               <div className="mb-6 flex items-center justify-between gap-3">
                 <div aria-hidden className="flex gap-1.5">
                   {DIFFICULTY_ORDER.map((level, step) => (
@@ -24,7 +24,7 @@ export function OpponentRoster() {
                 </div>
                 <span className="font-mono text-[13px] tabular-nums text-muted-foreground">{config.aiRating}</span>
               </div>
-              <h3 className="font-display text-[2rem] leading-tight">{config.persona.name}</h3>
+              <h3 className="font-display text-[1.5rem] leading-tight sm:text-[2rem]">{config.persona.name}</h3>
               <p className="mt-2 text-xs text-muted-foreground">
                 {config.label}{config.hintsAllowed ? ` · ${MAX_HINTS_PER_GAME} hints` : ""}
               </p>

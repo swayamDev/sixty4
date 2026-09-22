@@ -49,18 +49,22 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="landing-hero relative isolate overflow-hidden lg:-mt-14 lg:pt-14"
     >
-      <div className="mx-auto w-full max-w-[100rem] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-[80rem] px-4 sm:px-6">
         <div className="grid items-center gap-8 pt-8 pb-10 sm:pt-10 lg:grid-cols-12 lg:gap-8 lg:pt-10 lg:pb-12">
           <div className="max-w-[38rem] lg:col-span-5">
-            <Display level={1} id="hero-heading" className="hero-editorial-title">
+            <Display
+              level={1}
+              id="hero-heading"
+              className="hero-editorial-title"
+            >
               Chess you can <em>walk</em> around.
             </Display>
 
             {/* The title step (1.25rem) of the ramp, at body weight: the one line
                 that has to carry from the headline to the buttons. */}
             <p className="mt-6 max-w-[42ch] text-[1.125rem] leading-relaxed text-pretty text-muted-foreground">
-              Sit at a board in a room you chose. Play people near your rating, or an opponent
-              that tells you what it thinks.
+              Sit at a board in a room you chose. Play people near your rating,
+              or an opponent that tells you what it thinks.
             </p>
 
             <HeroCtas className="mt-7" />
@@ -71,7 +75,10 @@ export function Hero() {
             {/* Reserves the board's height on desktop; the canvas itself is the
                 absolutely positioned layer below, so it can touch the top and the
                 right edge of the viewport instead of stopping at the grid. */}
-            <div aria-hidden className="hidden lg:block lg:h-[min(64vh,640px)]" />
+            <div
+              aria-hidden
+              className="hidden lg:block lg:h-[min(64vh,640px)]"
+            />
             <div
               ref={boardRef}
               // Mobile: in flow, full width. Desktop: pinned to the section's top
@@ -88,7 +95,11 @@ export function Hero() {
             </div>
 
             <div className="relative z-10">
-              <NotationStrip moves={game.moves} ply={game.ply} className="mt-3 -ml-4" />
+              <NotationStrip
+                moves={game.moves}
+                ply={game.ply}
+                className="mt-3 -ml-4 sm:-ml-6"
+              />
 
               <div className="mt-1 flex items-center gap-1.5">
                 <ReplayToggle
@@ -97,7 +108,9 @@ export function Hero() {
                   reducedMotion={reducedMotion}
                   className="-ml-2"
                 />
-                <p className="text-[13px] text-muted-foreground">{SHOWCASE_CAPTION}</p>
+                <p className="text-[13px] text-muted-foreground">
+                  {SHOWCASE_CAPTION}
+                </p>
               </div>
 
               <RoomSwitcher

@@ -1,6 +1,8 @@
 "use client";
 // src/components/nav/site-header.tsx  [U4]
-// The app chrome of UI_REDESIGN §4: 56px tall, content capped at 1200.
+// The app chrome of UI_REDESIGN §4: 56px tall, content capped at 1200 in the
+// app frame and 1280 on the marketing pages (see WIDE_ROUTES below), so the
+// wordmark always lines up with whatever's underneath it.
 //
 // Three visual states, all driven by attributes rather than by a store, so the
 // landing page and the game screen can set them without importing anything:
@@ -21,12 +23,23 @@
 // so the game screen never has to reach into this tree.
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AuthActions, AuthNavLinks } from "@/components/nav/auth-nav";
 import { ThemeToggle } from "@/components/nav/theme-toggle";
 import { cn, focusRing } from "@/lib/ui";
 
 /** §3: "the header … gains --bg-elevated/80 + blur after 40px scroll". */
 const SCROLL_THRESHOLD = 40;
+
+/**
+ * The header is one shared component sitting above two different container
+ * widths: the marketing pages run 1280 (`Section`'s "wide", §3) and the
+ * signed-in app frame runs 1200 ("app", §4). Without this, the header always
+ * used the app's 1200 even on `/` and `/pro`, leaving the wordmark ~40px right
+ * of every headline and row title below it on any screen ≥1280px. These are
+ * exactly the routes that render `LandingFooter` - the marketing shell.
+ */
+const WIDE_ROUTES = new Set(["/", "/pro"]);
 
 function useScrolledPast(threshold: number): boolean {
   const [scrolled, setScrolled] = useState(false);
@@ -45,6 +58,8 @@ function useScrolledPast(threshold: number): boolean {
 
 export function SiteHeader() {
   const scrolled = useScrolledPast(SCROLL_THRESHOLD);
+  const pathname = usePathname();
+  const wide = WIDE_ROUTES.has(pathname);
 
   return (
     <header
@@ -66,15 +81,20 @@ export function SiteHeader() {
         "[body[data-hero=true]_&[data-scrolled=false]]:backdrop-blur-none",
       )}
     >
-      <div className="mx-auto flex h-full w-full max-w-[75rem] items-center gap-2 px-4 sm:gap-4 sm:px-6">
+      <div
+        className={cn(
+          "mx-auto flex h-full w-full items-center gap-2 px-4 sm:gap-4 sm:px-6",
+          wide ? "max-w-[80rem]" : "max-w-[75rem]",
+        )}
+      >
         <Link
           prefetch={false}
           href="/"
-          aria-label="Sixty4 - home"
+          aria-label="Sixty4 home"
           className={cn(
             // 36px of tappable area on touch (DESIGN.md, Layout) without
             // changing the header's density on a mouse-driven pointer.
-            "flex shrink-0 items-center justify-center gap-2 rounded-lg px-1 py-1 text-foreground",
+            "flex shrink-0 items-center justify-center gap-1 rounded-lg px-1 py-1 text-foreground",
             "pointer-coarse:min-h-9 pointer-coarse:min-w-9",
             focusRing,
           )}
@@ -85,7 +105,7 @@ export function SiteHeader() {
           {/* Below 640 the wordmark gives its width to the nav, which would
               otherwise clip "Leaderboard" mid-word at 375-390. The link keeps its
               accessible name either way. */}
-          <span className="hidden text-sm font-semibold tracking-tight sm:inline sm:text-[0.9375rem]">
+          <span className="hidden text-sm font-semibold tracking-tight sm:inline sm:text-[1rem]">
             Sixty4
           </span>
         </Link>
