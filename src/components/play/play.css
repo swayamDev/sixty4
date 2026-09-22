@@ -125,8 +125,17 @@
 @media (min-width: 640px) {
   .lobby-roster {
     grid-auto-flow: row;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    overflow-x: visible;
+    /* `minmax(5.25rem, 1fr)`, not `minmax(0, 1fr)`: the same safe per-column
+       floor the phone layout already uses below. Without it, five equal
+       columns can shrink past what "Kasparova" / "Grandmaster - 2300" (the
+       longest name/label pair) needs, and since a CSS grid track has no
+       built-in truncation, the name overflows straight past the row's own
+       edge instead of wrapping - visible in production between ~640 and
+       ~750px. `overflow-x` stays auto (not visible) as a second line of
+       defence: if the five safe-minimum columns are ever wider than the
+       container has room for, this scrolls instead of clipping. */
+    grid-template-columns: repeat(5, minmax(5.25rem, 1fr));
+    overflow-x: auto;
     padding-bottom: 0;
   }
 }
